@@ -164,6 +164,12 @@ a{color:var(--accent);}
 .how div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
 .how b{font-family:var(--display);font-size:1.25rem;display:block;line-height:1.1;}
 .how p{margin:4px 0 0;font-size:14px;color:var(--muted);}
+
+/* Zone grise dans la barre */
+.band .z2,.fm-band .z2{position:relative;}
+.gzone{position:absolute;left:0;top:0;bottom:0;width:50%;background:repeating-linear-gradient(135deg,rgba(90,90,90,.85) 0 4px,rgba(150,150,150,.45) 4px 8px);}
+.band .z2 .lbl,.fm-band .z2 .lbl{position:absolute;left:50%;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center;}
+.gz i{background:none;border:0;border-left:2px solid #8a8a8a;border-right:2px solid #8a8a8a;border-bottom:2px solid #8a8a8a;height:8px;top:0;border-radius:0 0 3px 3px;}
 </style>
 </head>
 <body>
@@ -186,7 +192,7 @@ a{color:var(--accent);}
           <div class="mk" style="left:70%"><b>SV2</b><span>tenable 45 à 60 min</span><i></i></div>
           <div class="mk" style="left:92%;width:7rem"><b>VMA</b><span>tenable 4 à 7 min</span><i></i></div>
         </div>
-        <div class="band"><div class="z1">Modéré</div><div class="z2">Élevé</div><div class="z3">Sévère</div><div class="z4">Max.</div></div>
+        <div class="band"><div class="z1">Modéré</div><div class="z2"><i class="gzone"></i><span class="lbl">Élevé</span></div><div class="z3">Sévère</div><div class="z4">Max.</div></div>
         <div class="gz"><i></i><span>zone grise : à éviter</span></div>
         <div class="scale-h">Parler</div>
         <div class="scale"><div class="z1">phrases complètes</div><div class="z2">phrases courtes</div><div class="z3">quelques mots</div><div class="z4">rien</div></div>
@@ -206,7 +212,7 @@ a{color:var(--accent);}
         <div class="m" style="left:70%"><b>SV2</b><span>45 à 60 min</span><i></i></div>
         <div class="m" style="left:92%"><b>VMA</b><span>4 à 7 min</span><i></i></div>
       </div>
-      <div class="fm-band"><div class="z1" style="flex:42">Modéré</div><div class="z2" style="flex:28">Élevé</div><div class="z3" style="flex:22">Sévère</div><div class="z4" style="flex:8">Max</div></div>
+      <div class="fm-band"><div class="z1" style="flex:42">Modéré</div><div class="z2" style="flex:28"><i class="gzone"></i><span class="lbl">Élevé</span></div><div class="z3" style="flex:22">Sévère</div><div class="z4" style="flex:8">Max</div></div>
       <div class="gz"><i></i><span>zone grise : à éviter</span></div>
       <div class="zm z1"><b>Modéré</b><p><span>Parler</span> phrases complètes · <span>Effort</span> 1 à 4</p><p class="u"><strong>EF · Sortie longue · Ultra</strong> en continu, de 30 min à plusieurs heures</p></div>
       <div class="zm z2"><b>Élevé</b><p><span>Parler</span> phrases courtes · <span>Effort</span> 5 à 6</p><p class="u"><strong>Tempo · Seuil</strong> blocs de 10 à 25 min</p></div>

@@ -1,0 +1,61 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Coaching personnalisé</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>:root{--bg:#f3f5f6;--paper:#fff;--ink:#16212b;--muted:#5d6b77;--line:#d8dee3;--accent:#c2410c;--display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Source Sans 3","Segoe UI",system-ui,sans-serif;}
+@media(prefers-color-scheme:dark){:root{--bg:#11171c;--paper:#182128;--ink:#e8edf1;--muted:#9aa8b3;--line:#2b3741;--accent:#fb7a3c;color-scheme:dark;}}
+*,*::before,*::after{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;}
+.wrap{max-width:46rem;margin-inline:auto;padding:32px 16px 56px;display:grid;gap:22px;}
+h1,h2,h3{margin:0;font-family:var(--display);}
+h1{font-size:clamp(2.2rem,8vw,3.2rem);line-height:1;font-weight:700;}
+h1 span{color:var(--accent);}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+.lede{color:var(--muted);margin:6px 0 0;}
+a{color:var(--accent);}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 18px 20px;display:grid;gap:10px;}
+.tile{display:grid;gap:4px;background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink);}
+.tile h3{font-size:1.4rem;font-weight:700;}.tile p{margin:0;color:var(--muted);font-size:14.5px;}
+.tile.off{opacity:.55;}
+form{display:grid;gap:10px;}
+input[type=text],input[type=password]{font:inherit;font-size:17px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:100%;}
+button{font:inherit;font-weight:700;font-size:16px;padding:12px 16px;border:0;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer;}
+.err{color:#b91c1c;font-size:14px;min-height:1.2em;margin:0;}
+.small{font-size:13px;color:var(--muted);margin:0;}
+</style></head><body><div class="wrap">
+<a href="../" class="small">← Accueil</a>
+<header><div class="eyebrow">Espace athlète</div><h1>Coaching <span>personnalisé</span></h1><p class="lede">Entre le code d'accès que ton coach t'a donné.</p></header>
+<form class="card" id="f" autocomplete="off">
+<label for="c" class="small">Code d'accès</label>
+<input type="text" id="c" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="par exemple : mifena-tosuri-bakolu" required>
+<button type="submit" id="b">Ouvrir mon espace</button>
+<p class="err" id="e" role="alert"></p>
+</form>
+<p class="small">Pas de code ? Demande-le à ton coach.</p>
+</div>
+<script>
+const norm=c=>c.toLowerCase().replace(/[\s\-]/g,'');
+async function pageId(code){
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveBits']);
+  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:new TextEncoder().encode('cyb-id-v1'),iterations:600000,hash:'SHA-256'},km,64);
+  return [...new Uint8Array(bits)].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+document.getElementById('f').addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  const e=document.getElementById('e'),b=document.getElementById('b');
+  e.textContent='';
+  const code=norm(document.getElementById('c').value);
+  if(!code)return;
+  b.disabled=true;b.textContent='Vérification…';
+  try{
+    const id=await pageId(code);
+    const url='../p/'+id+'/';
+    const r=await fetch(url,{method:'HEAD'});
+    if(!r.ok)throw 0;
+    try{const k=JSON.parse(sessionStorage.getItem('cyb-codes')||'[]');if(!k.includes(code))k.push(code);sessionStorage.setItem('cyb-codes',JSON.stringify(k));}catch(_){}
+    location.href=url;
+  }catch(_){
+    e.textContent='Code incorrect. Vérifie-le et réessaie.';
+    b.disabled=false;b.textContent='Ouvrir mon espace';
+  }
+});
+</script></body></html>

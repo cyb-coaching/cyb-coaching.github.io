@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Abécédaire de l'entraînement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg:#f3f5f6;--paper:#ffffff;--ink:#16212b;--muted:#5d6b77;--line:#d8dee3;--soft:#eef1f3;
+  --accent:#c2410c;--ok:#2e7d32;--warn:#b45309;--idea:#4f5f8a;
+  --d1:#3f7f9a;--d2:#3a9a6e;--d3:#d98a1c;--d4:#c0392b;
+  --d1-soft:#e3eff4;--d2-soft:#e3f3ea;--d3-soft:#fbefdc;--d4-soft:#f8e1de;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11171c;--paper:#182128;--ink:#e8edf1;--muted:#9aa8b3;--line:#2b3741;--soft:#1e2932;
+  --accent:#fb7a3c;--d1:#6fb3cf;--d2:#5fc795;--d3:#f0aa45;--d4:#ee6b5c;
+  --d1-soft:#1b2c34;--d2-soft:#1a2e25;--d3-soft:#33281a;--d4-soft:#36201e;color-scheme:dark;
+}}
+:root[data-theme="dark"]{--bg:#11171c;--paper:#182128;--ink:#e8edf1;--muted:#9aa8b3;--line:#2b3741;--soft:#1e2932;--accent:#fb7a3c;--d1:#6fb3cf;--d2:#5fc795;--d3:#f0aa45;--d4:#ee6b5c;--d1-soft:#1b2c34;--d2-soft:#1a2e25;--d3-soft:#33281a;--d4-soft:#36201e;color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5;}
+.wrap{max-width:68rem;margin-inline:auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px;}
+h1,h2,h3{margin:0;text-wrap:balance;}
+a{color:var(--accent);}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+.title{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,5.5vw,3.2rem);line-height:1;}
+.title span{color:var(--accent);}
+.lede{max-width:68ch;color:var(--muted);margin:8px 0 0;}
+.lede b{color:var(--ink);font-weight:600;}
+.sec{display:grid;gap:14px;}
+.sec>h2{font-family:var(--display);font-weight:600;font-size:1.7rem;}
+.note{font-size:13px;color:var(--muted);margin:0;max-width:90ch;}
+.home{font-size:13px;font-weight:600;text-decoration:none;}
+
+/* Spectre */
+.spec-box{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 18px 14px;overflow-x:auto;}
+.spec{min-width:620px;display:grid;gap:10px;}
+.marks{position:relative;height:74px;}
+.mk{position:absolute;bottom:0;transform:translateX(-50%);display:grid;justify-items:center;gap:2px;text-align:center;width:9.5rem;}
+.mk b{font-family:var(--display);font-size:1.25rem;font-weight:700;line-height:1;}
+.mk span{font-size:12.5px;color:var(--muted);line-height:1.2;}
+.mk i{width:2px;height:12px;background:var(--ink);margin-top:3px;}
+.band{display:grid;grid-template-columns:42fr 28fr 22fr 8fr;border-radius:8px;overflow:hidden;height:44px;}
+.band div{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:.02em;color:#fff;}
+.z1{background:var(--d1);}.z2{background:var(--d2);}.z3{background:var(--d3);}.z4{background:var(--d4);}
+.uses{display:grid;grid-template-columns:42fr 28fr 22fr 8fr;gap:4px;}
+.use{border-radius:6px;padding:8px 9px;display:grid;gap:2px;align-content:start;min-width:0;}
+.use strong{font-size:13.5px;font-weight:600;line-height:1.25;}
+.use span{font-size:12px;color:var(--muted);line-height:1.3;}
+.use.z1{background:var(--d1-soft);}.use.z2{background:var(--d2-soft);}.use.z3{background:var(--d3-soft);}.use.z4{background:var(--d4-soft);}
+.scale-h{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:-6px;}
+.scale{display:grid;grid-template-columns:42fr 28fr 22fr 8fr;gap:4px;}
+.scale div{border-top:3px solid var(--line);padding-top:4px;font-size:13px;line-height:1.25;min-width:0;}
+.scale .z1{border-color:var(--d1);}.scale .z2{border-color:var(--d2);}.scale .z3{border-color:var(--d3);}.scale .z4{border-color:var(--d4);}
+
+/* Tableau repères */
+.rep-box{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:auto;}
+.rep-box table{width:100%;border-collapse:collapse;font-size:14px;}
+.rep-box th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:700;text-align:left;padding:10px 12px 8px;border-bottom:1px solid var(--line);white-space:nowrap;}
+.rep-box td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+.rep-box tr:last-child td{border-bottom:0;}
+.rep-box td:first-child{font-weight:600;}
+.val{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.15rem;font-weight:600;font-variant-numeric:tabular-nums;}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;border:1px solid currentColor;margin-top:3px;}
+.pill.ok{color:var(--ok);}
+.pill.warn{color:var(--warn);}
+.pill.idea{color:var(--idea);}
+.pill.off{color:var(--muted);}
+
+/* Cartes séances */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:14px;}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0;position:relative;overflow:hidden;}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:var(--dom);}
+.card[data-d="1"]{--dom:var(--d1)}.card[data-d="2"]{--dom:var(--d2)}.card[data-d="3"]{--dom:var(--d3)}.card[data-d="4"]{--dom:var(--d4)}
+.card-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+.card h3{font-family:var(--display);font-weight:700;font-size:1.55rem;line-height:1;}
+.dom{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--dom);white-space:nowrap;}
+.card p{margin:0;}
+.k{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px;}
+.card ul{margin:0;padding-left:1.1rem;display:grid;gap:3px;}
+.cible{background:var(--soft);border-radius:8px;padding:10px 12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;}
+.cible div{display:grid;gap:0;min-width:0;}
+.cible small{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+.cible b{font-family:var(--display);font-size:1.2rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15;}
+.cible em{font-style:normal;font-size:13px;line-height:1.3;}
+
+/* Erreurs + mélange */
+.err{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:12px;}
+.err div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:4px;align-content:start;}
+.err div:first-child{border:2px solid var(--ink);}
+.err b{font-family:var(--display);font-size:1.15rem;font-weight:700;line-height:1.1;}
+.err p{margin:0;font-size:14px;}
+.mix{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr));gap:14px;}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0;}
+.panel h3{font-family:var(--display);font-weight:600;font-size:1.35rem;}
+.panel p{margin:0;}
+.dist{display:grid;gap:4px;}
+.dist-l{font-size:13px;font-weight:600;display:flex;justify-content:space-between;gap:8px;}
+.dist-l span{font-weight:400;color:var(--muted);}
+.bar{display:flex;height:26px;border-radius:6px;overflow:hidden;}
+.bar div{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;min-width:0;}
+.bar .z1{background:var(--d1);}.bar .z2{background:var(--d2);}.bar .z3{background:var(--d3);}
+.barleg{display:grid;gap:4px;font-size:13px;}
+.barleg span{display:flex;align-items:baseline;gap:6px;}
+.barleg i{flex:none;width:12px;height:12px;border-radius:3px;transform:translateY(1px);}
+.barleg b{font-weight:600;}
+.freq{width:100%;border-collapse:collapse;font-size:14px;}
+.freq th,.freq td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
+.freq th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+.freq tr:last-child td{border-bottom:0;}
+.freq td:first-child{font-weight:600;white-space:nowrap;}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px;}
+
+/* Mobile */
+.spec-m{display:none;}
+@media(max-width:700px){
+  .spec-box{overflow:visible;padding:14px;}
+  .spec{display:none;}
+  .spec-m{display:grid;gap:6px;}
+  .zm{border-radius:8px;padding:10px 12px;display:grid;gap:4px;}
+  .zm.z1{background:var(--d1-soft);border-left:5px solid var(--d1);}
+  .zm.z2{background:var(--d2-soft);border-left:5px solid var(--d2);}
+  .zm.z3{background:var(--d3-soft);border-left:5px solid var(--d3);}
+  .zm.z4{background:var(--d4-soft);border-left:5px solid var(--d4);}
+  .zm b{font-family:var(--display);font-size:1.3rem;font-weight:700;line-height:1;}
+  .zm p{margin:0;font-size:13.5px;}
+  .zm p span{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-right:3px;}
+  .zm .u strong{display:block;font-size:14px;}
+  .th{font-size:12.5px;color:var(--muted);text-align:center;padding:2px 0;border-top:2px dashed var(--line);border-bottom:2px dashed var(--line);}
+  .th b{font-family:var(--display);font-size:1.15rem;color:var(--ink);margin-right:4px;}
+  .rep-box{overflow:visible;}
+  .rep-box table,.rep-box tbody,.rep-box tr,.rep-box td{display:block;width:100%;}
+  .rep-box thead{display:none;}
+  .rep-box tr{padding:10px 14px;border-bottom:1px solid var(--line);}
+  .rep-box tr:last-child{border-bottom:0;}
+  .rep-box td{padding:2px 0;border:0;display:flex;justify-content:space-between;gap:12px;align-items:baseline;}
+  .rep-box td:first-child{font-size:15.5px;display:block;margin-bottom:2px;}
+  .rep-box td:nth-child(2)::before{content:"Allure EF (SV1)";}
+  .rep-box td:nth-child(3)::before{content:"Allure seuil (SV2)";}
+  .rep-box td:nth-child(4)::before{content:"VMA";}
+  .rep-box td:nth-child(5)::before{content:"FC max";}
+  .rep-box td::before{font-family:var(--body,inherit);font-size:12px;font-weight:600;color:var(--muted);}
+  .rep-box td:nth-child(6){justify-content:flex-start;}
+}
+
+/* Zone grise + frise mobile */
+.gz{position:relative;height:18px;}
+.gz i{position:absolute;left:42%;width:14%;top:2px;height:10px;border:1px solid #9e9e9e;border-radius:3px;background:repeating-linear-gradient(135deg,#9e9e9e 0 4px,transparent 4px 8px);}
+.gz span{position:absolute;left:57%;top:0;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;}
+.fm-marks{position:relative;height:44px;}
+.fm-marks .m{position:absolute;bottom:0;transform:translateX(-50%);display:grid;justify-items:center;gap:1px;text-align:center;white-space:nowrap;}
+.fm-marks .m b{font-family:var(--display);font-size:1.2rem;font-weight:700;line-height:1;}
+.fm-marks .m span{font-size:10.5px;color:var(--muted);line-height:1.1;}
+.fm-marks .m i{width:2px;height:8px;background:var(--ink);margin-top:2px;}
+.fm-band{display:flex;border-radius:8px;overflow:hidden;height:38px;}
+.fm-band div{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:1rem;color:#fff;min-width:0;overflow:hidden;}
+.fm-band .z1{background:var(--d1);}.fm-band .z2{background:var(--d2);}.fm-band .z3{background:var(--d3);}.fm-band .z4{background:var(--d4);font-size:.8rem;}
+.scale .z1,.scale .z2,.scale .z3,.scale .z4{background:none;}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:10px;}
+.how div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+.how b{font-family:var(--display);font-size:1.25rem;display:block;line-height:1.1;}
+.how p{margin:4px 0 0;font-size:14px;color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="../">← Ressources</a>
+
+  <header>
+    <div class="eyebrow">Ressources · Team Trail 7C</div>
+    <h1 class="title">Abécédaire <span>de l'entraînement</span></h1>
+    <p class="lede">Le spectre de l'effort, les séances une par une, et comment établir tes repères. <b>Une ressource commune</b> pour comprendre ce qu'on te demande et pourquoi.</p>
+  </header>
+
+  <section class="sec" id="spectre">
+    <h2>Le spectre de l'effort</h2>
+    <p class="note">Toutes les séances se rangent sur une seule ligne, de la plus facile à la plus dure. Deux seuils la découpent : le SV1 et le SV2. Sous le SV1, on peut durer des heures. Entre les deux, on tient de longues minutes. Au-dessus du SV2, la fatigue monte vite.</p>
+    <div class="spec-box">
+      <div class="spec" role="img" aria-label="Spectre de l'effort du modéré au maximal">
+        <div class="marks">
+          <div class="mk" style="left:42%"><b>SV1</b><span>tenable plusieurs heures</span><i></i></div>
+          <div class="mk" style="left:70%"><b>SV2</b><span>tenable 45 à 60 min</span><i></i></div>
+          <div class="mk" style="left:92%;width:7rem"><b>VMA</b><span>tenable 4 à 7 min</span><i></i></div>
+        </div>
+        <div class="band"><div class="z1">Modéré</div><div class="z2">Élevé</div><div class="z3">Sévère</div><div class="z4">Max.</div></div>
+        <div class="gz"><i></i><span>zone grise : à éviter</span></div>
+        <div class="scale-h">Parler</div>
+        <div class="scale"><div class="z1">phrases complètes</div><div class="z2">phrases courtes</div><div class="z3">quelques mots</div><div class="z4">rien</div></div>
+        <div class="scale-h">Effort sur 10</div>
+        <div class="scale"><div class="z1">1 à 4</div><div class="z2">5 à 6</div><div class="z3">7 à 8</div><div class="z4">9 à 10</div></div>
+        <div class="uses">
+          <div class="use z1"><strong>EF · Sortie longue · Ultra</strong><span>en continu, de 30 min à plusieurs heures</span></div>
+          <div class="use z2"><strong>Tempo · Seuil</strong><span>blocs de 10 à 25 min</span></div>
+          <div class="use z3"><strong>Fartlek · VMA · Côtes</strong><span>fractions de 1 à 5 min</span></div>
+          <div class="use z4"><strong>VMA courte · Sprints</strong><span>15 s à 1 min</span></div>
+        </div>
+      </div>
+
+    <div class="spec-m">
+      <div class="fm-marks">
+        <div class="m" style="left:42%"><b>SV1</b><span>plusieurs h</span><i></i></div>
+        <div class="m" style="left:70%"><b>SV2</b><span>45 à 60 min</span><i></i></div>
+        <div class="m" style="left:92%"><b>VMA</b><span>4 à 7 min</span><i></i></div>
+      </div>
+      <div class="fm-band"><div class="z1" style="flex:42">Modéré</div><div class="z2" style="flex:28">Élevé</div><div class="z3" style="flex:22">Sévère</div><div class="z4" style="flex:8">Max</div></div>
+      <div class="gz"><i></i><span>zone grise : à éviter</span></div>
+      <div class="zm z1"><b>Modéré</b><p><span>Parler</span> phrases complètes · <span>Effort</span> 1 à 4</p><p class="u"><strong>EF · Sortie longue · Ultra</strong> en continu, de 30 min à plusieurs heures</p></div>
+      <div class="zm z2"><b>Élevé</b><p><span>Parler</span> phrases courtes · <span>Effort</span> 5 à 6</p><p class="u"><strong>Tempo · Seuil</strong> blocs de 10 à 25 min</p></div>
+      <div class="zm z3"><b>Sévère</b><p><span>Parler</span> quelques mots · <span>Effort</span> 7 à 8</p><p class="u"><strong>Fartlek · VMA · Côtes</strong> fractions de 1 à 5 min</p></div>
+      <div class="zm z4"><b>Max.</b><p><span>Parler</span> rien · <span>Effort</span> 9 à 10</p><p class="u"><strong>VMA courte · Sprints</strong> 15 s à 1 min</p></div>
+    </div>
+    </div>
+    <p class="note">La zone grise se trouve juste au-dessus du SV1, là où une EF dérive trop vite : trop dur pour récupérer, trop facile pour progresser. On l'évite. Le travail au seuil, lui, est voulu : en blocs dosés, près du SV2. Sur route ou en terrain plat, le test de parole est le repère principal. En côte, l'allure s'effondre naturellement : on regarde alors la FC ou la sensation en fin de fraction.</p>
+  </section>
+
+  <section class="sec" id="reperes">
+    <h2>Tes repères</h2>
+    <p class="note">Chaque coureur a ses propres repères, établis par des tests ou par plusieurs séances concordantes, et toujours datés. Ils figurent dans ton espace personnel. Une valeur qu'on n'a pas encore mesurée reste « à mesurer » : on ne l'invente pas.</p>
+    <div class="how">
+      <div><b>Allure EF (SV1)</b><p>L'allure où tu tiens une conversation. On la confirme avec la FC sur plusieurs sorties.</p></div>
+      <div><b>Allure seuil (SV2)</b><p>Environ ce que tu tiens 45 à 60 min. On l'estime avec une séance de seuil ou un test dédié.</p></div>
+      <div><b>VMA</b><p>Mesurée sur un test de terrain ou sur tapis, ou estimée à partir d'une course récente.</p></div>
+      <div><b>FC max</b><p>Relevée sur un effort maximal. Jamais déduite d'un pic isolé ou d'une seule sortie.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="fiches">
+    <h2>Les séances</h2>
+    <div class="cards">
+
+      <article class="card" data-d="1">
+        <div class="card-h"><h3>EF</h3><span class="dom">Modéré</span></div>
+        <p><span class="k">C'est quoi</span>L'endurance fondamentale : courir lentement, en pouvant parler en phrases complètes. La base de tout, 70 à 85 % du volume annuel.</p>
+        <p><span class="k">Repère clé</span>Le test de la parole. Pas la FC seule, pas l'allure seule : les deux ensemble, plus la sensation. En côte, on marche si nécessaire sans culpabiliser.</p>
+        <div><span class="k">Séances types</span><ul><li>40 à 60 min en continu, sur route ou chemin</li><li>EF + 4 à 6 accélérations courtes de 15 à 20 s en fin de séance (optionnel)</li></ul></div>
+        <div class="cible">
+          <div><small>Test de parole</small><b>phrases complètes</b></div>
+          <div><small>Effort / 10</small><b>2 à 4</b></div>
+          <div><small>FC (repère général)</small><b>sous le SV1</b></div>
+          <div><small>Statut</small><em>À calibrer pour chacun</em></div>
+        </div>
+        <span class="pill off">Repères : à mesurer</span>
+      </article>
+
+      <article class="card" data-d="1">
+        <div class="card-h"><h3>Sortie longue</h3><span class="dom">Modéré</span></div>
+        <p><span class="k">C'est quoi</span>Une EF qui dure : de 1 h 15 à plusieurs heures. Peut être en trail avec du dénivelé.</p>
+        <p><span class="k">À quoi ça sert</span>L'endurance, l'alimentation à l'effort, les pieds, le mental. La séance qui grandit le plus au fil de la saison.</p>
+        <div><span class="k">Séances types</span><ul><li>1 h 30 sur route, avec test alimentation (objectif 60 g de glucides/h)</li><li>Sortie trail progressive : la dernière heure un cran plus vite</li><li>Enchaînement vélo + course : terrain ultra spécifique</li></ul></div>
+        <div class="cible">
+          <div><small>Allure</small><b>EF stricte</b></div>
+          <div><small>Alimentation</small><b>60 g glucides/h</b></div>
+          <div><small>Durée hiver</small><b>1 h 15 à 2 h</b></div>
+          <div><small>Durée printemps</small><b>jusqu'à 4-5 h</b></div>
+        </div>
+        <span class="pill off">Repères allure : à mesurer</span>
+      </article>
+
+      <article class="card" data-d="3">
+        <div class="card-h"><h3>Fartlek</h3><span class="dom">Sévère</span></div>
+        <p><span class="k">C'est quoi</span>Un « jeu d'allures » dans une sortie continue : des passages rapides alternés avec du trot, au ressenti. Inventé en Suède, parfait sur terrain vallonné.</p>
+        <p><span class="k">Repère d'effort</span>Rapide mais contrôlé : entre le SV2 et la VMA. La dernière accélération doit sortir avec la même énergie que la première. En montée, on vise l'effort, pas l'allure.</p>
+        <div><span class="k">Séances types</span><ul><li>6 à 10 accélérations de 30 s à 3 min au ressenti, dont plusieurs en montée</li><li>Version courte de reprise : 4 × (2' vif + 2' trot)</li></ul></div>
+        <div class="cible">
+          <div><small>Effort sur 10</small><b>7 / 10</b></div>
+          <div><small>En montée</small><b>effort, pas allure</b></div>
+          <div><small>FC fin fraction</small><b>sous le SV2</b></div>
+          <div><small>Statut</small><em>À calibrer pour chacun</em></div>
+        </div>
+        <span class="pill off">FC cible : à calibrer</span>
+      </article>
+
+      <article class="card" data-d="2">
+        <div class="card-h"><h3>Seuil</h3><span class="dom">Élevé, au SV2</span></div>
+        <p><span class="k">C'est quoi</span>L'allure qu'on tient environ une heure en course. La respiration est forte, on ne dit que quelques mots.</p>
+        <p><span class="k">À quoi ça sert</span>Repousser le seuil d'accumulation du lactate. On introduit le seuil après quelques semaines de régularité, jamais en reprise.</p>
+        <div><span class="k">Séances types</span><ul><li>3 × 10 min, 2 min de récupération</li><li>2 × 15 min, 3 min de récupération</li></ul></div>
+        <div class="cible">
+          <div><small>Test de parole</small><b>quelques mots</b></div>
+          <div><small>Effort sur 10</small><b>7 à 8</b></div>
+          <div><small>FC (repère général)</small><b>autour du SV2</b></div>
+          <div><small>Statut</small><em>À calibrer pour chacun</em></div>
+        </div>
+        <span class="pill off">Repères : à établir en janvier</span>
+      </article>
+
+      <article class="card" data-d="3">
+        <div class="card-h"><h3>Côtes</h3><span class="dom">Sévère</span></div>
+        <p><span class="k">C'est quoi</span>Des montées courues fort, ou marchées vite sur les pentes raides.</p>
+        <p><span class="k">À quoi ça sert</span>La force dans les jambes et une marche efficace : deux atouts majeurs en trail et en ultra. On introduit les côtes progressivement, une fois la régularité installée.</p>
+        <div><span class="k">Séances types</span><ul><li>8 × 1 min en côte, retour en trottinant</li><li>Côtes longues marchées fort, 3 × 5 min</li></ul></div>
+        <div class="cible">
+          <div><small>Effort sur 10</small><b>7 à 8</b></div>
+          <div><small>Marche</small><b>forte et régulière</b></div>
+          <div><small>FC fin fraction</small><b>élevée, normale</b></div>
+          <div><small>Statut</small><em>À calibrer au printemps</em></div>
+        </div>
+      </article>
+
+      <article class="card" data-d="4">
+        <div class="card-h"><h3>Renfo / pliométrie</h3><span class="dom">Complémentaire</span></div>
+        <p><span class="k">C'est quoi</span>Exercices de renforcement musculaire et sauts : squats, fentes, bonds, corde à sauter. Pas cardio, musculaire.</p>
+        <p><span class="k">À quoi ça sert</span>L'économie de course, la résistance aux descentes, la prévention des blessures. 1 à 2 fois par semaine, loin des séances clés.</p>
+        <div><span class="k">Séances types</span><ul><li>20 à 30 min de circuit : gainage, squats sautés, bonds, corde</li><li>Travail des pieds / mollets pour la stabilité de cheville</li></ul></div>
+        <div class="cible">
+          <div><small>Durée</small><b>20 à 30 min</b></div>
+          <div><small>Fréquence</small><b>1 à 2 / semaine</b></div>
+          <div><small>Timing</small><b>loin des séances clés</b></div>
+          <div><small>Charge</small><b>augmentation progressive</b></div>
+        </div>
+      </article>
+
+      <article class="card" data-d="1">
+        <div class="card-h"><h3>Vélo / cross-training</h3><span class="dom">Complémentaire</span></div>
+        <p><span class="k">C'est quoi</span>Vélo, home trainer, natation ou marche rapide. Maintient l'endurance avec moins de chocs que la course à pied.</p>
+        <p><span class="k">Quand l'utiliser</span>Remplacer une EF en cas de fatigue ou de petite gêne, compléter les semaines de fort volume, récupérer en maintenant le cardio. Sur le vélo, à effort égal, la FC est plus basse qu'en course : le test de la parole reste le meilleur repère.</p>
+        <div><span class="k">Séances types</span><ul><li>1 h à 1 h 30 de vélo tranquille ou home trainer</li><li>30 à 45 min de natation en crawl continu</li></ul></div>
+        <div class="cible">
+          <div><small>Effort</small><b>EF (test parole)</b></div>
+          <div><small>FC vélo / nat</small><b>plus basse qu'en course</b></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="sec" id="erreurs">
+    <h2>Erreurs classiques</h2>
+    <div class="err">
+      <div><b>Courir ses EF trop vite</b><p>L'erreur la plus fréquente, même chez les coureurs expérimentés. L'EF glisse dans la zone grise, fatigue sans faire progresser, et on arrive moins frais aux vraies séances. Si on ne peut plus parler en phrases complètes, on ralentit, quitte à marcher en côte.</p></div>
+      <div><b>Accélérer en sortie groupe</b><p>En groupe, le rythme monte naturellement. Chacun reste responsable de son effort, pas de la vitesse du groupe. La sortie longue n'est pas une compète.</p></div>
+      <div><b>Trop de séances dures d'un coup</b><p>Plus de 2 séances de qualité par semaine, ou deux jours de suite : la fatigue accumule plus vite que la forme. Un minimum de 48 h entre deux séances intenses.</p></div>
+      <div><b>Monter le volume trop vite</b><p>Augmenter d'un coup la durée ou le nombre de sorties, sans semaine allégée. Toutes les 3 à 4 semaines, une semaine allégée de 25 à 30 %.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="melange">
+    <h2>Le mélange dans un plan</h2>
+    <div class="mix">
+      <div class="panel">
+        <h3>Beaucoup de facile, un peu de dur</h3>
+        <p>Les coureurs d'endurance qui progressent passent l'essentiel de leur temps sous le SV1 : environ 80 % du temps. On compte en temps de course, pas en nombre de séances.</p>
+        <div class="dist">
+          <div class="dist-l">Pyramidal <span>le plus courant pour l'ultra</span></div>
+          <div class="bar" role="img" aria-label="80 % modéré, 15 % élevé, 5 % sévère"><div class="z1" style="flex:80">80 %</div><div class="z2" style="flex:15">15</div><div class="z3" style="flex:5">5</div></div>
+        </div>
+        <div class="dist">
+          <div class="dist-l">Polarisé <span>en bloc de vitesse</span></div>
+          <div class="bar" role="img" aria-label="80 % modéré, 5 % élevé, 15 % sévère"><div class="z1" style="flex:80">80 %</div><div class="z2" style="flex:5">5</div><div class="z3" style="flex:15">15</div></div>
+        </div>
+        <div class="barleg">
+          <span><i style="background:var(--d1)"></i><b>Modéré</b> · EF, sortie longue, vélo</span>
+          <span><i style="background:var(--d2)"></i><b>Élevé</b> · seuil, tempo, voulu et dosé</span>
+          <span><i style="background:var(--d3)"></i><b>Sévère</b> · fartlek, VMA, côtes</span>
+        </div>
+        <p class="note">Plus la course est longue, plus la part de facile grandit. Sur un ultra, l'enjeu est de durer, pas d'aller vite une fois.</p>
+      </div>
+      <div class="panel">
+        <h3>La semaine type</h3>
+        <table class="freq">
+          <thead><tr><th>Séance</th><th>Combien</th><th>Remarque</th></tr></thead>
+          <tbody>
+            <tr><td><i class="dot" style="background:var(--d3)"></i>Fartlek, côtes, VMA</td><td>1 fois</td><td>Au-dessus du SV2 ; au moins 48 h entre deux séances dures</td></tr>
+            <tr><td><i class="dot" style="background:var(--d2)"></i>Seuil</td><td>0 à 1 fois</td><td>Entre les deux seuils ; jamais en reprise</td></tr>
+            <tr><td><i class="dot" style="background:var(--d1)"></i>Sortie longue</td><td>1 fois</td><td>La séance qui grandit le plus dans la saison</td></tr>
+            <tr><td><i class="dot" style="background:var(--d1)"></i>EF</td><td>le reste</td><td>2 à 4 sorties de 40 à 60 min ; le volume du bloc</td></tr>
+            <tr><td><i class="dot" style="background:var(--d1)"></i>Vélo / cross</td><td>selon dispo</td><td>En substitution ou complément de l'EF</td></tr>
+            <tr><td><i class="dot" style="background:var(--muted)"></i>Renfo</td><td>1 à 2 fois</td><td>Loin des séances clés</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Toutes les 3 à 4 semaines : une semaine allégée (−25 à 30 %). Aucune séance de rattrapage : une séance manquée s'oublie et on repart de là où on en est.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

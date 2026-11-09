@@ -38,10 +38,46 @@ button{font:inherit;font-weight:700;font-size:16px;padding:12px 16px;border:0;bo
 .pillar .soonpill{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--muted);border:1px dashed #9aa6af;border-radius:999px;padding:1px 9px;}
 .goal{box-shadow:none;}
 .goal .top{height:3px !important;opacity:.45;}
+.pillars{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}
+.pillar{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+.pillar h3{font-size:1.2rem;font-weight:700;line-height:1.15;margin-bottom:2px;}
+.pillar p{margin:0;color:var(--muted);font-size:14.5px;}
+.pillar.soon{box-shadow:0 1px 0 rgba(22,33,43,.10),0 3px 8px rgba(22,33,43,.08);transition:transform .12s,box-shadow .12s;}
+.pillar.soon:hover{transform:translateY(-2px);box-shadow:0 2px 0 rgba(22,33,43,.12),0 8px 16px rgba(22,33,43,.12);}
+.pillar.soon:active{transform:translateY(1px);box-shadow:0 0 0 rgba(0,0,0,0);}
+.rowlabel{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:8px 0 -4px;}
+.sechead{font-family:var(--display);font-size:1.5rem;font-weight:700;margin:6px 0 -6px;}
 </style></head><body><div class="wrap">
 <a href="../" class="back">← Team Trail 7C</a>
 <header><div class="eyebrow">Ouvert à tous</div><h1><span>Ressources</span></h1><p class="lede">Des guides pour comprendre l'entraînement. Cette page s'enrichira au fil du temps.</p></header>
 <section style="display:grid;gap:10px">
 <a class="tile go" href="abecedaire/"><h3>Abécédaire de l'entraînement</h3><p>Le spectre de l'effort, les séances expliquées une par une, les erreurs classiques, comment mixer les intensités.</p></a>
+</section>
+<h2 class="sechead">À venir dans les prochains mois</h2>
+<p class="rowlabel">Compétences de course</p>
+<section class="pillars">
+<div class="pillar soon"><h3>Alimentation en course</h3><p>Quoi manger, quand, et comment s'entraîner à le faire.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Gestion de la nuit</h3><p>Sommeil, frontale, fatigue et coups de barre.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Stratégie d'épreuve</h3><p>Allure, ravitaillements, gestion des moments difficiles.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Marche en côte</h3><p>Pourquoi et comment marcher efficacement.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Descente</h3><p>Technique et préparation musculaire.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Matériel</h3><p>Tester son sac, ses chaussures, ses vêtements.</p><span class="soonpill">Bientôt</span></div>
+</section>
+<p class="rowlabel">Outils pratiques</p>
+<section class="pillars">
+<div class="pillar soon"><h3>Checklists à télécharger</h3><p>Matériel, veille de course, ravitaillement.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Petits calculateurs</h3><p>Allure, vitesse, apports en glucides sur une durée.</p><span class="soonpill">Bientôt</span></div>
+</section>
+<p class="rowlabel">Pour apprendre</p>
+<section class="pillars">
+<div class="pillar soon"><h3>Vidéos tutoriels</h3><p>Échauffement, lignes droites, gammes, renforcement.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Études et sources commentées</h3><p>Ce qu'elles montrent, et leurs limites.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Livres, podcasts, chaînes</h3><p>Une sélection, avec pour qui elle convient.</p><span class="soonpill">Bientôt</span></div>
+</section>
+<p class="rowlabel">Vie du collectif</p>
+<section class="pillars">
+<div class="pillar soon"><h3>Récits de course</h3><p>Des retours d'expérience partagés avec l'accord de leurs auteurs.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Calendrier des courses</h3><p>Les rendez-vous vus par l'équipe.</p><span class="soonpill">Bientôt</span></div>
+<div class="pillar soon"><h3>Question du mois</h3><p>Ce qui revient souvent dans nos échanges.</p><span class="soonpill">Bientôt</span></div>
 </section>
 </div></body></html>

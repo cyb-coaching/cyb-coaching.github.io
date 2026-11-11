@@ -1,0 +1,88 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Page protégée</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<script>try{if(JSON.parse(sessionStorage.getItem("cyb-codes")||"[]").length||JSON.parse(localStorage.getItem("cyb-keep")||"[]").length)document.documentElement.className="u"}catch(_){}</script>
+<style>html.u body{visibility:hidden}:root{--bg:#f3f5f6;--paper:#fff;--ink:#16212b;--muted:#5d6b77;--line:#d8dee3;--accent:#c2410c;--display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Source Sans 3","Segoe UI",system-ui,sans-serif;}
+
+*,*::before,*::after{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;}
+.wrap{max-width:46rem;margin-inline:auto;padding:32px 16px 56px;display:grid;gap:22px;}
+h1,h2,h3{margin:0;font-family:var(--display);}
+h1{font-size:clamp(2.2rem,8vw,3.2rem);line-height:1;font-weight:700;}
+h1 span{color:var(--accent);}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+.lede{color:var(--muted);margin:6px 0 0;}
+a{color:var(--accent);}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 18px 20px;display:grid;gap:10px;}
+.tile{display:grid;gap:4px;background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink);}
+.tile h3{font-size:1.4rem;font-weight:700;}.tile p{margin:0;color:var(--muted);font-size:14.5px;}
+.tile.off{opacity:.55;}
+form{display:grid;gap:10px;}
+input[type=text],input[type=password]{font:inherit;font-size:17px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:100%;}
+button{font:inherit;font-weight:700;font-size:16px;padding:12px 16px;border:0;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer;}
+.err{color:#b91c1c;font-size:14px;min-height:1.2em;margin:0;}
+.small{font-size:13px;color:var(--muted);margin:0;}
+.brand{display:flex;gap:14px;align-items:center;}
+.brand .logo{flex:none;}
+.tile.go:hover{box-shadow:0 2px 10px color-mix(in srgb,var(--ink) 10%,transparent);}
+.back{font-size:13px;color:var(--muted);}
+</style></head><body><div class="wrap">
+<header><div class="eyebrow">Team Trail 7C</div><h1>Accès <span>protégé</span></h1></header>
+<form class="card" id="f" autocomplete="off" hidden>
+<label for="c" class="small">Code d'accès</label>
+<input type="text" id="c" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+<button type="submit" id="b">Ouvrir</button>
+<p class="err" id="e" role="alert"></p>
+</form>
+<p class="small" id="w">Déverrouillage…</p>
+</div>
+<script id="p" type="application/json">@@PAYLOAD@@</script>
+<script>
+(async()=>{
+ const P=JSON.parse(document.getElementById('p').textContent);
+ const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+ const norm=c=>c.toLowerCase().replace(/[\s\-]/g,'');
+ async function pbk(code,salt,len){
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveBits']);
+  return new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',salt:salt,iterations:P.n,hash:'SHA-256'},km,len*8));
+ }
+ const hex=u=>Array.from(u).map(x=>x.toString(16).padStart(2,'0')).join('');
+ async function aes(keyBytes,iv,ct){
+  const k=await crypto.subtle.importKey('raw',keyBytes,'AES-GCM',false,['decrypt']);
+  return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:iv},k,ct));
+ }
+ async function attempt(code){
+  try{
+   if(P.k){
+    const id=hex(await pbk(code,new TextEncoder().encode('cyb-id-v1'),8));
+    const slot=P.k.find(x=>x.d===id);
+    if(!slot)return null;
+    const wk=await pbk(code,b64(slot.s),32);
+    const ck=await aes(wk,b64(slot.i),b64(slot.c));
+    return new TextDecoder().decode(await aes(ck,b64(P.i),b64(P.c)));
+   }
+   const pt=await aes(await pbk(code,b64(P.s),32),b64(P.i),b64(P.c));
+   return new TextDecoder().decode(pt);
+  }catch(_){return null;}
+ }
+ function show(html,code){
+  try{const k=JSON.parse(sessionStorage.getItem('cyb-codes')||'[]');if(!k.includes(code))k.push(code);sessionStorage.setItem('cyb-codes',JSON.stringify(k));}catch(_){}
+  document.open();document.write(html);document.close();
+ }
+ if(!window.crypto||!crypto.subtle){document.documentElement.className='';document.getElementById('w').textContent='Ce navigateur ne permet pas le déverrouillage. Ouvre la page dans un navigateur récent.';return;}
+ let stored=[];try{stored=JSON.parse(sessionStorage.getItem('cyb-codes')||'[]');}catch(_){}
+ try{for(const c of JSON.parse(localStorage.getItem('cyb-keep')||'[]'))if(!stored.includes(c))stored.push(c);}catch(_){}
+ for(const c of stored){const h=await attempt(c);if(h!==null){show(h,c);return;}}
+ document.getElementById('w').hidden=true;document.documentElement.className='';
+ const f=document.getElementById('f');f.hidden=false;
+ f.addEventListener('submit',async ev=>{
+  ev.preventDefault();
+  const e=document.getElementById('e'),btn=document.getElementById('b');
+  e.textContent='';btn.disabled=true;btn.textContent='Vérification…';
+  const code=norm(document.getElementById('c').value);
+  const h=await attempt(code);
+  if(h===null){e.textContent='Code incorrect. Vérifie-le et réessaie.';btn.disabled=false;btn.textContent='Ouvrir';}
+  else show(h,code);
+ });
+})();
+</script></body></html>

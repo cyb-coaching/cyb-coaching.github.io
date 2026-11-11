@@ -13,7 +13,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
 SPORT = {'ef': ('#9e9e9e', 'EF'), 'sl': ('#ffc107', 'Sortie longue'), 'fartlek': ('#ff9800', 'Fartlek'),
          'seuil': ('#e53935', 'VMA / seuil'), 'cotes': ('#3f51b5', 'Côtes'), 'tapis': ('#795548', 'Tapis'),
          'renfo': ('#8e44ad', 'Renfo'), 'velo': ('#e91e63', 'Vélo'), 'backyard': ('#cddc39', 'Boucles Backyard'),
-         'autre': ('#00acc1', 'Autre sport'), 'off': ('#43a047', 'OFF')}
+         'autre': ('#00acc1', 'Autre sport'), 'compet': ('#c2410c', 'Course'), 'off': ('#43a047', 'OFF')}
 TAGS = {'course': ('Course', '#c2410c'), 'etape': ('Étape', '#2e7d32'), 'test': ('Test', '#e53935'),
         'nouveau': ('Nouveau', '#2f6f8f'), 'decision': ('Décision', '#4f5f8a'), 'allegee': ('Allégée', '#8a8f94'),
         'gros': ('Gros week-end', '#b45309'), 'vacances': ('Vacances', '#8a8f94')}
@@ -88,7 +88,7 @@ def frise(blocs, jalons, titre="L'année d'un coup d'œil", sous=''):
     for b in blocs:
         o.append(f'<div class="tl-b" style="grid-row:2;grid-column:{col(b["debut"])}/{col(b["fin_d"]) + 1};background:{b["c"]}" title="{E(b["nom"])}">{E(b["nom"])}</div>')
     rows = []
-    for j in sorted([j for j in jalons if j.get('iso')], key=lambda j: j['iso']):
+    for j in sorted([j for j in jalons if j.get('iso') and j['type'] != 'decision'], key=lambda j: j['iso']):  # frise : courses et grands jalons seulement
         c = col(j['iso']); r = next((i for i, last in enumerate(rows) if last < c), None)
         if r is None: rows.append(0); r = len(rows) - 1
         rows[r] = c + W - 1

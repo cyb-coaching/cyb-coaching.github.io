@@ -43,7 +43,61 @@ EXTRA = """
  .wk-tbl tr:not(.sep) td:nth-child(3){font-size:14.5px!important;}
 }"""
 CD = ("<script>document.querySelectorAll('[data-cd]').forEach(e=>{const d=(new Date(e.dataset.cd+'T00:00:00')-new Date())/864e5;"
-      "e.textContent=d>0?(' · dans '+Math.ceil(d/7)+' semaines'):'';});</script>")
+      "e.textContent=d>0?(' · dans '+Math.ceil(d/7)+' semaines'):'';});"
+      "document.querySelectorAll('.tl-now').forEach(e=>{const c=Math.floor((new Date()-new Date(e.dataset.d0+'T00:00:00'))/6048e5)+1;"
+      "if(c>=1&&c<=+e.dataset.nw){e.style.gridColumn=c;e.hidden=false;}});</script>")
+
+MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.']
+CSS_FRISE = """
+.tl{min-width:0;max-width:100%;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 0 12px;}
+.tl-h{padding:0 16px 8px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;}
+.tl-h h2{font-family:var(--display);font-size:1.35rem;font-weight:600;margin:0;}
+.tl-h span{font-size:13px;color:var(--muted);}
+.tl-sc{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px 6px;}
+.tl-g{display:grid;grid-template-columns:repeat(var(--nw),minmax(17px,1fr));min-width:calc(var(--nw) * 17px);row-gap:3px;}
+.tl-m{font-size:11.5px;font-weight:700;color:var(--muted);border-left:1px solid var(--line);padding-left:4px;white-space:nowrap;overflow:hidden;}
+.tl-b{height:22px;border-radius:4px;color:#fff;font-size:11px;font-weight:700;padding:3px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-right:2px;}
+.tl-now{grid-row:1/-1;border-left:2px dashed var(--accent);opacity:.6;pointer-events:none;}
+.tl-j{font-size:11.5px;line-height:1.2;padding:16px 4px 2px 0;position:relative;min-width:0;}
+.tl-j::before{position:absolute;top:0;left:0;font-size:13px;line-height:1;color:var(--mc);content:"■";}
+.tl-j.star::before{content:"★";font-size:16px;top:-2px;}
+.tl-j b{display:block;font-family:var(--display);font-size:13.5px;font-weight:700;}
+.tl-j span{color:var(--muted);}
+.tl-lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);padding:6px 16px 0;}
+.tl-lg i{font-style:normal;color:var(--mc);margin-right:4px;}
+.tl-hint{display:none;font-size:12px;color:var(--muted);padding:0 16px 4px;}
+@media(max-width:700px){.tl-hint{display:block;}}
+"""
+import datetime as _dt
+def _d(iso): return _dt.date.fromisoformat(iso[:10])
+JCOL = {'course': '#c2410c', 'test': '#e53935', 'etape': '#2e7d32', 'gros': '#b45309', 'decision': '#4f5f8a', 'nouveau': '#2f6f8f', 'allegee': '#8a8f94', 'vacances': '#8a8f94'}
+def frise(blocs, jalons, titre="L'année d'un coup d'œil", sous=''):
+    """Frise chronologique horizontale (une colonne par semaine). blocs : nom, c, debut, fin_d ; jalons : iso, court/evt, date, qui, type, etoile."""
+    d0 = _d(blocs[0]['debut']); d0 -= _dt.timedelta(days=d0.weekday()); d1 = _d(blocs[-1]['fin_d'])
+    nw = (d1 - d0).days // 7 + 1; W = 7
+    col = lambda iso: max(1, min(nw, (_d(iso) - d0).days // 7 + 1))
+    o = []
+    # mois
+    y, m = d0.year, d0.month
+    while _dt.date(y, m, 1) <= d1:
+        c0 = col(max(_dt.date(y, m, 1), d0).isoformat()); ny, nm = (y + 1, 1) if m == 12 else (y, m + 1)
+        c1 = col(min(_dt.date(ny, nm, 1) - _dt.timedelta(days=1), d1).isoformat()) + 1
+        lab = (MOIS[m - 1] + (f' {str(y)[2:]}' if (m == 1 or not o) and c1 - c0 >= 4 else '')) if c1 - c0 >= 3 else ''
+        o.append(f'<div class="tl-m" style="grid-row:1;grid-column:{c0}/{c1}">{lab}</div>'); y, m = ny, nm
+    for b in blocs:
+        o.append(f'<div class="tl-b" style="grid-row:2;grid-column:{col(b["debut"])}/{col(b["fin_d"]) + 1};background:{b["c"]}" title="{E(b["nom"])}">{E(b["nom"])}</div>')
+    rows = []
+    for j in sorted([j for j in jalons if j.get('iso')], key=lambda j: j['iso']):
+        c = col(j['iso']); r = next((i for i, last in enumerate(rows) if last < c), None)
+        if r is None: rows.append(0); r = len(rows) - 1
+        rows[r] = c + W - 1
+        qui = f' · {E(j["qui"])}' if j.get('qui') else ''
+        cls = 'tl-j star' if j['type'] == 'course' else 'tl-j'
+        o.append(f'<div class="{cls}" style="grid-row:{3 + r};grid-column:{c}/span {W};--mc:{JCOL.get(j["type"], "#5d6b77")}"><b>{E(j.get("court") or j["evt"])}</b><span>{E(j["date"])}{qui}</span></div>')
+    o.append(f'<div class="tl-now" data-d0="{d0.isoformat()}" data-nw="{nw}" hidden></div>')
+    lg = ''.join(f'<span><i style="--mc:{JCOL[k]}">{"★" if k == "course" else "■"}</i>{l}</span>' for k, l in [('course', 'course'), ('test', 'test'), ('etape', 'étape'), ('gros', 'gros week-end')] if any(j['type'] == k for j in jalons))
+    return (f'<section class="tl"><div class="tl-h"><h2>{titre}</h2><span>{E(sous)}</span></div><p class="tl-hint">Fais glisser la frise vers la droite →</p>'
+            f'<div class="tl-sc"><div class="tl-g" style="--nw:{nw + W - 1}">{"".join(o)}</div></div><div class="tl-lg">{lg}<span>pointillé : aujourd\'hui</span></div></section>')
 
 def tag(t): l, c = TAGS[t]; return f'<span class="tg" style="--tc:{c}">{l}</span>'
 def hm(m):
@@ -73,18 +127,14 @@ def gooo(d, links):
     for ob in g['objectifs']:
         o.append(f'<span class="chip hot">Objectif {E(ob["niv"])} · {E(ob["nom"])} · {E(ob["date_txt"])}<span data-cd="{ob["date"]}"></span></span>')
     o.append('</div></header>')
-    o.append(f'''<section class="frise-box"><div class="frise-h"><h2>La saison d'un coup d'œil</h2><span>{E(g['periode'])}</span></div><div class="frise">''')
-    for b in g['blocs']:
-        o.append(f'<div class="fb" style="--bc:{b["c"]};--f:{b["nsem"]}"><span class="wk">{E(b["sem"])}</span><b>{E(b["nom"])}</b><small>{E(b["dates"])}</small></div>')
-    o.append('</div><div class="ms-row">' + ''.join(f'<span>★ <b>{E(j["evt"])}</b> {E(j["date"])}{(" (" + E(j["qui"]) + ")") if j.get("qui") else ""}</span>' for j in g['jalons'] if j.get('etoile')) + '</div></section>')
-    o.append('<section class="sec"><h2>Les blocs</h2><div class="blocs">')
-    for i, b in enumerate(g['blocs'], 1):
+    for i, b in enumerate(g['blocs'] if not d.get('accueil') else [], 1):
+        if i == 1: o.append('<section class="sec"><h2>Les blocs</h2><div class="blocs">')
         pts = ''.join(f'<li>{E(p)}</li>' for p in b['points'])
         o.append(f'''<article class="blk"><div class="blk-top" style="background:{b['c']}"></div><div class="blk-body">
 <div class="blk-h"><h3>{E(b['nom'])}</h3><span class="blk-num">{i:02d}</span></div><p class="dates">{E(b['dates'])} · {E(b['sem'])} · {b['nsem']} semaines</p>
 <p><b>Mission :</b> {E(b['mission'])}</p><ul>{pts}</ul>{f'<div class="who"><b>Fin de bloc :</b> {E(b["fin"])}</div>' if b.get('fin') else ''}
 {f'<p class="note">Volume : {E(b["volume"])}</p>' if b.get('volume') else ''}</div></article>''')
-    o.append('</div></section>')
+        if i == len(g['blocs']): o.append('</div></section>')
     o.append('<section class="sec"><h2>Le but de chaque semaine</h2><div class="tbl-box wk-tbl"><table><thead><tr><th>Sem.</th><th>Dates</th><th>But</th><th>Repère</th></tr></thead><tbody>')
     for b in g['blocs']:
         o.append(f'<tr class="sep" style="--bc:{b["c"]}"><td colspan="4">{E(b["nom"])}</td></tr>')
@@ -101,7 +151,7 @@ def gooo(d, links):
     if g.get('decisions'):
         o.append('<div class="card"><ul>' + ''.join(f'<li>{x}</li>' for x in g['decisions']) + '</ul></div>')
     o.append('<p class="note">Le détail des séances est dans Nolio. Les 4 prochaines semaines sont dans le Prévisionnel. Une semaine manquée ne se rattrape pas.</p></section>')
-    return doc(f"GOOO · {d['titre']}", CSS_SAISON + EXTRA, '\n'.join(o))
+    return doc(f"GOOO · {d['titre']}", CSS_SAISON + EXTRA + CSS_FRISE, '\n'.join(o))
 
 # ---------- Prévisionnel (4 semaines glissantes) ----------
 def prev(d, links):
@@ -134,19 +184,22 @@ def prev(d, links):
                      + (f'<div class="sn">{E(s["note"])}</div>' if s.get('note') else '') + '</div>')
         o.append('</div></div>')
         if groupe:
-            o.append('<div class="adapt"><h3>Adaptations individuelles</h3><table class="adapt-tbl"><tbody>'
-                     + ''.join(f'<tr><td>{E(a)}</td><td>{E(b)}</td></tr>' for a, b in w.get('adaptations', [])) + '</tbody></table></div>')
+            ad = [(a, b) for a, b in w.get('adaptations', []) if b]
+            o.append('<div class="adapt"><h3>Adaptations individuelles</h3>' + (('<table class="adapt-tbl"><tbody>'
+                     + ''.join(f'<tr><td>{E(a)}</td><td>{E(b)}</td></tr>' for a, b in ad) + '</tbody></table>') if ad else '<p class="note">Pas d\'adaptation particulière cette semaine : cadre commun pour tous.</p>') + '</div>')
         o.append('</div></article>')
     o.append('<div class="legend">' + ''.join(f'<span><i style="background:{SPORT[k][0]}"></i>{SPORT[k][1]}</span>' for k in used) + '</div>')
     if p.get('ensuite'): o.append(f'<p class="note">{E(p["ensuite"])}</p>')
     o.append('<p class="note">Une semaine manquée ne se rattrape pas : on reprend le fil.</p>')
-    return doc(f"Prévisionnel · {d['titre']}", CSS_SAISON + EXTRA, '\n'.join(o))
+    return doc(f"Prévisionnel · {d['titre']}", CSS_SAISON + EXTRA + CSS_FRISE, '\n'.join(o))
 
 # ---------- Fiche individuelle ----------
 def fiche(d, links):
     f = d['fiche']; o = []
     if links.get('groupe'): o.append(f'<a href="{links["groupe"]}" class="back">← Groupe Ultra 2027</a>')
     o.append(f'<header><div class="eyebrow">Espace personnel</div><h1 class="title">{E(d["titre"])}</h1><p class="lede">{E(f["objectif"])}</p></header>')
+    fr = f.get('frise') or (d.get('gooo') and {'blocs': d['gooo']['blocs'], 'jalons': d['gooo']['jalons']})
+    if fr: o.append(frise(fr['blocs'], fr['jalons'], 'Mon année', d.get('gooo', {}).get('periode', '')))
     o.append('<section class="sec"><h2>Mes dates clés</h2><div class="card"><table class="dates">'
              + ''.join(f'<tr><td>{E(r[0])}</td><td>{E(r[1])}{(" <span class=tbc>(" + E(r[2]) + ")</span>") if len(r) > 2 and r[2] else ""}</td></tr>' for r in f['dates'])
              + '</table></div></section>')
@@ -168,12 +221,12 @@ def fiche(d, links):
 <a class="doc" style="--dc:var(--accent)" href="{links['prev']}"><h3>Prévisionnel</h3><p>Les 4 prochaines semaines.</p></a></div></section>''')
     if links.get('groupe'):
         o.append(f'''<section class="sec"><h2>Le groupe</h2><div class="docs"><a class="doc hero" style="--dc:var(--accent)" href="{links['groupe']}"><h3>Page du groupe</h3><p>Plan et prévisionnel des 4 semaines.</p></a></div></section>''')
-    return doc('Mon espace · Team Trail 7C', CSS_FICHE, '\n'.join(o))
+    return doc('Mon espace · Team Trail 7C', CSS_FICHE + CSS_FRISE, '\n'.join(o))
 
 # ---------- Accueil du groupe ----------
 _sa = CSS_SAISON
 CSS_BLOCS = _sa[_sa.find('/* Blocs cartes */'):_sa.find('/* Tableau semaines */')]
-CSS_GROUPE = open(f'{D}/css/groupe.css').read() + CSS_BLOCS
+CSS_GROUPE = open(f'{D}/css/groupe.css').read() + CSS_BLOCS + CSS_FRISE + '.tg{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 6px;border-radius:3px;color:#fff;background:var(--tc);vertical-align:1px;}'
 def groupe(d, links):
     h = d['accueil']; g = d['gooo']; o = []
     o.append(f'''<header><a href="{links['retour']}" class="back">← Team Trail 7C</a><div class="eyebrow">Dossier collectif</div>
@@ -187,13 +240,15 @@ def groupe(d, links):
 <span class="pill {'a' if a else 'b'}">Objectif {ob['niv']} · {'principal' if a else 'intermédiaire'}</span><h3>{E(ob['nom'])}</h3>
 <p class="meta">{E(ob['meta'])}</p><p class="who"><b>{E(ob['qui'])}</b>{(' ' + E(ob['note'])) if ob.get('note') else ''}</p></div></article>''')
     o.append('</div></section>')
+    o.append(frise(g['blocs'], g['jalons'], "L'année d'un coup d'œil", g.get('periode', '')))
     o.append(f'<section class="sec"><h2>La saison en {len(g["blocs"])} blocs</h2><div class="blocs">')
     for i, b in enumerate(g['blocs'], 1):
+        pts = ''.join(f'<li>{E(p)}</li>' for p in b.get('points', []))
         o.append(f'''<article class="blk"><div class="blk-top" style="background:{b['c']}"></div><div class="blk-body">
 <div class="blk-h"><h3>{E(b['nom'])}</h3><span class="blk-num">{i:02d}</span></div><p class="dates">{E(b['dates'])} · {E(b['sem'])}</p>
-<p>{E(b['mission'])}</p>{f'<span class="ms-tag" style="--mc:{b["c"]}">★ {E(b["fin"])}</span>' if b.get('fin') else ''}</div></article>''')
+<p><b>Mission :</b> {E(b['mission'])}</p>{f'<ul>{pts}</ul>' if pts else ''}{f'<span class="ms-tag" style="--mc:{b["c"]}">★ {E(b["fin"])}</span>' if b.get('fin') else ''}</div></article>''')
     o.append('</div></section>')
     o.append(f'''<section class="sec"><h2>Les pages du dossier</h2><p class="note">Pages réservées au groupe, accessibles avec ton code.</p><div class="docs">
-<a class="doc hero" style="--dc:var(--accent)" href="{links['gooo']}"><h3>GOOO du groupe</h3><p>La saison semaine par semaine, les blocs en détail, les jalons.</p><span class="arr">→</span></a>
+<a class="doc hero" style="--dc:var(--accent)" href="{links['gooo']}"><h3>GOOO du groupe</h3><p>Le but de chaque semaine, les jalons et les règles communes.</p><span class="arr">→</span></a>
 <a class="doc" style="--dc:var(--ok)" href="{links['prev']}"><h3>Prévisionnel</h3><p>Les 4 prochaines semaines : cadre commun + adaptations individuelles.</p><span class="arr">→</span></a></div></section>''')
     return doc(f"{d['titre']} {h['annee']}", CSS_GROUPE, '\n'.join(o))

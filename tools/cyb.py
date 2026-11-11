@@ -75,6 +75,10 @@ def build(only=None):
     for pg in reg['pages']:
         if only and pg['data'] not in only: continue
         data = src(pg['data'], cc)
+        if data.get('membre_groupe'):   # frise d'un membre : blocs du groupe + jalons qui le concernent + jalons perso
+            g = src('groupe', cc)['gooo']; pr = data['prenom']
+            js = [dict(j, qui='') for j in g['jalons'] if pr in j.get('qui', '') or 'tout le groupe' in j.get('qui', '')]
+            data['fiche']['frise'] = {'blocs': g['blocs'], 'jalons': js + data['fiche'].get('jalons_perso', []), 'periode': g.get('periode', '')}
         html = getattr(T, pg['tpl'])(data, pg.get('liens', {}))
         if write_page(pg['path'], html, [codes[r] for r in pg['pour']], cc): changed.append(pg['path'])
     print('pages modifiées :', changed or 'aucune')

@@ -54,7 +54,7 @@ CSS_FRISE = """
 .tl-h h2{font-family:var(--display);font-size:1.35rem;font-weight:600;margin:0;}
 .tl-h span{font-size:13px;color:var(--muted);}
 .tl-sc{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px 6px;}
-.tl-g{display:grid;grid-template-columns:repeat(var(--nw),minmax(17px,1fr));min-width:calc(var(--nw) * 17px);row-gap:3px;}
+.tl-g{display:grid;grid-template-columns:repeat(var(--nw),minmax(15px,1fr));min-width:calc(var(--nw) * 15px);row-gap:3px;}
 .tl-m{font-size:11.5px;font-weight:700;color:var(--muted);border-left:1px solid var(--line);padding-left:4px;white-space:nowrap;overflow:hidden;}
 .tl-b{height:22px;border-radius:4px;color:#fff;font-size:11px;font-weight:700;padding:3px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-right:2px;}
 .tl-now{grid-row:1/-1;border-left:2px dashed var(--accent);opacity:.6;pointer-events:none;}
@@ -73,7 +73,8 @@ def _d(iso): return _dt.date.fromisoformat(iso[:10])
 JCOL = {'course': '#c2410c', 'test': '#e53935', 'etape': '#2e7d32', 'gros': '#b45309', 'decision': '#4f5f8a', 'nouveau': '#2f6f8f', 'allegee': '#8a8f94', 'vacances': '#8a8f94'}
 def frise(blocs, jalons, titre="L'année d'un coup d'œil", sous=''):
     """Frise chronologique horizontale (une colonne par semaine). blocs : nom, c, debut, fin_d ; jalons : iso, court/evt, date, qui, type, etoile."""
-    d0 = _d(blocs[0]['debut']); d0 -= _dt.timedelta(days=d0.weekday()); d1 = _d(blocs[-1]['fin_d'])
+    d0 = _d(blocs[0]['debut']); d0 -= _dt.timedelta(days=d0.weekday())
+    d1 = max([_d(blocs[-1]['fin_d'])] + [_d(j['iso']) for j in jalons if j.get('iso')])
     nw = (d1 - d0).days // 7 + 1; W = 7
     col = lambda iso: max(1, min(nw, (_d(iso) - d0).days // 7 + 1))
     o = []
@@ -97,7 +98,7 @@ def frise(blocs, jalons, titre="L'année d'un coup d'œil", sous=''):
     o.append(f'<div class="tl-now" data-d0="{d0.isoformat()}" data-nw="{nw}" hidden></div>')
     lg = ''.join(f'<span><i style="--mc:{JCOL[k]}">{"★" if k == "course" else "■"}</i>{l}</span>' for k, l in [('course', 'course'), ('test', 'test'), ('etape', 'étape'), ('gros', 'gros week-end')] if any(j['type'] == k for j in jalons))
     return (f'<section class="tl"><div class="tl-h"><h2>{titre}</h2><span>{E(sous)}</span></div><p class="tl-hint">Fais glisser la frise vers la droite →</p>'
-            f'<div class="tl-sc"><div class="tl-g" style="--nw:{nw + W - 1}">{"".join(o)}</div></div><div class="tl-lg">{lg}<span>pointillé : aujourd\'hui</span></div></section>')
+            f'<div class="tl-sc"><div class="tl-g" style="--nw:{nw + W + 2}">{"".join(o)}</div></div><div class="tl-lg">{lg}<span>pointillé : aujourd\'hui</span></div></section>')
 
 def tag(t): l, c = TAGS[t]; return f'<span class="tg" style="--tc:{c}">{l}</span>'
 def hm(m):
@@ -199,7 +200,7 @@ def fiche(d, links):
     if links.get('groupe'): o.append(f'<a href="{links["groupe"]}" class="back">← Groupe Ultra 2027</a>')
     o.append(f'<header><div class="eyebrow">Espace personnel</div><h1 class="title">{E(d["titre"])}</h1><p class="lede">{E(f["objectif"])}</p></header>')
     fr = f.get('frise') or (d.get('gooo') and {'blocs': d['gooo']['blocs'], 'jalons': d['gooo']['jalons']})
-    if fr: o.append(frise(fr['blocs'], fr['jalons'], 'Mon année', d.get('gooo', {}).get('periode', '')))
+    if fr: o.append(frise(fr['blocs'], fr['jalons'], 'Mon année', fr.get('periode') or d.get('gooo', {}).get('periode', '')))
     o.append('<section class="sec"><h2>Mes dates clés</h2><div class="card"><table class="dates">'
              + ''.join(f'<tr><td>{E(r[0])}</td><td>{E(r[1])}{(" <span class=tbc>(" + E(r[2]) + ")</span>") if len(r) > 2 and r[2] else ""}</td></tr>' for r in f['dates'])
              + '</table></div></section>')

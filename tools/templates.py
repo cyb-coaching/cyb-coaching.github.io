@@ -46,7 +46,18 @@ CD = ("<script>document.querySelectorAll('[data-cd]').forEach(e=>{const d=(new D
       "e.textContent=d>0?(' · dans '+Math.ceil(d/7)+' semaines'):'';});</script>")
 
 def tag(t): l, c = TAGS[t]; return f'<span class="tg" style="--tc:{c}">{l}</span>'
-def hm(m): h, r = divmod(int(m), 60); return f'{h} h {r:02d}' if h else f"{r}'"
+def hm(m):
+    if isinstance(m, (list, tuple)):
+        return hm(m[0]) if m[0] == m[1] else f'{hm(m[0])} – {hm(m[1])}'
+    h, r = divmod(int(m), 60); return f'{h} h {r:02d}' if h else f"{r}'"
+def rng(s):  # durée d'une séance (min ou [min, max]) x nombre de séances
+    m = s.get('min'); n = s.get('nb', 1)
+    if m is None: return None
+    a, b = (m, m) if not isinstance(m, (list, tuple)) else m
+    return [a * n, b * n]
+def add(ls):
+    if any(x is None for x in ls): return None
+    return [sum(x[0] for x in ls), sum(x[1] for x in ls)]
 def doc(title, css, body):
     return (f'<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
             f'<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
@@ -71,7 +82,7 @@ def gooo(d, links):
         pts = ''.join(f'<li>{E(p)}</li>' for p in b['points'])
         o.append(f'''<article class="blk"><div class="blk-top" style="background:{b['c']}"></div><div class="blk-body">
 <div class="blk-h"><h3>{E(b['nom'])}</h3><span class="blk-num">{i:02d}</span></div><p class="dates">{E(b['dates'])} · {E(b['sem'])} · {b['nsem']} semaines</p>
-<p><b>Mission :</b> {E(b['mission'])}</p><ul>{pts}</ul><div class="who"><b>Fin de bloc :</b> {E(b['fin'])}</div>
+<p><b>Mission :</b> {E(b['mission'])}</p><ul>{pts}</ul>{f'<div class="who"><b>Fin de bloc :</b> {E(b["fin"])}</div>' if b.get('fin') else ''}
 {f'<p class="note">Volume : {E(b["volume"])}</p>' if b.get('volume') else ''}</div></article>''')
     o.append('</div></section>')
     o.append('<section class="sec"><h2>Le but de chaque semaine</h2><div class="tbl-box wk-tbl"><table><thead><tr><th>Sem.</th><th>Dates</th><th>But</th><th>Repère</th></tr></thead><tbody>')
@@ -107,19 +118,19 @@ def prev(d, links):
     for w in p['semaines']:
         fix = w['statut'] == 'fix'
         ses = [s for s in w['seances'] if s['k'] != 'off']
-        tot = sum(s['min'] for s in ses); run = sum(s['min'] for s in ses if s.get('course'))
-        nrun = sum(1 for s in ses if s.get('course'))
+        tot = add([rng(s) for s in ses]); run = add([rng(s) for s in ses if s.get('course')])
+        nrun = sum(s.get('nb', 1) for s in ses if s.get('course'))
         o.append(f'''<article class="week{'' if fix else ' draft'}"><div class="week-h"><div class="wnum">{E(w['n'])}</div>
 <div class="wdates">{E(w['dates'])}</div><div class="wblock">{E(w['bloc'])}<span class="stat {'fix' if fix else 'ind'}">{'Planifiée dans Nolio' if fix else 'Indicative'}</span></div>
 <div class="wgoal">{E(w['but'])}</div></div>''')
         if not fix: o.append('<p class="draftnote">Semaine indicative : non figée dans Nolio.</p>')
         o.append(f'''<div class="week-body{'' if groupe else ' solo'}"><div class="cadre">
-<div class="vol"><span class="tot"><b>{hm(tot)}</b>au total</span><span><b>{hm(run)}</b>de course</span><span><b>{nrun}</b>sorties</span></div>''')
+<div class="vol"><span class="tot"><b>{hm(tot) if tot else hm(add([r for r in (rng(x) for x in ses) if r]) or [0, 0]) + ' +'}</b>{'au total' if tot else 'au total, plus une séance selon le profil'}</span><span><b>{hm(run) if run else '—'}</b>de course</span><span><b>{nrun}</b>sorties</span></div>''')
         if w.get('nouveau'): o.append(f'<div class="wnew"><b>Nouveauté</b>{E(w["nouveau"])}</div>')
         o.append(f'<h3 style="margin-top:12px">{"Cadre commun" if groupe else "Les séances de la semaine"}</h3><div class="ses-list">')
         for s in ses:
             if s['k'] not in used: used.append(s['k'])
-            o.append(f'<div class="ses" style="--sc:{SPORT[s["k"]][0]}"><div class="st">{E(s["jour"])} · {E(s["titre"])}<small>{hm(s["min"])}</small></div>'
+            o.append(f'<div class="ses" style="--sc:{SPORT[s["k"]][0]}"><div class="st">{E(s["jour"])} · {E(s["titre"])}<small>{(str(s["nb"]) + " × ") if s.get("nb", 1) > 1 else ""}{hm(s["min"]) if s.get("min") is not None else ""}</small></div>'
                      + (f'<div class="sn">{E(s["note"])}</div>' if s.get('note') else '') + '</div>')
         o.append('</div></div>')
         if groupe:
@@ -158,3 +169,31 @@ def fiche(d, links):
     if links.get('groupe'):
         o.append(f'''<section class="sec"><h2>Le groupe</h2><div class="docs"><a class="doc hero" style="--dc:var(--accent)" href="{links['groupe']}"><h3>Page du groupe</h3><p>Plan et prévisionnel des 4 semaines.</p></a></div></section>''')
     return doc('Mon espace · Team Trail 7C', CSS_FICHE, '\n'.join(o))
+
+# ---------- Accueil du groupe ----------
+_sa = CSS_SAISON
+CSS_BLOCS = _sa[_sa.find('/* Blocs cartes */'):_sa.find('/* Tableau semaines */')]
+CSS_GROUPE = open(f'{D}/css/groupe.css').read() + CSS_BLOCS
+def groupe(d, links):
+    h = d['accueil']; g = d['gooo']; o = []
+    o.append(f'''<header><a href="{links['retour']}" class="back">← Team Trail 7C</a><div class="eyebrow">Dossier collectif</div>
+<h1 class="title">{E(d['titre'])} <span>{E(h['annee'])}</span></h1><p class="lede">{E(h['lede'])}</p></header>''')
+    o.append('<section class="sec"><h2>Le groupe</h2><div class="membres">' + ''.join(
+        f'<div class="mb"><strong>{E(m["nom"])}</strong><span class="obj" style="--mc:var({"--accent" if m.get("niv", "A") == "A" else "--idea"})">{E(m["obj"])}</span></div>' for m in h['membres']) + '</div></section>')
+    o.append('<section class="sec"><h2>Objectifs</h2><div class="goals">')
+    for ob in h['objectifs']:
+        a = ob['niv'] == 'A'
+        o.append(f'''<article class="goal"><div class="top" style="background:var({'--accent' if a else '--idea'})"></div><div class="body">
+<span class="pill {'a' if a else 'b'}">Objectif {ob['niv']} · {'principal' if a else 'intermédiaire'}</span><h3>{E(ob['nom'])}</h3>
+<p class="meta">{E(ob['meta'])}</p><p class="who"><b>{E(ob['qui'])}</b>{(' ' + E(ob['note'])) if ob.get('note') else ''}</p></div></article>''')
+    o.append('</div></section>')
+    o.append(f'<section class="sec"><h2>La saison en {len(g["blocs"])} blocs</h2><div class="blocs">')
+    for i, b in enumerate(g['blocs'], 1):
+        o.append(f'''<article class="blk"><div class="blk-top" style="background:{b['c']}"></div><div class="blk-body">
+<div class="blk-h"><h3>{E(b['nom'])}</h3><span class="blk-num">{i:02d}</span></div><p class="dates">{E(b['dates'])} · {E(b['sem'])}</p>
+<p>{E(b['mission'])}</p>{f'<span class="ms-tag" style="--mc:{b["c"]}">★ {E(b["fin"])}</span>' if b.get('fin') else ''}</div></article>''')
+    o.append('</div></section>')
+    o.append(f'''<section class="sec"><h2>Les pages du dossier</h2><p class="note">Pages réservées au groupe, accessibles avec ton code.</p><div class="docs">
+<a class="doc hero" style="--dc:var(--accent)" href="{links['gooo']}"><h3>GOOO du groupe</h3><p>La saison semaine par semaine, les blocs en détail, les jalons.</p><span class="arr">→</span></a>
+<a class="doc" style="--dc:var(--ok)" href="{links['prev']}"><h3>Prévisionnel</h3><p>Les 4 prochaines semaines : cadre commun + adaptations individuelles.</p><span class="arr">→</span></a></div></section>''')
+    return doc(f"{d['titre']} {h['annee']}", CSS_GROUPE, '\n'.join(o))

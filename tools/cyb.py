@@ -49,7 +49,7 @@ def read_payload(path): return json.loads(RX.search(open(path, encoding='utf-8')
 
 def coach():
     c = os.environ.get('CYB_COACH')
-    if not c: sys.exit('CYB_COACH manquant (code coach, voir le document Site du projet).')
+    if not c: sys.exit('CYB_COACH manquant (code coach : claude/03_Acces_site.md dans le projet Coaching).')
     return c
 def src(name, code): return json.loads(dec1(json.load(open(f'{ROOT}/src/{name}.json.enc')), code))
 def write_src(name, data, code):

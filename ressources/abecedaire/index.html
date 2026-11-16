@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Abécédaire de l'entraînement · Ressources</title>
+<title>Abécédaire de l'entraînement · Team Trail 7C</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
   --paper:#f6f5f1;--card:#fff;--ink:#14181c;--ink2:#38414a;--muted:#6b747c;--rule:#d9d5cc;--rule2:#e9e6df;
@@ -303,46 +303,262 @@ figure,figure>*,.plate{min-width:0;}
 .two h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;margin:0;line-height:1.1;}
 .tbl td:first-child i{background:var(--c);}
 @media(max-width:640px){.tbl td:nth-child(2)::before{content:"Combien";}.tbl td:nth-child(3)::before{content:"";margin:0;}}
+
+
+/* ===== Identité Team Trail 7C (maquette) ===== */
+:root{--paper:#f4f2ee;--card:#fff;--ink:#16302a;--ink2:#36463f;--muted:#68776f;--rule:#d8d4cb;--rule2:#e7e3db;
+  --accent:#c4552f;--accent-soft:#f4e4da;--tan:#c9a585;--band:#ebe7df;--forest:#16302a;--forest2:#21443b;
+  --z1:#3f7a88;--z2:#5a9572;--z3:#d08f45;--z4:#c0503b;
+  --display:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink2);font-family:var(--sans);font-size:16.5px;line-height:1.65;}
+.in{max-width:76rem;margin-inline:auto;padding-inline:max(20px,env(safe-area-inset-left,0px));}
+/* en-tête */
+.site{border-bottom:1px solid var(--rule);background:#f8f7f4;}
+.site .in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);}
+.brand .mark{width:52px;height:52px;flex:none;}
+@media(max-width:700px){.brand .mark{width:44px;height:44px;}}
+.brand b{display:block;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.03em;line-height:1;}
+.brand b em{font-style:normal;color:var(--accent);}
+.brand small{display:block;font-size:9.5px;font-weight:600;letter-spacing:.2em;color:var(--muted);margin-top:4px;}
+.site nav{display:flex;gap:28px;}
+.site nav a{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;}
+.site nav a.on{color:var(--ink);font-weight:600;border-bottom-color:var(--accent);}
+@media(max-width:700px){.site .in{flex-direction:column;align-items:flex-start;gap:6px;padding-block:14px 0;min-height:0;}
+  .site nav{gap:22px;}.site nav a{padding:8px 0 10px;}}
+/* héros */
+.hero{position:relative;overflow:hidden;padding:0;border:0;display:block;gap:0;}
+.hero .in{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px;align-items:center;padding-block:72px 64px;}
+.kick{display:flex;align-items:center;gap:12px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 22px;}
+.kick::before{content:"";width:34px;height:1.5px;background:var(--accent);flex:none;}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.7rem,7.4vw,5.1rem);line-height:.95;letter-spacing:-.05em;color:var(--ink);margin:0;}
+.hero h1 span{display:block;color:var(--accent);}
+.hero .lede{font-size:clamp(1.05rem,2.2vw,1.2rem);line-height:1.6;color:var(--ink2);max-width:34em;margin:24px 0 0;}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:32px;}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--forest);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:15px 22px;}
+.btn:hover{background:var(--forest2);}
+.meta{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.hero-art{justify-self:center;width:min(100%,380px);}
+.hero-grid-bg{position:absolute;inset:0 0 0 55%;background-image:linear-gradient(var(--rule2) 1px,transparent 1px),linear-gradient(90deg,var(--rule2) 1px,transparent 1px);background-size:44px 44px;opacity:.55;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 30%);mask-image:linear-gradient(90deg,transparent,#000 30%);}
+.hero .in>*{position:relative;}
+@media(max-width:860px){.hero .in{grid-template-columns:1fr;padding-block:44px 40px;}.hero-art,.hero-grid-bg{display:none;}}
+/* bandeau duo */
+.duo{background:var(--forest);color:#cfd9d4;}
+.duo .in{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;padding-block:16px;}
+.duo .in>span{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;}
+.duo nav{display:flex;gap:10px;}
+.duo a{font-size:14px;font-weight:600;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.35);padding:10px 18px;white-space:nowrap;}
+.duo a b{font-weight:700;margin-right:8px;opacity:.75;}
+.duo a.on{background:#f8f7f4;color:var(--ink);border-color:#f8f7f4;}
+@media(max-width:560px){.duo nav{width:100%;}.duo a{flex:1;text-align:center;padding:12px 8px;}}
+/* corps + sommaire */
+.body{display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px;padding-block:56px 40px;}
+.toc{display:block;border:0;background:none;position:sticky;top:24px;align-self:start;padding-right:8px;}
+.toc>p{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 14px;}
+.toc nav{display:grid;gap:2px;}
+.toc nav a{display:block;font-size:13.5px;font-weight:500;color:var(--muted);text-decoration:none;padding:9px 12px;border-left:2px solid transparent;line-height:1.3;}
+.toc nav a:hover{color:var(--ink);}
+.toc nav a.on{color:var(--ink);font-weight:600;background:#e9ece8;border-left-color:var(--accent);}
+.toc .toc-foot{text-transform:none;letter-spacing:0;font-weight:400;margin-top:28px;padding-top:16px;border-top:1px solid var(--rule);font-size:12px;line-height:1.5;color:var(--muted);}
+main{min-width:0;border-left:1px solid var(--rule);padding-left:56px;}
+@media(max-width:1099px){.body{grid-template-columns:minmax(0,1fr);gap:0;padding-block:8px 24px;}.toc{display:none;}main{border-left:0;padding-left:0;}}
+/* sections */
+section.sec{padding:0 0 76px;gap:24px;}
+section.sec+section.sec{padding-top:8px;}
+.sh{display:grid;gap:12px;margin-bottom:4px;}
+.sk{display:flex;align-items:center;gap:14px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0;}
+.sk b{font-weight:700;}
+.sk i{width:30px;height:1.5px;background:var(--rule);}
+.sh h2{font-family:var(--display);font-weight:800;font-size:clamp(1.85rem,4.6vw,2.85rem);line-height:1.04;letter-spacing:-.045em;color:var(--ink);margin:0;}
+section.sec.alt{background:none;box-shadow:none;clip-path:none;}
+@media(max-width:1099px){
+  section.sec{padding:52px 0 52px;}
+  section.sec+section.sec{padding-top:52px;}
+  section.sec:nth-of-type(even){background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax);}
+}
+.lead,.sec>p.lead{font-size:16.5px;color:var(--ink2);max-width:42em;}
+.small{font-size:13.5px;color:var(--muted);}
+/* étiquettes et légendes */
+.label,.kicker,.cells .label,.k,.k2,.dl dt,.d-h .label,.figcap b{font-family:var(--sans)!important;font-size:11px!important;font-weight:700!important;letter-spacing:.14em!important;text-transform:uppercase;}
+.figcap{display:flex;gap:12px;align-items:baseline;}
+.figcap b{color:var(--accent)!important;white-space:nowrap;}
+.figcap span{font-size:13.5px;color:var(--muted);}
+.plate{background:#fff;border:1px solid var(--rule);padding:24px;}
+@media(max-width:600px){.plate{padding:16px 14px;}}
+/* cartes */
+.cells,.multiples,.steps,.mito,.parts{gap:14px!important;border:0!important;background:none;}
+.cells>div,.multiples>div,.steps>div,.mito>div,.parts li{background:#fff!important;border:1px solid var(--rule2)!important;border-top:3px solid var(--ink)!important;padding:20px!important;}
+.cells .alert{background:#fbf3ee!important;border-top-color:var(--accent)!important;}
+.cells .label{color:var(--accent);}
+.cells .t,.multiples h3{font-family:var(--display)!important;font-weight:700!important;font-size:1.2rem!important;letter-spacing:-.02em;color:var(--ink);}
+.steps .n{font-family:var(--serif)!important;font-size:2rem!important;line-height:1;color:var(--accent)!important;letter-spacing:0!important;}
+.steps b{font-family:var(--display)!important;font-weight:700!important;font-size:1.15rem!important;letter-spacing:-.02em;color:var(--ink);}
+.ladder{gap:14px;border:0!important;}
+.ladder>div{border:1px solid var(--rule2)!important;border-top:4px solid var(--c)!important;background:#fff;padding:18px!important;}
+.ladder b{font-family:var(--display)!important;font-weight:700!important;letter-spacing:-.02em;color:var(--ink);}
+@media(max-width:600px){.cells>div,.multiples>div,.steps>div,.mito>div,.parts li{padding:16px 14px!important;}}
+.note{background:#e8eeeb;border-left:3px solid var(--ink);padding:16px 20px;}
+.note .label{color:var(--ink)!important;}
+.note p{color:#2c3d36;}
+/* voiture et labo */
+.parts li{border-top-width:1px!important;border-left:4px solid var(--pc)!important;}
+.parts b{font-family:var(--display)!important;font-weight:700!important;letter-spacing:-.02em;color:var(--ink);}
+.lab{border:1.5px solid var(--ink)!important;}
+.seg button[aria-pressed="true"]{background:var(--ink)!important;}
+.d-h h3{font-family:var(--display)!important;font-weight:800!important;letter-spacing:-.035em;color:var(--ink);}
+.zsel button[aria-pressed="true"]{background:var(--ink)!important;}
+.tbl{border-color:var(--rule)!important;}
+.tbl th{border-bottom-color:var(--ink)!important;}
+/* idées reçues, références */
+.myths{border-top:2px solid var(--ink)!important;}
+.myth q{font-family:var(--serif)!important;font-style:italic;color:var(--ink);}
+.myth .v{font-family:var(--sans)!important;font-weight:700;letter-spacing:.14em!important;}
+.refs{border-top:2px solid var(--ink)!important;}
+.quote{border-left:3px solid var(--accent);padding:4px 0 4px 20px;font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.6vw,1.4rem);color:var(--ink);line-height:1.45;margin:0;max-width:34em;}
+/* bloc final */
+.final{background:var(--forest);color:#fff;padding:34px 36px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 32px;align-items:center;margin-top:8px;}
+.final .fl{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--tan);}
+.final .fq{font-family:var(--serif);font-size:clamp(1.3rem,3vw,1.7rem);line-height:1.3;margin:8px 0;}
+.final .fs{font-size:13.5px;color:#b8c7c0;}
+.final .f7{font-family:var(--serif);font-size:clamp(3rem,8vw,4.6rem);color:var(--tan);line-height:1;}
+@media(max-width:600px){.final{grid-template-columns:1fr;padding:26px 22px;}.final .f7{font-size:2.6rem;}}
+/* pied */
+.foot{border-top:1px solid var(--rule);background:#ecebe6;margin-top:24px;}
+.foot .in{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:26px;font-size:13px;color:var(--muted);}
+.foot b{color:var(--ink);font-weight:700;}
+.foot a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--ink);}
+
+
+/* frise + RPE */
+.rpe-plate{display:grid;gap:18px;}
+.rpe-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px 16px;flex-wrap:wrap;}
+.rpe-top .label{color:var(--muted)!important;margin:0;}
+.rpe-q{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3vw,1.6rem);letter-spacing:-.035em;color:var(--ink);margin:4px 0 0;}
+.rpe-scale{color:var(--accent)!important;}
+.sp-band{position:relative;}
+.mk-wrap{position:absolute;top:0;bottom:0;left:7.5rem;right:0;pointer-events:none;z-index:2;}
+.sp-marks{margin-bottom:24px;}
+.mk{position:absolute;top:-8px;bottom:-8px;width:3px;margin-left:-1.5px;background:var(--ink);box-shadow:0 0 0 1.5px #fff;transition:left .25s ease;}
+.mk b{position:absolute;top:-24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font:700 12px/1 var(--sans);padding:4px 7px;white-space:nowrap;}
+.sp-row>div{transition:opacity .2s, background .2s;}
+.sp-row:not(.sp-band)>div.dim{opacity:.38;}
+.sp-row:not(.sp-band)>div.act{background:#f3f1ec;}
+.sp-band>div.dim{opacity:.45;}
+.rpe{display:grid;gap:10px;border-top:1px solid var(--rule2);padding-top:18px;}
+.rpe-l{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px;color:var(--ink2);}
+.rpe-n{font-weight:700;color:var(--accent);white-space:nowrap;}
+.rpe-n b{font-size:1.3rem;}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;margin:0;cursor:pointer;--p:22%;--c:var(--z1);}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--ink) var(--p),var(--rule) var(--p));}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--rule);}
+input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--ink);}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:6px solid var(--ink);margin-top:-10px;box-shadow:0 1px 4px rgba(0,0,0,.25);}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:6px solid var(--ink);}
+input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:4px;}
+.rpe-ticks{display:flex;justify-content:space-between;padding:0 7px;font-size:11px;font-weight:600;color:var(--muted);margin-top:-6px;}
+.rpe-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 22px;background:#f1efea;border-left:4px solid var(--c);padding:16px 20px;align-items:start;}
+.rc-n b{font-family:var(--display);font-weight:800;font-size:2.6rem;line-height:1;color:var(--ink);letter-spacing:-.04em;}
+.rc-n span{font-size:13px;font-weight:600;color:var(--muted);margin-left:3px;}
+.rc-z{margin:0;font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--c);letter-spacing:-.02em;}
+.rc-d{margin:2px 0 8px;font-size:15px;color:var(--ink2);}
+.rpe-card dl{display:flex;flex-wrap:wrap;gap:4px 20px;margin:0;}
+.rpe-card dl div{display:flex;gap:6px;align-items:baseline;}
+.rpe-card dt{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.rpe-card dd{margin:0;font-size:14px;font-weight:600;color:var(--ink);}
+.rpe-what{background:var(--accent-soft);padding:14px 18px;}
+.rpe-what .label{color:var(--accent)!important;margin:0 0 4px;}
+.rpe-what p{margin:0;font-size:14.5px;color:#4a3a30;}
+@media(max-width:600px){.rpe-card{grid-template-columns:1fr;}.rpe-l{flex-direction:column;gap:2px;}}
+@media(max-width:760px){.mk-wrap{left:0;}}
+/* accordéon séances */
+.accs{border-top:2px solid var(--ink);}
+.acc{border-bottom:1px solid var(--rule);}
+.acc summary{list-style:none;display:grid;grid-template-columns:2.6rem minmax(0,1fr) auto 32px;gap:14px;align-items:center;padding:20px 4px;cursor:pointer;}
+.acc summary::-webkit-details-marker{display:none;}
+.acc summary:hover{background:#efede8;}
+.an{font-size:12px;font-weight:600;color:var(--muted);}
+.at b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(1.15rem,2.6vw,1.4rem);letter-spacing:-.03em;color:var(--ink);line-height:1.15;}
+.az{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-top:3px;}
+.az::before{content:"";width:8px;height:8px;background:var(--c);}
+.avm{display:none;color:var(--accent);}
+.av{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+.ai{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);position:relative;justify-self:end;}
+.ai::before,.ai::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%);}
+.ai::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s;}
+.acc[open] .ai{background:var(--ink);}
+.acc[open] .ai::before,.acc[open] .ai::after{background:#fff;}
+.acc[open] .ai::after{transform:translate(-50%,-50%) rotate(0deg);}
+.ab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,16rem);gap:20px 32px;padding:4px 4px 28px calc(2.6rem + 18px);}
+.ab .tx{display:grid;gap:12px;}
+.ab .tx p{margin:0;font-size:15.5px;}
+.ab .k{display:block;color:var(--accent);margin-bottom:2px;}
+.ab ul{margin:0;padding-left:1.1rem;display:grid;gap:3px;}
+.ab ul li::marker{color:var(--accent);}
+.ab-side{display:grid;gap:10px;align-content:start;}
+.ab .spec-t{border-top-color:var(--c)!important;}
+@media(max-width:760px){.acc summary{grid-template-columns:2rem minmax(0,1fr) 28px;gap:10px;padding:16px 2px;}.av{display:none;}.avm{display:inline;}.ab{grid-template-columns:1fr;padding:0 2px 22px;}}
+
 </style>
 </head>
 <body>
-<div class="wrap">
+<header class="site"><div class="in">
+  <a class="brand" href="../../"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><polygon points="0,84 18,46 30,62 52,22 74,60 84,48 100,84" fill="#9db8a5"/><polygon points="52,22 45,36 52,33 59,37" fill="#eef3ef"/><polygon points="31,64 39,64 33,90 25,90" fill="#8a6d3b"/><line x1="28.3" y1="74" x2="36.3" y2="74" stroke="#5e4826" stroke-width="1.5"/><line x1="26.3" y1="82" x2="34.3" y2="82" stroke="#5e4826" stroke-width="1.5"/><path d="M24.5,89 L33.5,89 L39,95 L39,98 L24.5,98 Z" fill="#3b2a18"/><polygon points="42,64 50,64 53,90 45,90" fill="#8a6d3b"/><line x1="43.4" y1="74" x2="51.4" y2="74" stroke="#5e4826" stroke-width="1.5"/><line x1="44.3" y1="82" x2="52.3" y2="82" stroke="#5e4826" stroke-width="1.5"/><path d="M44.5,89 L53.5,89 L59,95 L59,98 L44.5,98 Z" fill="#3b2a18"/><polygon points="53,64 61,64 58,90 50,90" fill="#8a6d3b"/><line x1="51.6" y1="74" x2="59.6" y2="74" stroke="#5e4826" stroke-width="1.5"/><line x1="50.7" y1="82" x2="58.7" y2="82" stroke="#5e4826" stroke-width="1.5"/><path d="M49.5,89 L58.5,89 L64,95 L64,98 L49.5,98 Z" fill="#3b2a18"/><polygon points="64,64 72,64 78,90 70,90" fill="#8a6d3b"/><line x1="66.7" y1="74" x2="74.7" y2="74" stroke="#5e4826" stroke-width="1.5"/><line x1="68.7" y1="82" x2="76.7" y2="82" stroke="#5e4826" stroke-width="1.5"/><path d="M69.5,89 L78.5,89 L84,95 L84,98 L69.5,98 Z" fill="#3b2a18"/><path d="M19,60 C19,22 81,22 81,60 Z" fill="#55693a"/><path d="M24,57 C24,33 38,25 49,25 C38,30 31,42 31,57 Z" fill="#fff" opacity=".16"/><path d="M46,59 L46,27 Q50,19.5 54,27 L54,59 Z" fill="#3b4a28"/><line x1="50" y1="24" x2="50" y2="58" stroke="#6f8450" stroke-width="1.2"/><path d="M12,61 Q50,74 88,61 L83,55.5 Q50,66 17,55.5 Z" fill="#3b4a28"/><path d="M17,55.5 Q50,66 83,55.5" fill="none" stroke="#7d9358" stroke-width="1.3"/><circle cx="23.5" cy="49" r="1.9" fill="#d9c46a"/><circle cx="76.5" cy="49" r="1.9" fill="#d9c46a"/><path d="M17,56 L14.5,68" stroke="#6b4a2a" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M83,56 L85.5,68" stroke="#6b4a2a" stroke-width="2.2" stroke-linecap="round" fill="none"/><circle cx="50" cy="44" r="9.5" fill="#e9dca4" stroke="#9a7d1f" stroke-width="1.6"/><text x="50" y="48.3" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="13" fill="#3b4a28">7C</text></svg><span><b>TEAM TRAIL <em>7C</em></b><small>COURSE À PIED · TRAIL · ULTRA</small></span></a>
+  <nav aria-label="Navigation du site"><a class="on" href="../">Ressources</a><a href="../../">Le collectif</a><a href="../../coaching/">Coaching</a></nav>
+</div></header>
 
-<div class="top"><a href="../">← Ressources</a></div>
+<section class="hero"><div class="hero-grid-bg"></div><div class="in">
+  <div>
+    <p class="kick">Abécédaire de l'entraînement</p>
+    <h1>Comprendre l'effort.<span>Mieux s'entraîner.</span></h1>
+    <p class="lede">Le spectre de l'effort, les séances une par une, et comment établir tes repères. Une ressource commune pour comprendre ce qu'on te demande et pourquoi.</p>
+    <div class="cta"><span class="meta">Lecture 8 min · 8 séances</span></div>
+  </div>
+  <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 380 380"><circle cx="190" cy="190" r="150" fill="none" stroke="#d8d4cb"/>
+<g fill="none" stroke-width="14"><path d="M190 64 A126 126 0 0 1 306.3 238.7" stroke="#3f7a88"/><path d="M306.3 238.7 A126 126 0 0 1 222.6 311.7" stroke="#5a9572"/><path d="M222.6 311.7 A126 126 0 0 1 110.6 288.1" stroke="#d08f45"/><path d="M110.6 288.1 A126 126 0 0 1 82.1 253.1" stroke="#c0503b"/></g>
+<circle cx="190" cy="190" r="84" fill="#16302a"/><text x="190" y="188" text-anchor="middle" font-family="Inter Tight,Inter,sans-serif" font-weight="800" font-size="40" letter-spacing="-1" fill="#f4f2ee">RPE</text><text x="190" y="216" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600" font-size="13" letter-spacing="3" fill="#c9a585">1 → 10</text>
+<text x="300" y="60" font-family="Newsreader,Georgia,serif" font-size="64" fill="#e2ded6">01.</text></svg></div>
+</div></section>
 
-<header class="hero">
-  <div class="byline"><span class="kicker">Ressources · Pour apprendre</span><span class="kicker">Team Trail 7C</span></div>
-  <h1>Abécédaire<br>de l'entraînement</h1>
-  <p class="dek">Le spectre de l'effort, les séances une par une, et comment établir tes repères. Une ressource commune pour comprendre ce qu'on te demande et pourquoi.</p>
-</header>
+<div class="duo"><div class="in"><span>Deux manières d'apprendre</span><nav aria-label="Les deux guides"><a href="../abecedaire/" class="on" aria-current="page"><b>01</b>L'abécédaire</a><a href="../moteur/"><b>02</b>Le moteur</a></nav></div></div>
 
-<!-- 01 -->
+<div class="in body">
+  <aside class="toc"><p>Dans ce dossier</p><nav aria-label="Sommaire"><a href="#spectre">Le spectre de l'effort</a><a href="#reperes">Tes repères</a><a href="#seances">Les séances</a><a href="#erreurs">Erreurs classiques</a><a href="#melange">Le mélange</a></nav><p class="toc-foot">Team Trail 7C<br>Des repères pour comprendre, pas des recettes universelles.</p></aside>
+  <main id="contenu">
 <section class="sec" id="spectre">
-  <div class="sec-h"><span class="num">01</span><h2>Le spectre de l'effort</h2></div>
+  <header class="sh"><p class="sk"><b>01</b><i></i>Se situer</p><h2>Le spectre de l'effort</h2></header>
+  <p class="quote">« Une bonne séance n'est pas forcément une séance difficile. »</p>
   <p class="lead">Toutes les séances se rangent sur une seule ligne, de la plus facile à la plus dure. Deux seuils la découpent : le SV1 et le SV2. Sous le SV1, on peut durer des heures. Entre les deux, on tient de longues minutes. Au-dessus du SV2, la fatigue monte vite.</p>
   <figure>
-    <div class="plate">
+    <div class="plate rpe-plate">
+      <div class="rpe-top"><div><p class="label">Visualisation interactive</p><h3 class="rpe-q">À quel point est-ce difficile ?</h3></div><p class="label rpe-scale">Échelle RPE · effort perçu · 1 à 10</p></div>
       <div class="spec-scroll"><div class="spec" role="img" aria-label="Spectre de l'effort du modéré au maximal">
         <div class="sp-marks">
           <div style="left:40%"><b>SV1</b><span class="lg">tenable plusieurs heures</span><span class="sh">plusieurs h</span><i></i></div>
           <div style="left:67%"><b>SV2</b><span class="lg">tenable 45 à 60 min</span><span class="sh">45-60 min</span><i></i></div>
           <div style="left:88%"><b>VMA</b><span class="lg">tenable 4 à 7 min</span><span class="sh">4-7 min</span><i></i></div>
         </div>
-        <div class="sp-row sp-band"><div class="h"></div><div style="background:var(--z1)">Modéré</div><div style="background:var(--z2)">Élevé</div><div style="background:var(--z3)">Sévère</div><div style="background:var(--z4)">Max.</div></div>
+        <div class="sp-row sp-band"><div class="h"></div><div class="mk-wrap" aria-hidden="true"><i class="mk" id="mk"><b id="mkv">3</b></i></div><div style="background:var(--z1)">Modéré</div><div style="background:var(--z2)">Élevé</div><div style="background:var(--z3)">Sévère</div><div style="background:var(--z4)">Max.</div></div>
         <div class="gz-row"><i></i><span>zone grise : à éviter</span></div>
         <div class="sp-row r1"><div class="h">Parler</div><div>phrases complètes</div><div>phrases courtes</div><div>quelques mots</div><div>rien</div></div>
         <div class="sp-row"><div class="h">Effort sur 10</div><div>1 à 4</div><div>5 à 6</div><div>7 à 8</div><div>9 à 10</div></div>
         <div class="sp-row" style="border-bottom:0"><div class="h">Séances</div><div><b>EF · Sortie longue · Ultra</b><br><span style="color:var(--muted)">en continu, de 30 min à plusieurs heures</span></div><div><b>Tempo · Seuil</b><br><span style="color:var(--muted)">blocs de 10 à 25 min</span></div><div><b>Fartlek · VMA · Côtes</b><br><span style="color:var(--muted)">fractions de 1 à 5 min</span></div><div><b>VMA courte · Sprints</b><br><span style="color:var(--muted)">15 s à 1 min</span></div></div>
       </div></div>
+      <div class="rpe">
+        <label for="rpe" class="rpe-l"><span>Déplace le curseur : <b>ton RPE</b>, l'effort que tu ressens</span><span class="rpe-n"><b id="rpev">3</b> / 10</span></label>
+        <input type="range" id="rpe" min="1" max="10" step="1" value="3" aria-describedby="rpe-what">
+        <div class="rpe-ticks" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+        <div class="rpe-card" id="rpecard" aria-live="polite"></div>
+      </div>
+      <div class="rpe-what" id="rpe-what"><p class="label">C'est quoi, le RPE ?</p><p><b>RPE</b> veut dire <i>Rating of Perceived Exertion</i> : l'effort perçu, noté de 1 à 10. Tu te donnes cette note pendant l'effort, en écoutant ta respiration, tes jambes et ta capacité à parler. Pas besoin de montre : c'est le repère qui marche partout, en côte, par la chaleur ou quand le cardio décroche. L'échelle vient des travaux du physiologiste suédois Gunnar Borg.</p></div>
     </div>
-    <figcaption class="figcap"><b>Fig. 1</b><span>Le spectre de l'effort, du modéré au maximal.</span></figcaption>
+    <figcaption class="figcap"><b>Fig. 1</b><span>Le spectre de l'effort, du modéré au maximal. Le curseur RPE montre où tombe chaque note.</span></figcaption>
   </figure>
   <div class="note"><span class="label">À retenir</span><p>La zone grise se trouve juste au-dessus du SV1, là où une EF dérive trop vite : trop dur pour récupérer, trop facile pour progresser. On l'évite. Le travail au seuil, lui, est voulu : en blocs dosés, près du SV2. Sur route ou en terrain plat, le test de parole est le repère principal. En côte, l'allure s'effondre naturellement : on regarde alors la FC ou la sensation en fin de fraction.</p></div>
 </section>
-
-<!-- 02 -->
-<section class="sec alt" id="reperes">
-  <div class="sec-h"><span class="num">02</span><h2>Tes repères</h2></div>
+<section class="sec" id="reperes">
+  <header class="sh"><p class="sk"><b>02</b><i></i>Personnaliser</p><h2>Tes repères</h2></header>
   <p class="lead">Chaque coureur a ses propres repères, établis par des tests ou par plusieurs séances concordantes, et toujours datés. Ils figurent dans ton espace personnel. Une valeur qu'on n'a pas encore mesurée reste « à mesurer » : on ne l'invente pas.</p>
   <div class="cells">
     <div><span class="label">SV1</span><span class="t">Allure EF</span><p>L'allure où tu tiens une conversation. On la confirme avec la FC sur plusieurs sorties.</p></div>
@@ -351,93 +567,85 @@ figure,figure>*,.plate{min-width:0;}
     <div><span class="label">Fréquence cardiaque</span><span class="t">FC max</span><p>Relevée sur un effort maximal. Jamais déduite d'un pic isolé ou d'une seule sortie.</p></div>
   </div>
 </section>
-
-<!-- 03 -->
 <section class="sec" id="seances">
-  <div class="sec-h"><span class="num">03</span><h2>Les séances</h2></div>
-  <div class="toc" aria-label="Les séances de cette section">
-    <span style="--c:var(--z1)"><i></i>EF</span><span style="--c:var(--z1)"><i></i>Sortie longue</span><span style="--c:var(--z3)"><i></i>Fartlek</span><span style="--c:var(--z2)"><i></i>Seuil</span><span style="--c:var(--z4)"><i></i>VMA</span><span style="--c:var(--z3)"><i></i>Côtes</span><span style="--c:var(--muted)"><i></i>Renfo</span><span style="--c:var(--z1)"><i></i>Vélo / cross</span>
-  </div>
-  <div class="entries">
-    <article class="entry" id="s-ef" style="--c:var(--z1)">
-      <div class="nm"><span class="zl">Modéré</span><h3>EF</h3><span class="tag">Repères : à mesurer</span></div>
-      <div class="tx">
+  <header class="sh"><p class="sk"><b>03</b><i></i>La boîte à outils</p><h2>Les séances</h2></header>
+  <p class="lead">Ouvre une séance pour voir son objectif, ses séances types et ses repères. Le nom seul ne suffit pas : c'est la manière de la réaliser qui compte.</p>
+  <div class="accs"><details class="acc" id="s-ef" style="--c:var(--z1)" open>
+      <summary><span class="an">01</span><span class="at"><b>EF</b><span class="az">Modéré<span class="avm"> · Construire</span></span></span><span class="av">Construire</span><span class="ai" aria-hidden="true"></span></summary>
+      <div class="ab"><div class="tx">
         <p><span class="k">C'est quoi</span>L'endurance fondamentale : courir lentement, en pouvant parler en phrases complètes. La base de tout, 70 à 85 % du volume annuel.</p>
         <p><span class="k">Repère clé</span>Le test de la parole. Pas la FC seule, pas l'allure seule : les deux ensemble, plus la sensation. En côte, on marche si nécessaire sans culpabiliser.</p>
         <div><span class="k">Séances types</span><ul><li>40 à 60 min en continu, sur route ou chemin</li><li>EF + 4 à 6 accélérations courtes de 15 à 20 s en fin de séance (optionnel)</li></ul></div>
       </div>
-      <div class="spec-t"><div><small>Test de parole</small><b>phrases complètes</b></div><div><small>Effort / 10</small><b>2 à 4</b></div><div><small>FC (repère général)</small><b>sous le SV1</b></div><div><small>Statut</small><em>À calibrer pour chacun</em></div></div>
-    </article>
-    <article class="entry" id="s-sl" style="--c:var(--z1)">
-      <div class="nm"><span class="zl">Modéré</span><h3>Sortie longue</h3><span class="tag">Repères allure : à mesurer</span></div>
-      <div class="tx">
+      <div class="ab-side"><div class="spec-t"><div><small>Test de parole</small><b>phrases complètes</b></div><div><small>Effort / 10</small><b>2 à 4</b></div><div><small>FC (repère général)</small><b>sous le SV1</b></div><div><small>Statut</small><em>À calibrer pour chacun</em></div></div><span class="tag">Repères : à mesurer</span></div></div>
+    </details>
+    <details class="acc" id="s-sl" style="--c:var(--z1)">
+      <summary><span class="an">02</span><span class="at"><b>Sortie longue</b><span class="az">Modéré<span class="avm"> · Durer</span></span></span><span class="av">Durer</span><span class="ai" aria-hidden="true"></span></summary>
+      <div class="ab"><div class="tx">
         <p><span class="k">C'est quoi</span>Une EF qui dure : de 1 h 15 à plusieurs heures. Peut être en trail avec du dénivelé.</p>
         <p><span class="k">À quoi ça sert</span>L'endurance, l'alimentation à l'effort, les pieds, le mental. La séance qui grandit le plus au fil de la saison.</p>
         <div><span class="k">Séances types</span><ul><li>1 h 30 sur route, avec test alimentation (objectif 60 g de glucides/h)</li><li>Sortie trail progressive : la dernière heure un cran plus vite</li><li>Enchaînement vélo + course : terrain ultra spécifique</li></ul></div>
       </div>
-      <div class="spec-t"><div><small>Allure</small><b>EF stricte</b></div><div><small>Alimentation</small><b>60 g glucides/h</b></div><div><small>Durée hiver</small><b>1 h 15 à 2 h</b></div><div><small>Durée printemps</small><b>jusqu'à 4-5 h</b></div></div>
-    </article>
-    <article class="entry" id="s-fartlek" style="--c:var(--z3)">
-      <div class="nm"><span class="zl">Sévère</span><h3>Fartlek</h3><span class="tag">FC cible : à calibrer</span></div>
-      <div class="tx">
+      <div class="ab-side"><div class="spec-t"><div><small>Allure</small><b>EF stricte</b></div><div><small>Alimentation</small><b>60 g glucides/h</b></div><div><small>Durée hiver</small><b>1 h 15 à 2 h</b></div><div><small>Durée printemps</small><b>jusqu'à 4-5 h</b></div></div><span class="tag">Repères allure : à mesurer</span></div></div>
+    </details>
+    <details class="acc" id="s-seuil" style="--c:var(--z2)">
+      <summary><span class="an">03</span><span class="at"><b>Seuil</b><span class="az">Élevé, au SV2<span class="avm"> · Soutenir</span></span></span><span class="av">Soutenir</span><span class="ai" aria-hidden="true"></span></summary>
+      <div class="ab"><div class="tx">
+        <p><span class="k">C'est quoi</span>L'allure qu'on tient environ une heure en course. La respiration est forte et rythmée, on parle par phrases courtes.</p>
+        <p><span class="k">À quoi ça sert</span>Repousser le seuil d'accumulation du lactate. On introduit le seuil après quelques semaines de régularité, jamais en reprise.</p>
+        <div><span class="k">Séances types</span><ul><li>3 × 10 min, 2 min de récupération</li><li>2 × 15 min, 3 min de récupération</li></ul></div>
+      </div>
+      <div class="ab-side"><div class="spec-t"><div><small>Test de parole</small><b>phrases courtes</b></div><div><small>Effort sur 10 (RPE)</small><b>5 à 6</b></div><div><small>FC (repère général)</small><b>autour du SV2</b></div><div><small>Statut</small><em>À calibrer pour chacun</em></div></div><span class="tag">Repères : à établir en janvier</span></div></div>
+    </details>
+    <details class="acc" id="s-fartlek" style="--c:var(--z3)">
+      <summary><span class="an">04</span><span class="at"><b>Fartlek</b><span class="az">Sévère<span class="avm"> · Varier</span></span></span><span class="av">Varier</span><span class="ai" aria-hidden="true"></span></summary>
+      <div class="ab"><div class="tx">
         <p><span class="k">C'est quoi</span>Un « jeu d'allures » dans une sortie continue : des passages rapides alternés avec du trot, au ressenti. Inventé en Suède, parfait sur terrain vallonné.</p>
         <p><span class="k">Repère d'effort</span>Rapide mais contrôlé : entre le SV2 et la VMA. La dernière accélération doit sortir avec la même énergie que la première. En montée, on vise l'effort, pas l'allure.</p>
         <div><span class="k">Séances types</span><ul><li>6 à 10 accélérations de 30 s à 3 min au ressenti, dont plusieurs en montée</li><li>Version courte de reprise : 4 × (2' vif + 2' trot)</li></ul></div>
       </div>
-      <div class="spec-t"><div><small>Effort sur 10</small><b>7 / 10</b></div><div><small>En montée</small><b>effort, pas allure</b></div><div><small>FC fin fraction</small><b>sous le SV2</b></div><div><small>Statut</small><em>À calibrer pour chacun</em></div></div>
-    </article>
-    <article class="entry" id="s-seuil" style="--c:var(--z2)">
-      <div class="nm"><span class="zl">Élevé, au SV2</span><h3>Seuil</h3><span class="tag">Repères : à établir en janvier</span></div>
-      <div class="tx">
-        <p><span class="k">C'est quoi</span>L'allure qu'on tient environ une heure en course. La respiration est forte, on ne dit que quelques mots.</p>
-        <p><span class="k">À quoi ça sert</span>Repousser le seuil d'accumulation du lactate. On introduit le seuil après quelques semaines de régularité, jamais en reprise.</p>
-        <div><span class="k">Séances types</span><ul><li>3 × 10 min, 2 min de récupération</li><li>2 × 15 min, 3 min de récupération</li></ul></div>
-      </div>
-      <div class="spec-t"><div><small>Test de parole</small><b>quelques mots</b></div><div><small>Effort sur 10</small><b>7 à 8</b></div><div><small>FC (repère général)</small><b>autour du SV2</b></div><div><small>Statut</small><em>À calibrer pour chacun</em></div></div>
-    </article>
-    <article class="entry" id="s-vma" style="--c:var(--z4)">
-      <div class="nm"><span class="zl">Sévère à Max.</span><h3>VMA</h3><span class="tag">VMA : à mesurer</span></div>
-      <div class="tx">
-        <p><span class="k">C'est quoi</span>Des fractions courues autour de la vitesse maximale aérobie : l'allure qu'on tient 4 à 7 min à fond. On la découpe en fractions plus courtes, avec du trot entre deux, pour la répéter.</p>
-        <p><span class="k">À quoi ça sert</span>Faire monter le plafond : le cœur et la consommation d'oxygène poussés au maximum. Elle rend aussi la foulée plus vive. En ultra, elle se dose : une séance par semaine au plus, après quelques semaines de régularité, jamais en reprise.</p>
-        <div><span class="k">Séances types</span><ul><li>VMA courte : 2 × (8 × 30 s vite / 30 s trot), 3 min de trot entre les séries</li><li>VMA longue : 5 × 3 min un peu sous la VMA, 2 min de trot</li><li>Toujours 15 à 20 min d'échauffement avant</li></ul></div>
-      </div>
-      <div class="spec-t"><div><small>Test de parole</small><b>rien ou presque</b></div><div><small>Effort sur 10</small><b>8 à 9</b></div><div><small>Fréquence</small><b>1 / semaine au plus</b></div><div><small>Statut</small><em>À calibrer pour chacun</em></div></div>
-    </article>
-    <article class="entry" id="s-cotes" style="--c:var(--z3)">
-      <div class="nm"><span class="zl">Sévère</span><h3>Côtes</h3></div>
-      <div class="tx">
+      <div class="ab-side"><div class="spec-t"><div><small>Effort sur 10</small><b>7 / 10</b></div><div><small>En montée</small><b>effort, pas allure</b></div><div><small>FC fin fraction</small><b>sous le SV2</b></div><div><small>Statut</small><em>À calibrer pour chacun</em></div></div><span class="tag">FC cible : à calibrer</span></div></div>
+    </details>
+    <details class="acc" id="s-cotes" style="--c:var(--z3)">
+      <summary><span class="an">05</span><span class="at"><b>Côtes</b><span class="az">Sévère<span class="avm"> · Renforcer</span></span></span><span class="av">Renforcer</span><span class="ai" aria-hidden="true"></span></summary>
+      <div class="ab"><div class="tx">
         <p><span class="k">C'est quoi</span>Des montées courues fort, ou marchées vite sur les pentes raides.</p>
         <p><span class="k">À quoi ça sert</span>La force dans les jambes et une marche efficace : deux atouts majeurs en trail et en ultra. On introduit les côtes progressivement, une fois la régularité installée.</p>
         <div><span class="k">Séances types</span><ul><li>8 × 1 min en côte, retour en trottinant</li><li>Côtes longues marchées fort, 3 × 5 min</li></ul></div>
       </div>
-      <div class="spec-t"><div><small>Effort sur 10</small><b>7 à 8</b></div><div><small>Marche</small><b>forte et régulière</b></div><div><small>FC fin fraction</small><b>élevée, normale</b></div><div><small>Statut</small><em>À calibrer au printemps</em></div></div>
-    </article>
-    <article class="entry" id="s-renfo" style="--c:var(--muted)">
-      <div class="nm"><span class="zl">Complémentaire</span><h3>Renfo / pliométrie</h3></div>
-      <div class="tx">
+      <div class="ab-side"><div class="spec-t"><div><small>Effort sur 10</small><b>7 à 8</b></div><div><small>Marche</small><b>forte et régulière</b></div><div><small>FC fin fraction</small><b>élevée, normale</b></div><div><small>Statut</small><em>À calibrer au printemps</em></div></div></div></div>
+    </details>
+    <details class="acc" id="s-vma" style="--c:var(--z4)">
+      <summary><span class="an">06</span><span class="at"><b>VMA</b><span class="az">Sévère à Max.<span class="avm"> · Stimuler</span></span></span><span class="av">Stimuler</span><span class="ai" aria-hidden="true"></span></summary>
+      <div class="ab"><div class="tx">
+        <p><span class="k">C'est quoi</span>Des fractions courues autour de la vitesse maximale aérobie : l'allure qu'on tient 4 à 7 min à fond. On la découpe en fractions plus courtes, avec du trot entre deux, pour la répéter.</p>
+        <p><span class="k">À quoi ça sert</span>Faire monter le plafond : le cœur et la consommation d'oxygène poussés au maximum. Elle rend aussi la foulée plus vive. En ultra, elle se dose : une séance par semaine au plus, après quelques semaines de régularité, jamais en reprise.</p>
+        <div><span class="k">Séances types</span><ul><li>VMA courte : 2 × (8 × 30 s vite / 30 s trot), 3 min de trot entre les séries</li><li>VMA longue : 5 × 3 min un peu sous la VMA, 2 min de trot</li><li>Toujours 15 à 20 min d'échauffement avant</li></ul></div>
+      </div>
+      <div class="ab-side"><div class="spec-t"><div><small>Test de parole</small><b>rien ou presque</b></div><div><small>Effort sur 10</small><b>8 à 9</b></div><div><small>Fréquence</small><b>1 / semaine au plus</b></div><div><small>Statut</small><em>À calibrer pour chacun</em></div></div><span class="tag">VMA : à mesurer</span></div></div>
+    </details>
+    <details class="acc" id="s-renfo" style="--c:var(--muted)">
+      <summary><span class="an">07</span><span class="at"><b>Renfo / pliométrie</b><span class="az">Complémentaire<span class="avm"> · Protéger</span></span></span><span class="av">Protéger</span><span class="ai" aria-hidden="true"></span></summary>
+      <div class="ab"><div class="tx">
         <p><span class="k">C'est quoi</span>Exercices de renforcement musculaire et sauts : squats, fentes, bonds, corde à sauter. Pas cardio, musculaire.</p>
         <p><span class="k">À quoi ça sert</span>L'économie de course, la résistance aux descentes, la prévention des blessures. 1 à 2 fois par semaine, loin des séances clés.</p>
         <div><span class="k">Séances types</span><ul><li>20 à 30 min de circuit : gainage, squats sautés, bonds, corde</li><li>Travail des pieds / mollets pour la stabilité de cheville</li></ul></div>
       </div>
-      <div class="spec-t"><div><small>Durée</small><b>20 à 30 min</b></div><div><small>Fréquence</small><b>1 à 2 / semaine</b></div><div><small>Timing</small><b>loin des séances clés</b></div><div><small>Charge</small><b>augmentation progressive</b></div></div>
-    </article>
-    <article class="entry" id="s-velo" style="--c:var(--z1)">
-      <div class="nm"><span class="zl">Complémentaire</span><h3>Vélo / cross-training</h3></div>
-      <div class="tx">
+      <div class="ab-side"><div class="spec-t"><div><small>Durée</small><b>20 à 30 min</b></div><div><small>Fréquence</small><b>1 à 2 / semaine</b></div><div><small>Timing</small><b>loin des séances clés</b></div><div><small>Charge</small><b>augmentation progressive</b></div></div></div></div>
+    </details>
+    <details class="acc" id="s-velo" style="--c:var(--z1)">
+      <summary><span class="an">08</span><span class="at"><b>Vélo / cross-training</b><span class="az">Complémentaire<span class="avm"> · Entretenir</span></span></span><span class="av">Entretenir</span><span class="ai" aria-hidden="true"></span></summary>
+      <div class="ab"><div class="tx">
         <p><span class="k">C'est quoi</span>Vélo, home trainer, natation ou marche rapide. Maintient l'endurance avec moins de chocs que la course à pied.</p>
         <p><span class="k">Quand l'utiliser</span>Remplacer une EF en cas de fatigue ou de petite gêne, compléter les semaines de fort volume, récupérer en maintenant le cardio. Sur le vélo, à effort égal, la FC est plus basse qu'en course : le test de la parole reste le meilleur repère.</p>
         <div><span class="k">Séances types</span><ul><li>1 h à 1 h 30 de vélo tranquille ou home trainer</li><li>30 à 45 min de natation en crawl continu</li></ul></div>
       </div>
-      <div class="spec-t"><div><small>Effort</small><b>EF (test parole)</b></div><div><small>FC vélo / nat</small><b>plus basse qu'en course</b></div></div>
-    </article>
-  </div>
+      <div class="ab-side"><div class="spec-t"><div><small>Effort</small><b>EF (test parole)</b></div><div><small>FC vélo / nat</small><b>plus basse qu'en course</b></div></div></div></div>
+    </details></div>
   <p class="small">Ce que chaque séance améliore dans le corps, et en combien de temps : voir <a href="../moteur/">Le moteur du coureur</a>.</p>
 </section>
-
-<!-- 04 -->
-<section class="sec alt" id="erreurs">
-  <div class="sec-h"><span class="num">04</span><h2>Erreurs classiques</h2></div>
+<section class="sec" id="erreurs">
+  <header class="sh"><p class="sk"><b>04</b><i></i>Les pièges</p><h2>Erreurs classiques</h2></header>
   <div class="cells">
     <div class="alert"><span class="label">La plus fréquente</span><span class="t">Courir ses EF trop vite</span><p>L'erreur la plus fréquente, même chez les coureurs expérimentés. L'EF glisse dans la zone grise, fatigue sans faire progresser, et on arrive moins frais aux vraies séances. Si on ne peut plus parler en phrases complètes, on ralentit, quitte à marcher en côte.</p></div>
     <div><span class="label">En groupe</span><span class="t">Accélérer en sortie groupe</span><p>En groupe, le rythme monte naturellement. Chacun reste responsable de son effort, pas de la vitesse du groupe. La sortie longue n'est pas une compète.</p></div>
@@ -445,10 +653,8 @@ figure,figure>*,.plate{min-width:0;}
     <div><span class="label">Volume</span><span class="t">Monter le volume trop vite</span><p>Augmenter d'un coup la durée ou le nombre de sorties, sans semaine allégée. Toutes les 3 à 4 semaines, une semaine allégée de 25 à 30 %.</p></div>
   </div>
 </section>
-
-<!-- 05 -->
 <section class="sec" id="melange">
-  <div class="sec-h"><span class="num">05</span><h2>Le mélange dans un plan</h2></div>
+  <header class="sh"><p class="sk"><b>05</b><i></i>Construire la semaine</p><h2>Le mélange dans un plan</h2></header>
   <div class="two">
     <figure>
       <div class="plate">
@@ -475,8 +681,53 @@ figure,figure>*,.plate{min-width:0;}
     </figure>
   </div>
 </section>
-
-<footer><span class="kicker">Team Trail 7C · Ressources</span><a class="kicker" href="../moteur/" style="color:var(--accent)">Le moteur du coureur →</a></footer>
+<aside class="final" aria-label="À retenir"><div><p class="fl">Le principe 7C</p><p class="fq">La meilleure séance est celle qui trouve sa place dans la semaine.</p><p class="fs">Régularité, adaptation à la personne et cohérence de la charge.</p></div><div class="f7" aria-hidden="true">7C.</div></aside>
+  </main>
 </div>
+
+<footer class="foot"><div class="in"><span><b>TEAM TRAIL 7C</b> · Courir avec méthode, progresser avec plaisir.</span><a href="#">Retour en haut ↑</a></div></footer>
+<script>
+(function(){
+  var D=[null,
+   ["Modéré","Très, très facile. Marche active, trot de récupération."],
+   ["Modéré","Très facile. Footing de récupération, respiration calme."],
+   ["Modéré","Facile. La conversation reste fluide : le cœur de l'EF."],
+   ["Modéré","Facile mais présent. Encore des phrases complètes : haut de l'EF, sortie longue."],
+   ["Élevé","Soutenu. Des phrases courtes. Voulu en tempo ; si c'était censé être une EF, c'est la zone grise."],
+   ["Élevé","Soutenu, près du seuil. Phrases courtes, respiration forte et régulière."],
+   ["Sévère","Dur. Quelques mots seulement : fartlek, côtes, fractions de quelques minutes."],
+   ["Sévère","Très dur. Quelques mots, avec peine : fin de fraction, VMA."],
+   ["Max.","Extrêmement dur. On ne parle plus : VMA courte, fin de côte."],
+   ["Max.","Maximal. Impossible de tenir plus de quelques secondes : sprint."]];
+  var Z={"Modéré":[0,"var(--z1)","phrases complètes","EF · Sortie longue · Ultra","plusieurs heures"],"Élevé":[1,"var(--z2)","phrases courtes","Tempo · Seuil","45 à 60 min au SV2"],
+         "Sévère":[2,"var(--z3)","quelques mots","Fartlek · VMA · Côtes","quelques minutes"],"Max.":[3,"var(--z4)","rien","VMA courte · Sprints","quelques secondes à 1 min"]};
+  function pos(v){if(v<=4)return (v-.5)/4*40;if(v<=6)return 40+(v-4.5)/2*27;if(v<=8)return 67+(v-6.5)/2*21;return 88+(v-8.5)/2*12;}
+  var r=document.getElementById('rpe'),card=document.getElementById('rpecard'),mk=document.getElementById('mk');
+  var rows=[].slice.call(document.querySelectorAll('.spec .sp-row'));
+  function draw(){var v=+r.value,d=D[v],z=Z[d[0]];
+    document.getElementById('rpev').textContent=v;document.getElementById('mkv').textContent=v;
+    mk.style.left=pos(v)+'%';mk.style.setProperty('--c',z[1]);
+    r.style.setProperty('--p',((v-1)/9*100)+'%');r.style.setProperty('--c',z[1]);
+    rows.forEach(function(row){var cells=[].slice.call(row.children).filter(function(c){return !c.classList.contains('h')&&!c.classList.contains('mk-wrap');});cells.forEach(function(c,i){c.classList.toggle('act',i===z[0]);c.classList.toggle('dim',i!==z[0]);});});
+    card.style.setProperty('--c',z[1]);
+    card.innerHTML='<div class="rc-n"><b>'+v+'</b><span>/ 10</span></div><div class="rc-t"><p class="rc-z">'+d[0]+'</p><p class="rc-d">'+d[1]+'</p><dl><div><dt>Parler</dt><dd>'+z[2]+'</dd></div><div><dt>Séances</dt><dd>'+z[3]+'</dd></div><div><dt>Tenable</dt><dd>'+z[4]+'</dd></div></dl></div>';}
+  r.addEventListener('input',draw);draw();
+  // accordéon : une séance ouverte à la fois, sans saut de page
+  var acc=[].slice.call(document.querySelectorAll('details.acc'));
+  acc.forEach(function(d){d.addEventListener('toggle',function(){if(!d.open)return;
+    var top=d.getBoundingClientRect().top;
+    acc.forEach(function(o){if(o!==d&&o.open)o.open=false;});
+    var nt=d.getBoundingClientRect().top; if(Math.abs(nt-top)>1)window.scrollBy({top:nt-top,left:0,behavior:'instant'});
+  });});
+})();
+</script>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.toc nav a'));if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.remove('on');});var a=map[e.target.id];if(a)a.classList.add('on');}});},{rootMargin:'-30% 0px -60% 0px'});
+  Object.keys(map).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s);});
+})();
+</script>
 </body>
 </html>

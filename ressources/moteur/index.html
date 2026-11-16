@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Le moteur du coureur · Ressources</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#f6f5f1;--card:#fff;--ink:#14181c;--ink2:#38414a;--muted:#6b747c;--rule:#d9d5cc;--rule2:#e9e6df;
+  --accent:#b4431a;--accent-soft:#f6e9e2;
+  --z1:#2f6f8a;--z2:#2e7d5b;--z3:#c08a2a;--z4:#a93226;
+  --fat:#c9a227;--carb:#c4652a;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;font-feature-settings:"ss01","cv11";}
+.wrap{max-width:70rem;margin-inline:auto;padding:28px max(20px,env(safe-area-inset-right,0px)) 80px max(20px,env(safe-area-inset-left,0px));}
+p{margin:0;}
+a{color:var(--accent);text-underline-offset:3px;}
+svg{display:block;max-width:100%;height:auto;}
+svg text{font-family:var(--mono);}
+
+/* typographie */
+.kicker,.label,.figcap,.mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:10px;}
+.top a{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+.hero{padding:56px 0 40px;border-bottom:1px solid var(--rule);display:grid;gap:18px;}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,8vw,4.6rem);line-height:.98;letter-spacing:-.02em;margin:0;}
+.hero .dek{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.6vw,1.45rem);line-height:1.4;color:var(--ink2);max-width:36em;}
+.byline{display:flex;flex-wrap:wrap;gap:6px 18px;}
+
+.motto{padding:40px 0;border-bottom:1px solid var(--rule);display:grid;gap:20px;}
+.motto-words{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-family:var(--serif);font-size:clamp(1.7rem,5.2vw,2.9rem);font-weight:500;line-height:1.1;letter-spacing:-.01em;}
+.motto-words i{font-style:normal;color:var(--rule);font-weight:400;}
+.motto-words b{font-weight:500;color:var(--accent);}
+.motto p{max-width:40em;color:var(--ink2);font-size:17px;}
+
+section.sec{padding:56px 0 8px;display:grid;gap:22px;}
+.sec-h{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline;border-top:1px solid var(--ink);padding-top:14px;}
+.sec-h .num{font-family:var(--mono);font-size:13px;color:var(--accent);}
+.sec-h h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,4.2vw,2.4rem);line-height:1.08;letter-spacing:-.01em;margin:0;}
+.sec-h .kicker{grid-column:2;}
+.lead{max-width:40em;color:var(--ink2);font-size:17px;}
+.lead b{color:var(--ink);font-weight:600;}
+
+figure{margin:0;display:grid;gap:10px;}
+.plate{background:var(--card);border:1px solid var(--rule);padding:18px;}
+.figcap{display:flex;gap:10px;}
+.figcap b{color:var(--ink);font-weight:500;white-space:nowrap;}
+.figcap span{text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:13px;}
+
+.cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule);}
+.cells>div{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:16px 18px;background:var(--card);display:grid;gap:6px;align-content:start;}
+.cells .label{color:var(--muted);}
+.cells .t{font-family:var(--serif);font-size:1.3rem;font-weight:500;line-height:1.15;}
+.cells p{font-size:14.5px;color:var(--ink2);}
+.cells .alert{background:#fbf6f1;}
+.cells .alert .label{color:var(--accent);}
+
+.note{border-left:2px solid var(--accent);padding:2px 0 2px 16px;max-width:44em;display:grid;gap:4px;}
+.note p{font-size:14.5px;color:var(--ink2);}
+.small{font-size:13px;color:var(--muted);max-width:44em;}
+
+/* cycle */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule);}
+.steps>div{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--card);padding:16px;display:grid;gap:6px;align-content:start;}
+.steps .n{font-family:var(--mono);font-size:12px;color:var(--accent);}
+.steps b{font-family:var(--serif);font-weight:500;font-size:1.35rem;line-height:1;}
+.steps p{font-size:14px;color:var(--ink2);}
+@media(max-width:700px){.steps{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+.multiples{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule);}
+.multiples>div{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--card);padding:16px;display:grid;gap:8px;align-content:start;}
+.multiples h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;margin:0;line-height:1.1;}
+.multiples p{font-size:14px;color:var(--ink2);}
+
+.ladder{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-left:1px solid var(--rule);}
+.ladder>div{border-right:1px solid var(--rule);border-top:3px solid var(--c);background:var(--card);padding:14px;display:grid;gap:6px;align-content:start;border-bottom:1px solid var(--rule);}
+.ladder b{font-family:var(--serif);font-weight:500;font-size:1.2rem;line-height:1.1;}
+.ladder p{font-size:13.5px;color:var(--ink2);}
+@media(max-width:760px){.ladder{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+/* voiture : une couleur par pièce */
+.car [data-p="moteur"],.parts [data-p="moteur"],.plist [data-p="moteur"]{--pc:#b4431a;}
+.car [data-p="mito"],.parts [data-p="mito"],.plist [data-p="mito"]{--pc:#2e7d5b;}
+.car [data-p="pompe"],.parts [data-p="pompe"],.plist [data-p="pompe"]{--pc:#c0392b;}
+.car [data-p="tuyaux"],.parts [data-p="tuyaux"],.plist [data-p="tuyaux"]{--pc:#2f6f8a;}
+.car [data-p="graisse"],.parts [data-p="graisse"],.plist [data-p="graisse"]{--pc:#c9a227;}
+.car [data-p="glucides"],.parts [data-p="glucides"],.plist [data-p="glucides"]{--pc:#d9822b;}
+.car [data-p="nitro"],.parts [data-p="nitro"],.plist [data-p="nitro"]{--pc:#7b3f98;}
+.car [data-p="seuil"],.parts [data-p="seuil"],.plist [data-p="seuil"]{--pc:#b8487a;}
+.car [data-p="conso"],.parts [data-p="conso"],.plist [data-p="conso"]{--pc:#138a8a;}
+.car [data-p="chassis"],.parts [data-p="chassis"],.plist [data-p="chassis"]{--pc:#4a5d73;}
+.car [data-p="pilote"],.parts [data-p="pilote"],.plist [data-p="pilote"]{--pc:#7a5230;}
+.car .pt,.car .co{transition:opacity .2s,filter .2s;}
+.car .pt .f{fill:var(--pc);stroke:var(--pc);}
+.car .pt .s{stroke:var(--pc);}
+.car .ct{fill:var(--pc);}
+.car .co circle{fill:var(--pc);stroke:var(--pc);stroke-width:1;}
+.car .co text{fill:#fff;font-size:9px;font-weight:500;text-anchor:middle;}
+.car .co line{stroke:var(--pc);stroke-width:.9;}
+.car.sel .pt,.car.sel .co{opacity:.22;filter:grayscale(1);}
+.car.sel .pt.on,.car.sel .co.on{opacity:1;filter:none;}
+.car.sel .co.on line{stroke-width:1.4;}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule);margin:0;padding:0;list-style:none;}
+.parts li{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--card);padding:14px 16px;display:grid;grid-template-columns:2.2rem 1fr;gap:0 10px;}
+.parts .n{font-family:var(--mono);font-size:11px;color:#fff;background:var(--pc);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;margin-top:1px;}
+.parts li{border-left:3px solid var(--pc)!important;}
+.parts b{font-family:var(--serif);font-weight:500;font-size:1.15rem;line-height:1.2;display:block;}
+.parts em{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:block;margin:2px 0 4px;}
+.parts span{font-size:14px;color:var(--ink2);display:block;line-height:1.5;}
+
+/* labo */
+.lab{background:var(--card);border:1px solid var(--ink);display:grid;grid-template-rows:auto minmax(0,1fr);height:min(620px,74svh);}
+.lab-l{display:grid;gap:0;border-bottom:1px solid var(--rule);min-width:0;}
+.lab-bar{display:flex;justify-content:space-between;gap:8px;padding:8px 14px;border-bottom:1px solid var(--rule);}
+.carslot{padding:10px 12px 4px;}
+.seg{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--rule);overscroll-behavior-x:contain;}
+.seg::-webkit-scrollbar{display:none;}
+.seg button{flex:none;font:inherit;font-size:13px;font-weight:500;background:transparent;color:var(--ink2);border:0;border-right:1px solid var(--rule);padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.seg button i{width:8px;height:8px;background:var(--c);}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff;}
+.seghint{display:none;}
+.dwrap{position:relative;min-height:0;}
+.detail{height:100%;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:16px 16px 40px;display:grid;gap:16px;align-content:start;}
+.detail:focus{outline:none;}
+.d-h{display:grid;gap:2px;}
+.d-h .label{color:var(--c);}
+.d-h h3{font-family:var(--serif);font-weight:500;font-size:1.9rem;line-height:1;margin:0;}
+.plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule);}
+.plist li{display:grid;grid-template-columns:2rem 1fr;gap:0 8px;padding:10px 0;border-bottom:1px solid var(--rule);}
+.plist .n{font-family:var(--mono);font-size:10.5px;color:#fff;background:var(--pc,var(--accent));width:22px;height:22px;border-radius:50%;display:grid;place-items:center;}
+.plist b{font-weight:600;font-size:14.5px;}
+.plist b em{font-style:normal;font-weight:400;color:var(--muted);}
+.plist span{display:block;font-size:14px;color:var(--ink2);}
+.dl{display:grid;gap:10px;margin:0;}
+.dl div{display:grid;gap:2px;}
+.dl dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.dl dd{margin:0;font-size:14.5px;}
+.dl .cond dt{color:var(--accent);}
+.more{position:absolute;left:0;right:0;bottom:0;height:56px;pointer-events:none;background:linear-gradient(rgba(255,255,255,0),#fff 50%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);transition:opacity .2s;}
+.more.off{opacity:0;}
+@media(max-width:899px){.seghint{display:block;margin:0;padding:6px 14px 7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--accent);border-top:1px solid var(--rule);}}
+@media(min-width:900px){
+  .lab{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr);height:min(560px,calc(100vh - 80px));}
+  .lab-l{border-bottom:0;border-right:1px solid var(--rule);align-content:start;}
+  .seg{flex-wrap:wrap;overflow:visible;}
+  .seg button{border-bottom:1px solid var(--rule);}
+}
+
+/* tableau récap */
+.tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--rule);font-size:14.5px;}
+.tbl th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400;text-align:left;padding:10px 14px;border-bottom:1px solid var(--ink);}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--ink2);}
+.tbl td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;}
+.tbl td:first-child i{display:inline-block;width:8px;height:8px;background:var(--c);margin-right:8px;vertical-align:1px;}
+@media(max-width:640px){
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%;}
+  .tbl thead{display:none;}
+  .tbl tr{padding:10px 14px;border-bottom:1px solid var(--rule);}
+  .tbl td{border:0;padding:1px 0;}
+  .tbl td:nth-child(2)::before,.tbl td:nth-child(3)::before{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:6px;}
+  .tbl td:nth-child(2)::before{content:"Améliore";}
+  .tbl td:nth-child(3)::before{content:"Délai";}
+}
+
+/* carburant */
+.tank-bars{display:grid;gap:14px;}
+.tb{display:grid;gap:5px;}
+.tb .row{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+.tb .row b{font-family:var(--serif);font-weight:500;font-size:1.15rem;}
+.tb .bar{height:10px;background:var(--rule2);}
+.tb .bar div{height:100%;}
+.zsel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--rule);}
+.zsel button{font:inherit;font-size:13px;font-weight:500;background:var(--card);border:0;border-right:1px solid var(--rule);border-top:3px solid var(--c);padding:9px 4px;cursor:pointer;color:var(--ink2);}
+.zsel button:last-child{border-right:0;}
+.zsel button[aria-pressed="true"]{background:var(--ink);color:#fff;}
+.mix{display:flex;height:22px;}
+.mix div{transition:flex-basis .35s;}
+.mixleg{display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--mono);font-size:11.5px;color:var(--ink2);}
+.mixleg span::before{content:"";display:inline-block;width:9px;height:9px;margin-right:6px;background:var(--c);vertical-align:0;}
+.chk{display:flex;gap:10px;align-items:center;font-size:14px;cursor:pointer;}
+.chk input{width:18px;height:18px;accent-color:var(--ink);}
+
+/* fibres */
+.recr{width:100%;border-collapse:collapse;font-size:13.5px;}
+.recr th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400;padding:4px;text-align:center;}
+.recr th:first-child{text-align:left;}
+.recr td{padding:4px;}
+.recr td:first-child{font-weight:500;white-space:nowrap;padding-right:10px;}
+.recr i{display:block;height:12px;background:var(--rule2);}
+.recr i.y{background:var(--c);}
+
+.mito{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule);}
+.mito>div{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--card);padding:16px;display:grid;justify-items:center;gap:8px;text-align:center;}
+.mito b{font-family:var(--serif);font-weight:500;font-size:1.15rem;}
+.mito p{font-size:13.5px;color:var(--ink2);}
+
+.myths{border-top:1px solid var(--ink);}
+.myth{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;padding:18px 0;border-bottom:1px solid var(--rule);}
+.myth q{font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1.3;quotes:"« " " »";}
+.myth .v{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);align-self:start;padding-top:6px;}
+.myth p{grid-column:1/-1;font-size:14.5px;color:var(--ink2);max-width:44em;}
+
+.refs{border-top:1px solid var(--ink);padding-top:14px;display:grid;gap:10px;}
+.refs ol{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-size:13.5px;color:var(--ink2);}
+.refs li::marker{font-family:var(--mono);font-size:11px;color:var(--muted);}
+footer{margin-top:48px;border-top:1px solid var(--ink);padding-top:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+
+/* === v2 : séparation et couleur === */
+section.sec{padding:52px 0 44px;}
+section.sec.alt{background:#ece8de;box-shadow:0 0 0 100vmax #ece8de;clip-path:inset(0 -100vmax);}
+.sec-h{border-top:3px solid var(--ink);padding-top:16px;}
+.sec-h .num{background:var(--accent);color:#fff;padding:3px 7px 2px;font-size:12px;align-self:center;}
+.motto{background:#f2e3d9;box-shadow:0 0 0 100vmax #f2e3d9;clip-path:inset(0 -100vmax);border-bottom:0;padding:40px 0;}
+.motto p{color:#4a3a30;}
+.hero{border-bottom:0;}
+.cells .label{color:var(--accent);}
+.cells .alert{background:#f8ece5;}
+.note{background:#e3edf1;border-left:3px solid var(--z1);padding:14px 18px;}
+.note .label{color:var(--z1);}
+.note p{color:#26343c;}
+.steps .n{color:var(--accent);font-weight:500;}
+.hintline{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--accent);}
+.refs{border-top:3px solid var(--ink);}
+@media(max-width:640px){section.sec{padding:44px 0 36px;gap:18px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top"><a href="../">← Ressources</a></div>
+
+<header class="hero">
+  <div class="byline"><span class="kicker">Ressources · Pour apprendre</span><span class="kicker">Team Trail 7C</span></div>
+  <h1>Le moteur<br>du coureur</h1>
+  <p class="dek">Ce qui se passe dans le corps quand on s'entraîne, et pourquoi on ne fait pas toujours la même séance. Expliqué avec une voiture.</p>
+</header>
+
+<div class="motto">
+  <div class="motto-words"><span>Solliciter</span><i>/</i><span>Récupérer</span><i>/</i><span>S'adapter</span><i>/</i><b>Repousser</b></div>
+  <p>Le corps ne progresse pas pendant la séance, mais après. On lui demande un peu plus que d'habitude, il se défend, il se renforce pendant la récupération, et la limite recule. Si on lui demande toujours la même chose, il n'a plus de raison de changer.</p>
+</div>
+
+<!-- 01 -->
+<section class="sec" id="principe">
+  <div class="sec-h"><span class="num">01</span><h2>Le principe de l'adaptation</h2></div>
+  <div class="steps">
+    <div><span class="n">01</span><b>Solliciter</b><p>La séance demande un peu plus que d'habitude : réserves entamées, muscles et cœur sollicités.</p></div>
+    <div><span class="n">02</span><b>Récupérer</b><p>Juste après, on est un peu moins en forme. Le corps se défend et répare.</p></div>
+    <div><span class="n">03</span><b>S'adapter</b><p>Pendant le repos et le sommeil, il renforce ce qui a été sollicité.</p></div>
+    <div><span class="n">04</span><b>Repousser</b><p>Il revient un peu au-dessus. La séance suivante part de plus haut.</p></div>
+  </div>
+
+  <figure>
+    <div class="plate">
+      <svg viewBox="0 0 360 214" role="img" aria-label="Courbe sur deux séances : chaque séance fait baisser le niveau, qui remonte au-dessus ; la deuxième séance part du nouveau niveau ; sans séance, le gain s'efface">
+        <defs><marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" fill="#6b747c"/></marker></defs>
+        <g stroke="#e9e6df" stroke-width="1"><line x1="8" y1="40" x2="352" y2="40"/><line x1="8" y1="64" x2="352" y2="64"/><line x1="8" y1="140" x2="352" y2="140"/></g>
+        <line x1="8" y1="116" x2="352" y2="116" stroke="#14181c" stroke-width=".75" stroke-dasharray="3 3"/>
+        <text x="352" y="129" text-anchor="end" font-size="8.5" fill="#6b747c">NIVEAU DE DÉPART</text>
+        <line x1="104" y1="90" x2="352" y2="90" stroke="#b4431a" stroke-width=".75" stroke-dasharray="1 3"/>
+        <text x="262" y="103" text-anchor="middle" font-size="8.5" fill="#b4431a">NOUVEAU DÉPART</text>
+        <line x1="31" y1="22" x2="31" y2="116" stroke="#b4431a" stroke-width=".75"/>
+        <line x1="104" y1="22" x2="104" y2="90" stroke="#b4431a" stroke-width=".75"/>
+        <text x="31" y="16" text-anchor="middle" font-size="8.5" fill="#b4431a">SÉANCE 1</text>
+        <text x="104" y="16" text-anchor="middle" font-size="8.5" fill="#b4431a">SÉANCE 2</text>
+        <path d="M104 90 C140 90 180 106 232 115" fill="none" stroke="#9aa1a8" stroke-width="1.25" stroke-dasharray="4 3"/>
+        <text x="190" y="152" text-anchor="middle" font-size="8.5" fill="#6b747c">SANS SÉANCE 2 : RETOUR AU DÉPART</text>
+        <path d="M8 116 L31 116 C42 116 44 146 58 146 C74 146 82 90 104 90 C114 90 118 120 132 120 C148 120 156 64 180 64 C220 64 290 82 350 104" fill="none" stroke="#14181c" stroke-width="2" stroke-linecap="round"/>
+        <g font-size="8.5" font-weight="500">
+          <circle cx="31" cy="116" r="7" fill="#fff" stroke="#14181c"/><text x="31" y="119" text-anchor="middle" fill="#14181c">1</text>
+          <circle cx="58" cy="146" r="7" fill="#fff" stroke="#14181c"/><text x="58" y="149" text-anchor="middle" fill="#14181c">2</text>
+          <circle cx="80" cy="116" r="7" fill="#fff" stroke="#14181c"/><text x="80" y="119" text-anchor="middle" fill="#14181c">3</text>
+          <circle cx="104" cy="90" r="7" fill="#b4431a" stroke="#b4431a"/><text x="104" y="93" text-anchor="middle" fill="#fff">4</text>
+        </g>
+        <text x="292" y="50" text-anchor="middle" font-size="8.5" fill="#6b747c">SANS SUITE, LE GAIN</text>
+        <text x="292" y="61" text-anchor="middle" font-size="8.5" fill="#6b747c">S'EFFACE PEU À PEU</text>
+        <line x1="8" y1="176" x2="352" y2="176" stroke="#14181c" stroke-width=".75"/>
+        <path d="M31 184 L102 184" stroke="#b4431a" stroke-width="1.25" marker-end="url(#ar)"/>
+        <text x="66" y="198" text-anchor="middle" font-size="8.5" fill="#14181c">1 À 3 JOURS</text>
+        <text x="66" y="208" text-anchor="middle" font-size="8" fill="#6b747c">selon la séance</text>
+        <path d="M190 184 L348 184" stroke="#6b747c" stroke-width="1.25" stroke-dasharray="3 3" marker-end="url(#ar)"/>
+        <text x="268" y="198" text-anchor="middle" font-size="8.5" fill="#14181c">QUELQUES JOURS À QUELQUES SEMAINES</text>
+        <text x="268" y="208" text-anchor="middle" font-size="8" fill="#6b747c">selon ce qui a été gagné</text>
+      </svg>
+    </div>
+    <figcaption class="figcap"><b>Fig. 1</b><span>Deux séances bien espacées : la seconde part du niveau gagné par la première.</span></figcaption>
+  </figure>
+
+  <div class="cells">
+    <div><span class="label">Récupérer</span><p>Moins de 24 h après une EF. 48 à 72 h après une séance dure ou une longue sortie.</p></div>
+    <div><span class="label">La bonne fenêtre</span><p>La séance clé suivante arrive quand on est remonté : en pratique, 2 séances dures par semaine au plus, avec de l'EF entre les deux.</p></div>
+    <div><span class="label">Quand le gain s'efface</span><p>Le bénéfice d'une séance isolée s'estompe en une à deux semaines. Après 3 à 4 semaines d'arrêt, une bonne part des gains d'endurance a fondu.</p></div>
+  </div>
+  <p class="small">Ordres de grandeur : ils varient avec le niveau, l'âge, le sommeil et la séance elle-même.</p>
+
+  <figure>
+    <div class="multiples">
+      <div><svg viewBox="0 0 200 64" aria-hidden="true"><line x1="4" y1="54" x2="196" y2="54" stroke="#d9d5cc" stroke-dasharray="2 3"/><path d="M6 54 L20 54 Q28 64 36 54 Q44 42 56 44 Q64 56 72 46 Q80 32 92 34 Q100 46 108 36 Q116 22 128 24 Q136 36 144 26 Q152 12 164 14 Q172 26 180 16 L194 12" fill="none" stroke="#2e7d5b" stroke-width="1.75"/></svg><h3>Bien dosé</h3><p>La séance suivante arrive quand le corps est remonté. Chaque marche part un peu plus haut.</p></div>
+      <div><svg viewBox="0 0 200 64" aria-hidden="true"><line x1="4" y1="16" x2="196" y2="16" stroke="#d9d5cc" stroke-dasharray="2 3"/><path d="M6 16 L20 16 Q28 30 36 26 Q42 22 48 30 Q56 40 62 36 Q68 32 74 42 Q82 52 88 48 Q94 44 100 54 Q108 60 196 58" fill="none" stroke="#a93226" stroke-width="1.75"/></svg><h3>Trop, trop souvent</h3><p>On recharge avant d'être remonté. La fatigue s'empile, le niveau baisse.</p></div>
+      <div><svg viewBox="0 0 200 64" aria-hidden="true"><line x1="4" y1="36" x2="196" y2="36" stroke="#d9d5cc" stroke-dasharray="2 3"/><path d="M6 36 L20 36 Q28 44 36 36 Q44 32 60 36 Q68 44 76 36 Q84 32 100 36 Q108 44 116 36 Q124 32 140 36 Q148 44 156 36 Q164 32 194 36" fill="none" stroke="#c08a2a" stroke-width="1.75"/></svg><h3>Toujours pareil</h3><p>Même parcours, même allure, même durée. On entretient, on ne progresse plus.</p></div>
+    </div>
+    <figcaption class="figcap"><b>Fig. 2</b><span>Trois façons d'enchaîner les séances.</span></figcaption>
+  </figure>
+
+  <figure>
+    <div class="ladder">
+      <div style="--c:var(--z2)"><span class="label">Niveau 1</span><b>Fatigue de séance</b><p>Normale et voulue. Partie en 1 à 3 jours.</p></div>
+      <div style="--c:var(--z3)"><span class="label">Niveau 2</span><b>Fatigue de bloc</b><p>Après quelques semaines chargées. Une semaine allégée suffit, et on repart souvent plus fort.</p></div>
+      <div style="--c:var(--z4)"><span class="label">Niveau 3</span><b>Surmenage</b><p>Les performances baissent malgré le repos, plusieurs semaines. Il faut lever le pied franchement.</p></div>
+      <div style="--c:#5e1a12"><span class="label">Niveau 4</span><b>Surentraînement</b><p>Rare mais sérieux : fatigue durable, sommeil perturbé, envie en berne. Le retour peut prendre des mois. On en parle au coach et au médecin.</p></div>
+    </div>
+    <figcaption class="figcap"><b>Fig. 3</b><span>De la fatigue utile au surentraînement. Signaux à ne pas laisser traîner : FC au repos plus haute plusieurs jours, sommeil dégradé, jambes lourdes qui ne passent pas, plus aucune envie de courir.</span></figcaption>
+  </figure>
+
+  <div class="note"><span class="label">Note scientifique</span><p>On parle de surcompensation. C'est un modèle simplifié : forme et fatigue se superposent en réalité (modèle « forme-fatigue » de Banister), et les délais varient beaucoup. L'idée tient pourtant : le gain vient de l'alternance entre une charge un peu plus grande que d'habitude et une récupération suffisante. Les niveaux de fatigue suivent le consensus européen et américain de médecine du sport (Meeusen, 2013).</p></div>
+</section>
+
+<!-- 02 -->
+<section class="sec alt" id="voiture">
+  <div class="sec-h"><span class="num">02</span><h2>Le corps, vu comme une voiture</h2></div>
+  <p class="lead">Chaque pièce de la voiture correspond à quelque chose dans le corps. <b>D'abord les pièces une par une, ensuite quelle séance améliore quelle pièce.</b></p>
+
+  <figure>
+    <div class="plate">
+      <svg class="car" id="car0" viewBox="0 0 400 212" role="img" aria-label="Dessin technique d'une voiture dont les pièces numérotées représentent le corps du coureur">
+        <defs>
+          <pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#14181c" stroke-width=".6"/></pattern>
+        </defs>
+        <line x1="10" y1="175" x2="390" y2="175" stroke="#d9d5cc" stroke-width="1"/>
+        <!-- carrosserie (berline, vue de côté) -->
+        <path d="M40 150 C33 150 30 145 30 137 L30 124 C30 117 34 113 42 112 L98 105 C116 96 132 80 152 71 C172 62 228 60 256 65 C276 70 296 88 314 101 C332 104 352 107 362 111 C370 114 374 121 374 131 L373 141 C372 147 368 150 361 150 L327 150 A27 27 0 0 0 273 150 L127 150 A27 27 0 0 0 73 150 Z" fill="#fff" stroke="#14181c" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M138 101 C148 90 160 80 174 74 L205 71 L205 101 Z" fill="none" stroke="#14181c" stroke-width="1"/>
+        <path d="M213 70 L252 69 C266 71 284 86 297 101 L213 101 Z" fill="none" stroke="#14181c" stroke-width="1"/>
+        <path d="M128 104 L306 104" fill="none" stroke="#14181c" stroke-width=".6"/>
+        <path d="M209 71 L209 146 M302 104 C303 118 302 132 299 140 M134 104 C136 118 134 132 128 146" fill="none" stroke="#14181c" stroke-width=".6"/>
+        <rect x="222" y="109" width="12" height="2.5" rx="1" fill="#14181c"/><rect x="150" y="109" width="12" height="2.5" rx="1" fill="#14181c"/>
+        <path d="M296 99 L304 96 L307 101 Z" fill="#14181c"/>
+        <path d="M354 113 C362 114 368 117 370 122 L358 122 Z" fill="none" stroke="#14181c" stroke-width=".9"/>
+        <path d="M31 119 L39 117 L39 127 L31 127" fill="none" stroke="#14181c" stroke-width=".9"/>
+        <!-- tuyaux -->
+        <g class="pt" data-p="tuyaux"><path class="s" d="M76 144 L282 144 L282 124 M300 124 L318 124" fill="none" stroke="#14181c" stroke-width="1.1" stroke-dasharray="3 2"/></g>
+        <!-- chassis : roues et bas de caisse -->
+        <g class="pt" data-p="chassis">
+          <path class="s" d="M40 150 L73 150 M127 150 L273 150 M327 150 L361 150" stroke="#14181c" stroke-width="2.2"/>
+          <circle class="s" cx="100" cy="151" r="21" fill="#fff" stroke="#14181c" stroke-width="1.6"/><circle cx="100" cy="151" r="13" fill="none" stroke="#14181c" stroke-width=".8"/><circle cx="100" cy="151" r="3.5" fill="#14181c"/>
+          <circle class="s" cx="300" cy="151" r="21" fill="#fff" stroke="#14181c" stroke-width="1.6"/><circle cx="300" cy="151" r="13" fill="none" stroke="#14181c" stroke-width=".8"/><circle cx="300" cy="151" r="3.5" fill="#14181c"/>
+        </g>
+        <!-- moteur -->
+        <g class="pt" data-p="moteur"><rect class="f" x="318" y="116" width="42" height="24" fill="#fff" stroke="#14181c" stroke-width="1.2"/></g>
+        <!-- cylindres -->
+        <g class="pt" data-p="mito"><circle class="f" cx="329" cy="128" r="4" fill="#fff" stroke="#14181c"/><circle class="f" cx="339" cy="128" r="4" fill="#fff" stroke="#14181c"/><circle class="f" cx="349" cy="128" r="4" fill="#fff" stroke="#14181c"/></g>
+        <!-- pompe -->
+        <g class="pt" data-p="pompe"><path class="f" d="M286 133 l-9 -9 a5 5 0 0 1 9 -6.5 a5 5 0 0 1 9 6.5 z" fill="#fff" stroke="#14181c" stroke-width="1.2"/></g>
+        <!-- graisses -->
+        <g class="pt" data-p="graisse"><rect class="f" x="38" y="118" width="34" height="22" fill="#c9a227" stroke="#14181c" stroke-width="1.2"/></g>
+        <!-- glucides -->
+        <g class="pt" data-p="glucides"><rect class="f" x="140" y="124" width="22" height="16" fill="#fff" stroke="#14181c" stroke-width="1.2"/></g>
+        <!-- nitro -->
+        <g class="pt" data-p="nitro"><rect class="f" x="168" y="119" width="8" height="21" rx="4" fill="#fff" stroke="#14181c" stroke-width="1.2"/></g>
+        <!-- compte-tours -->
+        <g class="pt" data-p="seuil"><path class="s" d="M178 96 A9 9 0 1 1 196 96" fill="none" stroke="#14181c" stroke-width="1.2"/><path class="f" d="M193 88 A9 9 0 0 1 196 96" fill="none" stroke="#14181c" stroke-width="3"/><line x1="187" y1="95" x2="192" y2="89" stroke="#14181c"/></g>
+        <!-- pilote -->
+        <g class="pt" data-p="pilote"><circle class="f" cx="240" cy="86" r="6" fill="#fff" stroke="#14181c" stroke-width="1.2"/><path class="s" d="M230 101 Q240 91 250 101" fill="none" stroke="#14181c" stroke-width="1.2"/></g>
+        <!-- conso : lecture -->
+        <g class="pt" data-p="conso"><rect class="s" x="14" y="190" width="120" height="16" fill="#fff" stroke="#14181c" stroke-width=".9"/><text class="ct" x="38" y="201" font-size="8">6,2 L / 100 KM</text></g>
+
+        <!-- repères -->
+        <g class="co" data-p="graisse"><line x1="55" y1="33" x2="55" y2="118"/><circle cx="55" cy="26" r="7"/><text x="55" y="29">5</text></g>
+        <g class="co" data-p="glucides"><line x1="151" y1="33" x2="151" y2="124"/><circle cx="151" cy="26" r="7"/><text x="151" y="29">6</text></g>
+        <g class="co" data-p="nitro"><line x1="172" y1="33" x2="172" y2="119"/><circle cx="172" cy="26" r="7"/><text x="172" y="29">7</text></g>
+        <g class="co" data-p="seuil"><line x1="196" y1="33" x2="188" y2="87"/><circle cx="196" cy="26" r="7"/><text x="196" y="29">8</text></g>
+        <g class="co" data-p="pilote"><line x1="240" y1="33" x2="240" y2="80"/><circle cx="240" cy="26" r="7"/><text x="240" y="29">11</text></g>
+        <g class="co" data-p="pompe"><line x1="286" y1="33" x2="286" y2="118"/><circle cx="286" cy="26" r="7"/><text x="286" y="29">3</text></g>
+        <g class="co" data-p="moteur"><line x1="372" y1="33" x2="356" y2="116"/><circle cx="372" cy="26" r="7"/><text x="372" y="29">1</text></g>
+        <g class="co" data-p="conso"><circle cx="25" cy="198" r="6.5"/><text x="25" y="201">9</text></g>
+        <g class="co" data-p="chassis"><line x1="196" y1="151" x2="196" y2="191"/><circle cx="196" cy="198" r="7"/><text x="196" y="201">10</text></g>
+        <g class="co" data-p="tuyaux"><line x1="246" y1="145" x2="246" y2="191"/><circle cx="246" cy="198" r="7"/><text x="246" y="201">4</text></g>
+        <g class="co" data-p="mito"><line x1="339" y1="132" x2="339" y2="191"/><circle cx="339" cy="198" r="7"/><text x="339" y="201">2</text></g>
+      </svg>
+    </div>
+    <figcaption class="figcap"><b>Fig. 4</b><span>Les onze pièces du moteur du coureur.</span></figcaption>
+  </figure>
+
+  <ol class="parts">
+    <li data-p="moteur"><span class="n">1</span><div><b>Le moteur, sa cylindrée</b><em>VO2max</em><span>La quantité maximale d'oxygène que le corps peut utiliser. Le plafond de puissance.</span></div></li>
+    <li data-p="mito"><span class="n">2</span><div><b>Les cylindres</b><em>Mitochondries</em><span>Les petites centrales des muscles, où l'oxygène brûle le carburant. Plus il y en a, plus le moteur tourne longtemps sans chauffer.</span></div></li>
+    <li data-p="pompe"><span class="n">3</span><div><b>La pompe</b><em>Cœur</em><span>Elle envoie le sang chargé d'oxygène. Entraînée, elle pousse plus à chaque battement : même vitesse, moins de battements.</span></div></li>
+    <li data-p="tuyaux"><span class="n">4</span><div><b>Les tuyaux</b><em>Sang, vaisseaux, capillaires</em><span>Le réseau qui livre l'oxygène jusqu'à chaque fibre. L'endurance en ajoute de nouveaux, très fins, autour des muscles.</span></div></li>
+    <li data-p="graisse"><span class="n">5</span><div><b>Le grand réservoir</b><em>Graisses</em><span>Énorme, même chez quelqu'un de mince. Mais le débit est lent : parfait pour durer, pas pour accélérer.</span></div></li>
+    <li data-p="glucides"><span class="n">6</span><div><b>Le petit réservoir</b><em>Glucides (glycogène)</em><span>Petit mais à débit rapide : indispensable pour aller vite. Vide, c'est le « mur » ou la fringale.</span></div></li>
+    <li data-p="nitro"><span class="n">7</span><div><b>La nitro</b><em>Phosphocréatine</em><span>Une poussée immédiate de quelques secondes : départ, sprint, relance. Elle se recharge en quelques minutes.</span></div></li>
+    <li data-p="seuil"><span class="n">8</span><div><b>La zone rouge du compte-tours</b><em>Seuil (SV2)</em><span>Le régime tenable sans « surchauffer ». Au-dessus, on tient quelques minutes. L'entraînement repousse cette zone rouge.</span></div></li>
+    <li data-p="conso"><span class="n">9</span><div><b>La consommation aux 100 km</b><em>Économie de course</em><span>L'énergie dépensée à une vitesse donnée. Une foulée plus économe, c'est plus de kilomètres avec le même plein.</span></div></li>
+    <li data-p="chassis"><span class="n">10</span><div><b>Le châssis et les suspensions</b><em>Muscles, tendons, os</em><span>Ce qui encaisse les chocs, surtout en descente. Il se renforce plus lentement que le moteur : c'est souvent lui qui casse quand on va trop vite.</span></div></li>
+    <li data-p="pilote"><span class="n">11</span><div><b>Le pilote</b><em>Cerveau</em><span>Il gère l'allure, le ravitaillement, la coordination et les coups de moins bien. Il s'entraîne aussi.</span></div></li>
+  </ol>
+</section>
+
+<!-- 03 -->
+<section class="sec" id="seances">
+  <div class="sec-h"><span class="num">03</span><h2>Quelle séance améliore quelle pièce</h2></div>
+  <p class="lead">Choisissez une séance : ses pièces ressortent sur le schéma, et la fiche détaille ce qui change. Les noms des séances sont ceux de l'<a href="../abecedaire/">abécédaire</a>.</p>
+
+  <figure>
+    <div class="lab">
+      <div class="lab-l">
+        <div class="lab-bar"><span class="label">Fig. 5 · Séance → pièces</span><span class="label" id="lab-z"></span></div>
+        <div class="carslot" id="carslot"></div>
+        <div class="seg" id="chips" role="group" aria-label="Choisir une séance"></div>
+        <p class="seghint">← Faites glisser pour voir les 9 séances →</p>
+      </div>
+      <div class="dwrap">
+        <div class="detail" id="detail" aria-live="polite" tabindex="0"></div>
+        <div class="more" id="more" aria-hidden="true">↓ Suite de la fiche</div>
+      </div>
+    </div>
+  </figure>
+
+  <table class="tbl"><thead><tr><th>Séance</th><th>Améliore surtout</th><th>Délai pour sentir l'effet</th></tr></thead><tbody id="recap"></tbody></table>
+  <p class="small">Délais : ordres de grandeur. Ils dépendent du niveau de départ (un débutant progresse plus vite au début), de l'âge, du sommeil, et de chacun.</p>
+</section>
+
+<!-- 04 -->
+<section class="sec alt" id="carburant">
+  <div class="sec-h"><span class="num">04</span><h2>Deux réservoirs, pas un seul</h2></div>
+  <div class="cells">
+    <div><span class="label">Grand réservoir · graisses</span><span class="t">Énorme, débit lent</span><p>De quoi tenir des jours, même chez un coureur mince. Ne suit pas quand on accélère. Sert à durer, à allure modérée.</p></div>
+    <div><span class="label">Petit réservoir · glucides</span><span class="t">Petit, débit rapide</span><p>De l'ordre de 1 h 30 à 2 h d'effort soutenu. C'est l'essence de la vitesse ; il se remplit en mangeant.</p></div>
+  </div>
+  <figure>
+    <div class="plate" style="display:grid;gap:14px">
+      <p class="hintline">↓ Touchez une intensité pour voir la part de chaque carburant</p>
+      <div class="zsel" id="zbtns">
+        <button style="--c:var(--z1)" data-z="0" aria-pressed="true">Modéré</button>
+        <button style="--c:var(--z2)" data-z="1" aria-pressed="false">Élevé</button>
+        <button style="--c:var(--z3)" data-z="2" aria-pressed="false">Sévère</button>
+        <button style="--c:var(--z4)" data-z="3" aria-pressed="false">Max.</button>
+      </div>
+      <div class="mix"><div id="mf" style="background:var(--fat)"></div><div id="mc" style="background:var(--carb)"></div><div id="mn" style="background:var(--z4)"></div></div>
+      <div class="mixleg"><span style="--c:var(--fat)" id="lf"></span><span style="--c:var(--carb)" id="lc"></span><span style="--c:var(--z4)" id="ln"></span></div>
+      <label class="chk"><input type="checkbox" id="trained"> Après plusieurs mois d'endurance fondamentale</label>
+      <p id="mixtxt" style="font-size:14.5px;color:var(--ink2)"></p>
+    </div>
+    <figcaption class="figcap"><b>Fig. 6</b><span>Part de chaque carburant selon l'intensité : touchez Modéré, Élevé, Sévère ou Max. pour comparer, et cochez la case pour voir l'effet de l'entraînement. Schéma illustratif : les proportions réelles varient d'une personne à l'autre.</span></figcaption>
+  </figure>
+  <div class="note"><span class="label">Note scientifique</span><p>Plus l'effort est intense, plus le corps puise dans les glucides. L'entraînement en endurance déplace ce point de bascule : à la même vitesse, un coureur entraîné brûle davantage de graisses et économise ses glucides. C'est une des raisons pour lesquelles l'EF « lente » est si utile en ultra.</p></div>
+</section>
+
+<!-- 05 -->
+<section class="sec" id="fibres">
+  <div class="sec-h"><span class="num">05</span><h2>Diesel, hybride, turbo : les fibres</h2></div>
+  <div class="cells">
+    <div><span class="label" style="color:var(--z1)">Type I · lentes</span><span class="t">Le diesel</span><p>Peu puissantes mais quasi infatigables, bourrées de mitochondries, elles brûlent volontiers les graisses. Les reines de l'ultra.</p></div>
+    <div><span class="label" style="color:var(--z3)">Type IIa · rapides</span><span class="t">L'hybride</span><p>Assez puissantes et assez endurantes. Les plus « éducables » : l'endurance les rend plus résistantes à la fatigue.</p></div>
+    <div><span class="label" style="color:var(--z4)">Type IIx · très rapides</span><span class="t">Le turbo</span><p>Très puissantes, épuisées en quelques secondes. Glucides et nitro. Sprint, saut, relance brutale.</p></div>
+  </div>
+  <figure>
+    <div class="plate">
+      <table class="recr">
+        <thead><tr><th>Fibres</th><th>Modéré</th><th>Élevé</th><th>Sévère</th><th>Max.</th></tr></thead>
+        <tbody>
+          <tr style="--c:var(--z1)"><td>Lentes</td><td><i class="y"></i></td><td><i class="y"></i></td><td><i class="y"></i></td><td><i class="y"></i></td></tr>
+          <tr style="--c:var(--z3)"><td>Rapides IIa</td><td><i></i></td><td><i class="y"></i></td><td><i class="y"></i></td><td><i class="y"></i></td></tr>
+          <tr style="--c:var(--z4)"><td>Très rapides</td><td><i></i></td><td><i></i></td><td><i class="y"></i></td><td><i class="y"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption class="figcap"><b>Fig. 7</b><span>Le corps allume d'abord les fibres lentes, puis ajoute les rapides quand l'effort monte, ou en fin d'ultra quand les lentes fatiguent. D'où l'intérêt des côtes et du renfo, même pour l'endurance.</span></figcaption>
+  </figure>
+  <div class="note"><span class="label">Note scientifique</span><p>La proportion de fibres lentes et rapides dépend beaucoup de la génétique. L'entraînement ne transforme pas un sprinteur en diesel, mais il change ce que chaque fibre sait faire : les rapides deviennent plus endurantes, et toutes gagnent des mitochondries et des capillaires.</p></div>
+</section>
+
+<!-- 06 -->
+<section class="sec alt" id="mitochondries">
+  <div class="sec-h"><span class="num">06</span><h2>Les mitochondries, centrales du muscle</h2></div>
+  <figure>
+    <div class="mito">
+      <div><svg viewBox="0 0 120 120" width="120" aria-hidden="true"><circle cx="60" cy="60" r="54" fill="none" stroke="#14181c" stroke-width="1.2"/><g fill="#14181c"><ellipse cx="40" cy="42" rx="6" ry="3"/><ellipse cx="78" cy="50" rx="6" ry="3" transform="rotate(30 78 50)"/><ellipse cx="52" cy="80" rx="6" ry="3" transform="rotate(-20 52 80)"/><ellipse cx="84" cy="82" rx="6" ry="3"/><ellipse cx="30" cy="66" rx="6" ry="3" transform="rotate(60 30 66)"/></g></svg><b>Avant</b><p>Quelques centrales : le moteur chauffe vite.</p></div>
+      <div><svg viewBox="0 0 120 120" width="120" aria-hidden="true"><circle cx="60" cy="60" r="54" fill="none" stroke="#14181c" stroke-width="1.2"/><g fill="#b4431a"><ellipse cx="40" cy="42" rx="7" ry="3.5"/><ellipse cx="78" cy="50" rx="7" ry="3.5" transform="rotate(30 78 50)"/><ellipse cx="52" cy="80" rx="7" ry="3.5" transform="rotate(-20 52 80)"/><ellipse cx="84" cy="82" rx="7" ry="3.5"/><ellipse cx="30" cy="66" rx="7" ry="3.5" transform="rotate(60 30 66)"/><ellipse cx="60" cy="26" rx="7" ry="3.5"/><ellipse cx="60" cy="58" rx="7" ry="3.5" transform="rotate(10 60 58)"/><ellipse cx="94" cy="64" rx="7" ry="3.5" transform="rotate(-50 94 64)"/><ellipse cx="34" cy="90" rx="6" ry="3" transform="rotate(30 34 90)"/><ellipse cx="70" cy="100" rx="7" ry="3.5"/><ellipse cx="88" cy="32" rx="6" ry="3" transform="rotate(40 88 32)"/><ellipse cx="22" cy="48" rx="5" ry="2.5" transform="rotate(80 22 48)"/><ellipse cx="44" cy="62" rx="5" ry="2.5"/><ellipse cx="76" cy="72" rx="5" ry="2.5" transform="rotate(-30 76 72)"/></g></svg><b>Après des mois d'endurance</b><p>Plus nombreuses et plus grosses : même vitesse, moins d'effort.</p></div>
+    </div>
+    <figcaption class="figcap"><b>Fig. 8</b><span>Coupe schématique d'une fibre musculaire.</span></figcaption>
+  </figure>
+  <div class="cells">
+    <div><span class="label">Ce qui les fait pousser</span><p>Le volume d'endurance (EF, sortie longue) et, d'une autre façon, le seuil et le fractionné.</p></div>
+    <div><span class="label">Ce que ça change</span><p>On brûle plus de graisses, on garde ses glucides pour plus tard, on produit moins de lactate à la même vitesse.</p></div>
+    <div><span class="label">En combien de temps</span><p>Les premiers gains se mesurent en quelques semaines ; ils continuent pendant des années.</p></div>
+    <div class="alert"><span class="label">Attention</span><p>Elles s'en vont aussi : après 3 à 4 semaines d'arrêt, une bonne partie du gain a fondu. La régularité vaut mieux que l'exploit.</p></div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="sec" id="varier">
+  <div class="sec-h"><span class="num">07</span><h2>Varier, oui. Faire n'importe quoi, non.</h2></div>
+  <div class="cells">
+    <div><span class="label">La base ne change pas</span><p>Environ 80 % du temps de course reste en endurance facile. Ce n'est pas de la monotonie : c'est la fondation.</p></div>
+    <div><span class="label">Ce qui change</span><p>Un peu plus long, un peu plus vite, un autre terrain, un autre type de séance. Une seule chose à la fois.</p></div>
+    <div><span class="label">Le bon rythme</span><p>On garde un type de séance quelques semaines pour qu'il produise son effet, puis on le fait évoluer. Toutes les 3 à 4 semaines, une semaine plus légère.</p></div>
+    <div class="alert"><span class="label">Le faux ami</span><p>Changer tout, tout le temps, ou ajouter toujours plus dur : le corps n'a plus le temps de s'adapter.</p></div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="sec alt" id="idees-recues">
+  <div class="sec-h"><span class="num">08</span><h2>Idées reçues</h2></div>
+  <div class="myths">
+    <div class="myth"><q>Courir lentement, ça ne sert à rien.</q><span class="v">Faux</span><p>C'est justement là que se construisent les mitochondries, les capillaires et le cœur, sans trop abîmer le châssis.</p></div>
+    <div class="myth"><q>Plus j'ai mal, plus je progresse.</q><span class="v">Faux</span><p>La progression vient de la récupération qui suit. Une séance trop dure qui empêche de récupérer coûte plus qu'elle ne rapporte.</p></div>
+    <div class="myth"><q>Le lactate est un déchet qui donne des courbatures.</q><span class="v">Faux</span><p>Le lactate est recyclé et sert lui-même de carburant. Les courbatures viennent de micro-lésions musculaires, surtout en descente.</p></div>
+    <div class="myth"><q>Une semaine sans courir, je perds tout.</q><span class="v">Pas vraiment</span><p>Une semaine de repos ne coûte presque rien, et elle fait souvent du bien. C'est au-delà de quelques semaines que les gains d'endurance s'effacent.</p></div>
+  </div>
+</section>
+
+<section class="sec refs" id="sources">
+  <span class="label">Références</span>
+  <ol>
+    <li>Holloszy (1967), J Biol Chem : chez le rat, l'entraînement d'endurance augmente les mitochondries musculaires.</li>
+    <li>Joyner &amp; Coyle (2008), J Physiol : VO2max, seuil et économie, les trois piliers de la performance d'endurance.</li>
+    <li>Seiler (2010), Int J Sports Physiol Perform : la répartition des intensités chez les athlètes d'endurance.</li>
+    <li>MacInnis &amp; Gibala (2017), J Physiol : adaptations selon l'intensité de l'entraînement fractionné.</li>
+    <li>Brooks (2018), Cell Metabolism : le lactate comme carburant.</li>
+    <li>Banister et al. (1975) ; Calvert et al. (1976), IEEE Trans Syst Man Cybern : le modèle « forme-fatigue ».</li>
+    <li>Meeusen et al. (2013), consensus ECSS / ACSM (Eur J Sport Sci ; Med Sci Sports Exerc) : surmenage et surentraînement.</li>
+  </ol>
+  <p class="small">Cette page simplifie volontairement : chaque organisme répond à sa façon. Les repères personnels de chacun sont dans son espace.</p>
+</section>
+
+<footer><span class="kicker">Team Trail 7C · Ressources</span><a class="kicker" href="../abecedaire/" style="color:var(--accent)">Abécédaire de l'entraînement →</a></footer>
+</div>
+
+<script>
+(function(){
+  var P={moteur:["01","Cylindrée","VO2max"],mito:["02","Cylindres","mitochondries"],pompe:["03","Pompe","cœur"],tuyaux:["04","Tuyaux","sang, capillaires"],
+    graisse:["05","Grand réservoir","graisses"],glucides:["06","Petit réservoir","glucides"],nitro:["07","Nitro","sprint"],seuil:["08","Zone rouge","seuil"],
+    conso:["09","Consommation","économie de course"],chassis:["10","Châssis","muscles, tendons, os"],pilote:["11","Pilote","cerveau"]};
+  var S=[
+    {n:"EF",c:"var(--z1)",zone:"Modéré",parts:[["mito","Plus nombreux et plus gros : le moteur tourne longtemps sans chauffer."],["tuyaux","De nouveaux capillaires autour des fibres : l'oxygène arrive mieux."],["pompe","Plus de sang à chaque battement : FC plus basse à la même allure."],["graisse","Le grand réservoir est mieux utilisé : on garde les glucides pour plus tard."]],
+     stress:"Des heures cumulées à faible intensité.",cond:"Vraiment facile (phrases complètes) et régulier. Trop vite, elle glisse dans la zone grise et perd son intérêt.",delai:"Premiers effets en 3 à 6 semaines ; continue des mois et des années.",recap:"Cylindres, tuyaux, pompe, grand réservoir"},
+    {n:"Sortie longue",c:"var(--z1)",zone:"Modéré",parts:[["graisse","On puise davantage dans les graisses sur la durée."],["glucides","Le petit réservoir se remplit mieux, et on apprend à le recharger en mangeant."],["chassis","Pieds, tendons et articulations s'habituent à durer."],["pilote","Gérer l'allure, manger, boire, tenir dans la tête."]],
+     stress:"La durée : le petit réservoir se vide, le châssis encaisse.",cond:"Allonger progressivement, pas à chaque fois. Manger pendant. Rester en EF.",delai:"Quelques semaines pour le moteur ; des mois pour tendons et pieds.",recap:"Les deux réservoirs, châssis, pilote"},
+    {n:"Seuil",c:"var(--z2)",zone:"Élevé",parts:[["seuil","La zone rouge recule : on tient une allure plus rapide sans surchauffer."],["mito","Le muscle recycle mieux le lactate comme carburant."],["tuyaux","L'oxygène est mieux livré aux fibres qui travaillent."]],
+     stress:"Rouler longtemps juste sous la zone rouge.",cond:"Après quelques semaines de régularité. Blocs dosés, pas plus vite que le seuil (sinon c'est une autre séance).",delai:"Environ 4 à 8 semaines.",recap:"Zone rouge du compte-tours"},
+    {n:"Fartlek · VMA",c:"var(--z3)",zone:"Sévère",parts:[["moteur","La cylindrée grandit : le plafond (VO2max) monte."],["pompe","Le cœur pousse plus de sang au maximum."],["mito","Les fibres rapides deviennent plus endurantes."]],
+     stress:"Des fractions où cœur et oxygène montent au maximum.",cond:"Récupération suffisante entre les fractions, 48 h entre deux séances dures, 1 à 2 par semaine au plus.",delai:"Environ 4 à 8 semaines ; très rapide chez le débutant.",recap:"Cylindrée (VO2max), pompe"},
+    {n:"VMA courte · Sprints",c:"var(--z4)",zone:"Max.",parts:[["nitro","Une poussée immédiate plus efficace."],["pilote","Coordination : le cerveau commande les muscles plus vite et mieux."],["conso","Une foulée plus vive, donc plus économe."]],
+     stress:"Quelques secondes à fond.",cond:"Être frais, récupérer complètement entre les répétitions : on cherche la qualité, pas la fatigue.",delai:"Coordination : 1 à 3 semaines.",recap:"Nitro, pilote, consommation"},
+    {n:"Côtes",c:"var(--z3)",zone:"Sévère",parts:[["chassis","Des jambes plus fortes et des tendons plus solides."],["moteur","Cœur et oxygène poussés haut, sans la vitesse."],["nitro","Plus de puissance à chaque appui."]],
+     stress:"Monter fort : beaucoup de force par foulée.",cond:"Progressif ; attention aux mollets et tendons d'Achille. Retour en trottinant.",delai:"Quelques semaines pour la force ; des mois pour les tendons.",recap:"Châssis, cylindrée, nitro"},
+    {n:"Renfo · Pliométrie",c:"var(--muted)",zone:"Complémentaire",parts:[["chassis","Muscles et tendons plus résistants : moins de blessures, meilleure descente."],["conso","Plus de « ressort » : la foulée coûte moins cher."]],
+     stress:"Charges et sauts, autrement que par la course.",cond:"1 à 2 fois par semaine, loin des séances clés, charge qui augmente doucement.",delai:"2 à 4 semaines (système nerveux) ; des mois pour muscles et tendons.",recap:"Châssis, consommation"},
+    {n:"Vélo · Cross-training",c:"var(--muted)",zone:"Complémentaire",parts:[["pompe","Entretenue, sans les chocs de la course."],["mito","Entretenus comme en EF."],["tuyaux","Entretenus comme en EF."]],
+     stress:"Le moteur travaille, le châssis se repose.",cond:"Remplace une EF en cas de fatigue ou de petite gêne. Ne prépare pas le châssis aux chocs de la course.",delai:"Comme l'EF, pour le moteur.",recap:"Pompe, cylindres, tuyaux"},
+    {n:"Récupération · Sommeil",c:"var(--z2)",zone:"Indispensable",all:true,parts:Object.keys({moteur:1,mito:1,pompe:1,tuyaux:1,graisse:1,glucides:1,nitro:1,seuil:1,conso:1,chassis:1,pilote:1}).map(function(k){return [k,""];}),
+     stress:"Aucun : c'est l'atelier.",cond:"Dormir, manger (glucides et protéines après les grosses séances), une semaine plus légère toutes les 3 à 4 semaines.",delai:"24 à 72 h après chaque séance.",recap:"Tout : c'est l'atelier"}
+  ];
+  var car=document.getElementById('car0').cloneNode(true);car.id='car';
+  car.setAttribute('aria-label','Schéma : les pièces améliorées par la séance choisie ressortent en couleur');
+  document.getElementById('carslot').appendChild(car);
+  var chips=document.getElementById('chips'),detail=document.getElementById('detail'),recap=document.getElementById('recap'),labz=document.getElementById('lab-z'),more=document.getElementById('more');
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  var first;
+  S.forEach(function(s,k){
+    var b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed','false');b.style.setProperty('--c',s.c);
+    b.innerHTML='<i></i>'+esc(s.n);b.onclick=function(){pick(s,b);};chips.appendChild(b);if(!k)first=b;
+    var tr=document.createElement('tr');tr.style.setProperty('--c',s.c);
+    tr.innerHTML='<td><i></i>'+esc(s.n)+'</td><td>'+esc(s.recap)+'</td><td>'+esc(s.delai)+'</td>';recap.appendChild(tr);
+  });
+  function hint(){more.classList.toggle('off',detail.scrollTop+detail.clientHeight>=detail.scrollHeight-8);}
+  function pick(s,b){
+    chips.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    var ids=s.parts.map(function(x){return x[0];});
+    car.classList.add('sel');
+    car.querySelectorAll('.pt,.co').forEach(function(p){p.classList.toggle('on',ids.indexOf(p.dataset.p)>=0);});
+    labz.textContent=s.zone;
+    var list=s.all?'<li><span class="n">—</span><div><b>Toutes les pièces</b><span>C\'est pendant le repos qu\'elles sont réparées et renforcées. Sans atelier, les séances ne laissent que de la fatigue.</span></div></li>'
+      :s.parts.map(function(x){var q=P[x[0]];return '<li data-p="'+x[0]+'"><span class="n">'+(+q[0])+'</span><div><b>'+esc(q[1])+' <em>· '+esc(q[2])+'</em></b><span>'+esc(x[1])+'</span></div></li>';}).join('');
+    detail.style.setProperty('--c',s.c);detail.scrollTop=0;
+    detail.innerHTML='<div class="d-h"><span class="label">'+esc(s.zone)+'</span><h3>'+esc(s.n)+'</h3></div>'+
+      '<div><span class="label" style="display:block;margin-bottom:6px">Ce qui s\'améliore</span><ul class="plist">'+list+'</ul></div>'+
+      '<dl class="dl"><div><dt>Ce qui sollicite</dt><dd>'+esc(s.stress)+'</dd></div><div class="cond"><dt>À condition de</dt><dd>'+esc(s.cond)+'</dd></div><div><dt>Délai</dt><dd>'+esc(s.delai)+'</dd></div></dl>';
+    setTimeout(hint,0);
+  }
+  detail.addEventListener('scroll',hint,{passive:true});window.addEventListener('resize',hint);
+  pick(S[0],first);
+
+  var MIX=[[55,45,0],[30,70,0],[10,85,5],[0,75,25]],TR=[[68,32,0],[40,60,0],[15,80,5],[0,75,25]];
+  var TXT=["Allure de conversation : le grand réservoir fait une bonne part du travail. On peut tenir des heures, surtout en mangeant.",
+           "Allure de seuil : les glucides prennent le dessus. Le petit réservoir se vide en une à deux heures.",
+           "Fractionné : presque tout vient des glucides, le petit réservoir baisse vite.",
+           "Sprint : la nitro et les glucides. Quelques secondes, puis il faut récupérer."];
+  var zb=document.querySelectorAll('#zbtns button'),tg=document.getElementById('trained'),z=0;
+  function draw(){
+    var m=(tg.checked?TR:MIX)[z];
+    ['mf','mc','mn'].forEach(function(id,i){document.getElementById(id).style.flex='0 0 '+m[i]+'%';});
+    document.getElementById('lf').textContent='Graisses '+m[0]+' %';
+    document.getElementById('lc').textContent='Glucides '+m[1]+' %';
+    document.getElementById('ln').textContent='Nitro '+m[2]+' %';
+    document.getElementById('mixtxt').textContent=TXT[z]+(tg.checked&&z<3?' Entraîné, à la même allure, on garde plus de glucides pour la fin.':'');
+  }
+  zb.forEach(function(b){b.onclick=function(){z=+b.dataset.z;zb.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});draw();};});
+  tg.onchange=draw;draw();
+})();
+</script>
+</body>
+</html>

@@ -6,8 +6,9 @@ E = lambda s: html.escape(str(s), quote=False)
 D = os.path.dirname(os.path.abspath(__file__))
 CSS_SAISON = open(f'{D}/css/saison.css').read()
 CSS_FICHE = open(f'{D}/css/fiche.css').read()
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap">')
+FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">'
+         '<link rel="icon" href="/favicon.svg" type="image/svg+xml">')
 
 # Code couleur Nolio (permanent) + « autre sport » (cyan, validé le 11/11/2026)
 SPORT = {'ef': ('#9e9e9e', 'EF'), 'sl': ('#ffc107', 'Sortie longue'), 'fartlek': ('#ff9800', 'Fartlek'),
@@ -113,10 +114,49 @@ def rng(s):  # durée d'une séance (min ou [min, max]) x nombre de séances
 def add(ls):
     if any(x is None for x in ls): return None
     return [sum(x[0] for x in ls), sum(x[1] for x in ls)]
+
+# ---------- Identité Team Trail 7C (16/11/2026) : habillage commun, contenu inchangé ----------
+LOGO = '<svg class="tt-mark" viewBox="0 0 100 100" aria-hidden="true"><polygon points="0,84 18,46 30,62 52,22 74,60 84,48 100,84" fill="#9db8a5"/><polygon points="52,22 45,36 52,33 59,37" fill="#eef3ef"/><polygon points="31,64 39,64 33,90 25,90" fill="#8a6d3b"/><line x1="28.3" y1="74" x2="36.3" y2="74" stroke="#5e4826" stroke-width="1.5"/><line x1="26.3" y1="82" x2="34.3" y2="82" stroke="#5e4826" stroke-width="1.5"/><path d="M24.5,89 L33.5,89 L39,95 L39,98 L24.5,98 Z" fill="#3b2a18"/><polygon points="42,64 50,64 53,90 45,90" fill="#8a6d3b"/><line x1="43.4" y1="74" x2="51.4" y2="74" stroke="#5e4826" stroke-width="1.5"/><line x1="44.3" y1="82" x2="52.3" y2="82" stroke="#5e4826" stroke-width="1.5"/><path d="M44.5,89 L53.5,89 L59,95 L59,98 L44.5,98 Z" fill="#3b2a18"/><polygon points="53,64 61,64 58,90 50,90" fill="#8a6d3b"/><line x1="51.6" y1="74" x2="59.6" y2="74" stroke="#5e4826" stroke-width="1.5"/><line x1="50.7" y1="82" x2="58.7" y2="82" stroke="#5e4826" stroke-width="1.5"/><path d="M49.5,89 L58.5,89 L64,95 L64,98 L49.5,98 Z" fill="#3b2a18"/><polygon points="64,64 72,64 78,90 70,90" fill="#8a6d3b"/><line x1="66.7" y1="74" x2="74.7" y2="74" stroke="#5e4826" stroke-width="1.5"/><line x1="68.7" y1="82" x2="76.7" y2="82" stroke="#5e4826" stroke-width="1.5"/><path d="M69.5,89 L78.5,89 L84,95 L84,98 L69.5,98 Z" fill="#3b2a18"/><path d="M19,60 C19,22 81,22 81,60 Z" fill="#55693a"/><path d="M24,57 C24,33 38,25 49,25 C38,30 31,42 31,57 Z" fill="#fff" opacity=".16"/><path d="M46,59 L46,27 Q50,19.5 54,27 L54,59 Z" fill="#3b4a28"/><line x1="50" y1="24" x2="50" y2="58" stroke="#6f8450" stroke-width="1.2"/><path d="M12,61 Q50,74 88,61 L83,55.5 Q50,66 17,55.5 Z" fill="#3b4a28"/><path d="M17,55.5 Q50,66 83,55.5" fill="none" stroke="#7d9358" stroke-width="1.3"/><circle cx="23.5" cy="49" r="1.9" fill="#d9c46a"/><circle cx="76.5" cy="49" r="1.9" fill="#d9c46a"/><path d="M17,56 L14.5,68" stroke="#6b4a2a" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M83,56 L85.5,68" stroke="#6b4a2a" stroke-width="2.2" stroke-linecap="round" fill="none"/><circle cx="50" cy="44" r="9.5" fill="#e9dca4" stroke="#9a7d1f" stroke-width="1.6"/><text x="50" y="48.3" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="13" fill="#3b4a28">7C</text></svg>'
+THEME = """
+:root{--bg:#f4f2ee;--paper:#fff;--ink:#16302a;--muted:#68776f;--line:#e1ddd4;--soft:#ebe7df;--accent:#c4552f;
+ --display:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;}
+body{color:#36463f;font-size:15.5px;line-height:1.6;}
+.title{font-weight:800;letter-spacing:-.04em;line-height:1.02;color:var(--ink);}
+.sec>h2,.tl-h h2{font-weight:800;letter-spacing:-.03em;color:var(--ink);font-size:1.55rem;}
+h3{letter-spacing:-.02em;color:var(--ink);}
+.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.16em;font-size:11.5px;}
+.card,.tl,.blk,.doc,.goal,.week,.tbl-box,.frise-box,.season-box,.soon li,.mb{border-radius:0;}
+.card,.tl,.week,.tbl-box{border-color:var(--line);}
+.doc{border-top:3px solid var(--ink);}
+.tt-site{border-bottom:1px solid #d8d4cb;background:#f8f7f4;}
+.tt-in{max-width:76rem;margin-inline:auto;padding-inline:max(20px,env(safe-area-inset-left,0px));}
+.tt-site .tt-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;}
+.tt-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#16302a;}
+.tt-mark{width:52px;height:52px;flex:none;}
+.tt-brand b{display:block;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.03em;line-height:1;}
+.tt-brand b em{font-style:normal;color:#c4552f;}
+.tt-brand small{display:block;font-size:9.5px;font-weight:600;letter-spacing:.2em;color:#68776f;margin-top:4px;}
+.tt-nav{display:flex;gap:28px;}
+.tt-nav a{font-size:14px;font-weight:500;color:#68776f;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;}
+.tt-nav a.on{color:#16302a;font-weight:600;border-bottom-color:#c4552f;}
+.tt-foot{border-top:1px solid #d8d4cb;background:#ecebe6;margin-top:8px;}
+.tt-foot .tt-in{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:26px;font-size:13px;color:#68776f;}
+.tt-foot b{color:#16302a;font-weight:700;}
+.tt-foot a{color:#16302a;font-weight:600;text-decoration:none;border-bottom:1px solid #16302a;}
+@media(max-width:700px){.tt-site .tt-in{flex-direction:column;align-items:flex-start;gap:6px;padding-block:14px 0;min-height:0;}
+ .tt-mark{width:44px;height:44px;}.tt-nav{gap:22px;}.tt-nav a{padding:8px 0 10px;}}
+"""
+HEADER = ('<header class="tt-site"><div class="tt-in"><a class="tt-brand" href="/">' + LOGO +
+          '<span><b>TEAM TRAIL <em>7C</em></b><small>COURSE À PIED · TRAIL · ULTRA</small></span></a>'
+          '<nav class="tt-nav" aria-label="Navigation du site"><a href="/">Accueil</a><a href="/ressources/">Ressources</a>'
+          '<a class="on" aria-current="page" href="/coaching/">Coaching</a></nav></div></header>')
+FOOTER = ('<footer class="tt-foot"><div class="tt-in"><span><b>TEAM TRAIL 7C</b> · Courir avec méthode, progresser avec plaisir.</span>'
+          '<a href="#">Retour en haut ↑</a></div></footer>')
+
 def doc(title, css, body):
     return (f'<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
             f'<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
-            f'<title>{E(title)}</title>\n{FONTS}\n<style>{css}</style>\n</head>\n<body>\n<div class="wrap">\n{body}\n</div>\n{CD}\n</body>\n</html>\n')
+            f'<title>{E(title)}</title>\n{FONTS}\n<style>{css}{THEME}</style>\n</head>\n<body>\n{HEADER}\n<div class="wrap">\n{body}\n</div>\n{FOOTER}\n{CD}\n</body>\n</html>\n')
 
 # ---------- GOOO (vue saison) ----------
 def gooo(d, links):
@@ -230,7 +270,7 @@ CSS_BLOCS = _sa[_sa.find('/* Blocs cartes */'):_sa.find('/* Tableau semaines */'
 CSS_GROUPE = open(f'{D}/css/groupe.css').read() + CSS_BLOCS + CSS_FRISE + '.tg{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 6px;border-radius:3px;color:#fff;background:var(--tc);vertical-align:1px;}'
 def groupe(d, links):
     h = d['accueil']; g = d['gooo']; o = []
-    o.append(f'''<header><a href="{links['retour']}" class="back">← Team Trail 7C</a><div class="eyebrow">Dossier collectif</div>
+    o.append(f'''<header><div class="eyebrow">Dossier collectif</div>
 <h1 class="title">{E(d['titre'])} <span>{E(h['annee'])}</span></h1><p class="lede">{E(h['lede'])}</p></header>''')
     o.append('<section class="sec"><h2>Le groupe</h2><div class="membres">' + ''.join(
         f'<div class="mb"><strong>{E(m["nom"])}</strong><span class="obj" style="--mc:var({"--accent" if m.get("niv", "A") == "A" else "--idea"})">{E(m["obj"])}</span></div>' for m in h['membres']) + '</div></section>')
@@ -253,3 +293,23 @@ def groupe(d, links):
 <a class="doc hero" style="--dc:var(--accent)" href="{links['gooo']}"><h3>GOOO du groupe</h3><p>Le but de chaque semaine, les jalons et les règles communes.</p><span class="arr">→</span></a>
 <a class="doc" style="--dc:var(--ok)" href="{links['prev']}"><h3>Prévisionnel</h3><p>Les 4 prochaines semaines : cadre commun + adaptations individuelles.</p><span class="arr">→</span></a></div></section>''')
     return doc(f"{d['titre']} {h['annee']}", CSS_GROUPE, '\n'.join(o))
+
+
+# ---------- Tableau de bord du coach (généré par l'outil depuis le 16/11/2026) ----------
+def hub(groupe, athletes):
+    """groupe : [(titre, lien, maj)] ; athletes : [(nom, lien, statut, maj)]"""
+    card = lambda t, l, sub: (f'<a class="doc" style="--dc:var(--accent)" href="{l}"><h3>{E(t)}</h3>'
+                              f'<p>{E(sub)}</p><span class="arr">→</span></a>')
+    o = ['<header><div class="eyebrow">Accès coach</div><h1 class="title">Tableau de <span>bord</span></h1>'
+         '<p class="lede">Le groupe, puis chaque athlète : le GOOO et le prévisionnel se trouvent dans leur page. '
+         'La date indique la dernière mise à jour de leur plan.</p></header>']
+    o.append('<section class="sec"><h2>Groupe Ultra 2027</h2><div class="docs">'
+             + ''.join(card(t, l, f'Mis à jour le {m}' if m else '') for t, l, m in groupe) + '</div></section>')
+    o.append('<section class="sec"><h2>Athlètes</h2><div class="docs">'
+             + ''.join(card(n, l, ' · '.join(x for x in (st, f'mis à jour le {m}' if m else '') if x)) for n, l, st, m in athletes)
+             + '</div></section>')
+    o.append('<section class="sec"><h2>Cet appareil</h2><p class="note">Si tu as coché « Garder ce code sur cet appareil », il y est enregistré. Ce bouton l\'efface.</p>'
+             '<button class="kbtn" id="forget">Oublier ce code sur cet appareil</button></section>')
+    o.append("<script>document.getElementById('forget').onclick=function(){try{localStorage.removeItem('cyb-keep');sessionStorage.removeItem('cyb-codes')}catch(e){}location.href='/coaching/#reset'};</script>")
+    css = CSS_FICHE + '.kbtn{justify-self:start;font:inherit;font-weight:700;font-size:15px;padding:12px 16px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;}.kbtn:hover{background:var(--ink);color:#fff;}'
+    return doc('Tableau de bord · Team Trail 7C', css, '\n'.join(o))

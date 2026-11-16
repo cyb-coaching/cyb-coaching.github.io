@@ -58,16 +58,20 @@ def write_src(name, data, code):
 
 def write_page(path, html, codes, coach_code):
     full = f'{ROOT}/{path}'
+    shell = open(f'{ROOT}/tools/shell.html', encoding='utf-8').read()
     if os.path.exists(full):
         try:
+            cur = open(full, encoding='utf-8').read(); a, b = shell.split('@@PAYLOAD@@')
+            same_shell = cur.startswith(a) and cur.endswith(b)
             P = read_payload(full)
             same_rcpt = sorted(x['d'] for x in P.get('k', [])) == sorted(slot_id(c) for c in codes)
-            if same_rcpt and dec_page(P, coach_code) == html: return False   # rien n'a changé : on ne touche pas
+            if same_shell and same_rcpt and dec_page(P, coach_code) == html: return False   # rien n'a changé : on ne touche pas
         except Exception: pass
-    shell = open(f'{ROOT}/tools/shell.html', encoding='utf-8').read()
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, 'w', encoding='utf-8').write(shell.replace('@@PAYLOAD@@', json.dumps(enc_multi(html, codes))))
     return True
+
+HUB = 'p/5c08340fa6736971/index.html'   # tableau de bord du coach
 
 def build(only=None):
     cc = coach(); reg = src('registre', cc); codes = reg['codes']
@@ -81,6 +85,20 @@ def build(only=None):
             data['fiche']['frise'] = {'blocs': g['blocs'], 'jalons': js + data['fiche'].get('jalons_perso', []), 'periode': g.get('periode', '')}
         html = getattr(T, pg['tpl'])(data, pg.get('liens', {}))
         if write_page(pg['path'], html, [codes[r] for r in pg['pour']], cc): changed.append(pg['path'])
+    # tableau de bord du coach (code coach seul), régénéré à chaque build
+    gm = reg['groupe_ultra']['membres']; gp = reg['groupe_ultra']['page']
+    def maj(dd): return (dd.get('prev') or {}).get('maj') or (dd.get('gooo') or {}).get('maj') or ''
+    gd = src('groupe', cc)
+    grp = [('Page du groupe', f'../{gp}/', maj(gd)), ('GOOO du groupe', f'../{gp}/plan/', (gd.get('gooo') or {}).get('maj', '')),
+           ('Prévisionnel', f'../{gp}/previsionnel/', (gd.get('prev') or {}).get('maj', ''))]
+    ath = []
+    for pg in reg['pages']:
+        if pg['tpl'] != 'fiche': continue
+        dd = src(pg['data'], cc); n = pg['data']
+        st = 'Groupe Ultra' if n in gm else ('invité du groupe' if 'groupe' in pg.get('liens', {}) else 'suivi individuel')
+        ath.append((dd.get('titre', n), '../' + pg['path'].split('/')[1] + '/', st, maj(dd)))
+    ath.sort(key=lambda x: ['Groupe Ultra', 'invité du groupe', 'suivi individuel'].index(x[2]))
+    if write_page(HUB, T.hub(grp, ath), [codes['coach']], cc): changed.append(HUB)
     print('pages modifiées :', changed or 'aucune')
 
 def check():
@@ -92,6 +110,9 @@ def check():
         if got != sorted(pg['pour']): print('DESTINATAIRES', pg['path'], got, '≠', sorted(pg['pour'])); ok = False
         for r in pg['pour']:
             if dec_page(P, codes[r]) is None: print('ÉCHEC', pg['path'], r); ok = False
+    P = read_payload(f'{ROOT}/{HUB}')
+    if [x['d'] for x in P.get('k', [])] != [slot_id(codes['coach'])] or dec_page(P, codes['coach']) is None:
+        print('TABLEAU DE BORD : doit s\'ouvrir avec le seul code coach'); ok = False
     # fuite : aucun nom d'athlète ni code en clair dans les fichiers suivis par git
     words = [w for a in reg['athletes'].values() for w in a['nom'].split() if len(w) > 3] + list(codes.values())
     files = os.popen(f'git -C {ROOT} ls-files').read().split()

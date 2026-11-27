@@ -72,11 +72,13 @@ CSS_FRISE = """
 import datetime as _dt
 def _d(iso): return _dt.date.fromisoformat(iso[:10])
 JCOL = {'course': '#c2410c', 'test': '#e53935', 'etape': '#2e7d32', 'gros': '#b45309', 'decision': '#4f5f8a', 'nouveau': '#2f6f8f', 'allegee': '#8a8f94', 'vacances': '#8a8f94'}
-def frise(blocs, jalons, titre="L'année d'un coup d'œil", sous=''):
+def frise(blocs, jalons, titre="L'année d'un coup d'œil", sous='', auto=False):
     """Frise chronologique horizontale (une colonne par semaine). blocs : nom, c, debut, fin_d ; jalons : iso, court/evt, date, qui, type, etoile."""
     d0 = _d(blocs[0]['debut']); d0 -= _dt.timedelta(days=d0.weekday())
     d1 = max([_d(blocs[-1]['fin_d'])] + [_d(j['iso']) for j in jalons if j.get('iso')])
     nw = (d1 - d0).days // 7 + 1; W = 7
+    if auto:  # sous-titre calculé sur la frise affichée (fiches : période propre à l'athlète, 27/11/2026)
+        sous = f'{MOIS[d0.month - 1]} {d0.year} → {MOIS[d1.month - 1]} {d1.year} · environ {nw} semaines'
     col = lambda iso: max(1, min(nw, (_d(iso) - d0).days // 7 + 1))
     o = []
     # mois
@@ -240,7 +242,7 @@ def fiche(d, links):
     if links.get('groupe'): o.append(f'<a href="{links["groupe"]}" class="back">← Groupe Ultra 2027</a>')
     o.append(f'<header><div class="eyebrow">Espace personnel</div><h1 class="title">{E(d["titre"])}</h1><p class="lede">{E(f["objectif"])}</p></header>')
     fr = f.get('frise') or (d.get('gooo') and {'blocs': d['gooo']['blocs'], 'jalons': d['gooo']['jalons']})
-    if fr: o.append(frise(fr['blocs'], fr['jalons'], 'Mon année', fr.get('periode') or d.get('gooo', {}).get('periode', '')))
+    if fr: o.append(frise(fr['blocs'], fr['jalons'], 'Mon année', auto=True))
     o.append('<section class="sec"><h2>Mes dates clés</h2><div class="card"><table class="dates">'
              + ''.join(f'<tr><td>{E(r[0])}</td><td>{E(r[1])}{(" <span class=tbc>(" + E(r[2]) + ")</span>") if len(r) > 2 and r[2] else ""}</td></tr>' for r in f['dates'])
              + '</table></div></section>')
@@ -281,7 +283,7 @@ def groupe(d, links):
 <span class="pill {'a' if a else 'b'}">Objectif {ob['niv']} · {'principal' if a else 'intermédiaire'}</span><h3>{E(ob['nom'])}</h3>
 <p class="meta">{E(ob['meta'])}</p><p class="who"><b>{E(ob['qui'])}</b>{(' ' + E(ob['note'])) if ob.get('note') else ''}</p></div></article>''')
     o.append('</div></section>')
-    o.append(frise(g['blocs'], g['jalons'], "L'année d'un coup d'œil", g.get('periode', '')))
+    o.append(frise(g['blocs'], g['jalons'], "L'année d'un coup d'œil", auto=True))
     o.append(f'<section class="sec"><h2>La saison en {len(g["blocs"])} blocs</h2><div class="blocs">')
     for i, b in enumerate(g['blocs'], 1):
         pts = ''.join(f'<li>{E(p)}</li>' for p in b.get('points', []))
